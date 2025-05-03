@@ -14,7 +14,7 @@ class Kernel extends HttpKernel
      * @var array<string, class-string|string>
      */
     protected $routeMiddleware = [
-        // ... existing code ...
-        'psikologrole' => \App\Http\Middleware\IsPsikolog::class,
+        // ... middleware lain ...
+        'psikologrole' => \App\Http\Middleware\IsPsikologRole::class,
     ];
-} 
+}

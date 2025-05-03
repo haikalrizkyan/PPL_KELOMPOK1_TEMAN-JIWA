@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class IsPsikolog
+class IsPsikologRole
 {
     /**
      * Handle an incoming request.
@@ -16,6 +16,7 @@ class IsPsikolog
         if (!Auth::check() || !Auth::user()->isPsikolog()) {
             abort(403, 'Akses khusus untuk psikolog.');
         }
+        
         return $next($request);
     }
 } 
