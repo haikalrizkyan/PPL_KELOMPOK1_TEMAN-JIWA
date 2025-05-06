@@ -9,12 +9,12 @@
         <h2 class="mb-4">Haloo!!</h2>
         <p class="text-muted">Selamat datang, {{ $user->name }}!</p>
 
-        <!-- Menampilkan Saldo Pengguna -->
+        
         <div class="alert alert-info">
             <strong>Saldo Anda:</strong> Rp {{ number_format($user->saldo, 0, ',', '.') }}
         </div>
 
-        <!-- Top Up Saldo Section -->
+        
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <div class="card shadow-sm">
@@ -29,7 +29,7 @@
                                 <input type="number" class="form-control" id="amount" name="amount" placeholder="Masukkan jumlah saldo" required>
                             </div>
                             <div class="mb-3">
-                                <label for="payment_method" class="form-label">Metode Pembayaran</label>
+                                <label for="payment_method" class="form-label">Metode P</label>
                                 <select class="form-select" id="payment_method" name="payment_method" required>
                                     <option value="bank_transfer">Transfer Bank</option>
                                     <option value="gopay">Gopay</option>
