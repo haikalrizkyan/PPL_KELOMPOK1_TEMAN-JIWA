@@ -18,12 +18,8 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
-        'role',
         'password',
         'saldo', // Menambahkan saldo ke dalam fillable
-        'phone', // Menambahkan phone ke fillable
-        'photo', // Menambahkan photo ke fillable
-        
     ];
 
     /**
@@ -48,21 +44,5 @@ class User extends Authenticatable
             'password' => 'hashed',
             'saldo' => 'float', // Mengatur saldo agar selalu di-cast sebagai float
         ];
-    }
-
-    /**
-     * Cek apakah user adalah psikolog.
-     */
-    public function isPsikolog()
-    {
-        return $this->role === 'psikolog';
-    }
-
-    /**
-     * Cek apakah user adalah user biasa.
-     */
-    public function isUser()
-    {
-        return $this->role === 'user';
     }
 }

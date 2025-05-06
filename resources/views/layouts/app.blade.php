@@ -56,8 +56,8 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link {{ Route::is('articles.*') ? 'active fw-bold text-primary' : '' }}" href="{{ route('articles.index') }}">
-                                    Artikel
+                                <a class="nav-link {{ Route::is('assessment.questions.*') ? 'active fw-bold text-primary' : '' }}" href="{{ route('assessment.questions.index') }}">
+                                    Kelola Pertanyaan
                                 </a>
                             </li>
                         @endauth
@@ -81,16 +81,6 @@
                                     {{ Auth::user()->name }}
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <li class="px-3 py-2">
-                                        <div class="alert alert-info mb-2 py-2 px-3 text-center" style="font-size:1rem; border-radius: 0.75rem; min-width: 160px;">
-                                            <strong>Saldo Anda:</strong><br>Rp {{ number_format(Auth::user()->saldo, 0, ',', '.') }}
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="{{ route('profile.edit') }}">
-                                            Edit Profile
-                                        </a>
-                                    </li>
                                     <li>
                                         <a class="dropdown-item" href="{{ route('assessment.history') }}">
                                             Riwayat Assessment

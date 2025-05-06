@@ -11,7 +11,9 @@ class AssessmentController extends Controller
 {
     public function index()
     {
-        $questions = \App\Models\AssessmentQuestion::latest()->get();
+        $questions = AssessmentQuestion::where('is_active', true)
+            ->orderBy('order')
+            ->get();
         return view('assessment.index', compact('questions'));
     }
 
@@ -20,7 +22,7 @@ class AssessmentController extends Controller
         $data = $request->except('_token');
 
         Assessment::create([
-            'user_id' => Auth::id(), // Gunakan Auth::id() agar lebih konsisten dan dikenali
+            'user_id' => Auth::id(),
             'answers' => $data,
         ]);
 
@@ -67,44 +69,5 @@ class AssessmentController extends Controller
         }
 
         return view('assessment.history', compact('assessments'));
-    }
-
-    // CRUD untuk pertanyaan assessment (khusus psikolog)
-    public function manageQuestions()
-    {
-        $questions = AssessmentQuestion::latest()->get();
-        return view('assessment.questions.manage', compact('questions'));
-    }
-
-    public function storeQuestion(Request $request)
-    {
-        $request->validate([
-            'pertanyaan' => 'required|string|max:255',
-        ]);
-        AssessmentQuestion::create(['pertanyaan' => $request->pertanyaan]);
-        return redirect()->route('assessment.questions.manage')->with('success', 'Pertanyaan berhasil ditambahkan!');
-    }
-
-    public function editQuestion($id)
-    {
-        $question = AssessmentQuestion::findOrFail($id);
-        return view('assessment.questions.edit', compact('question'));
-    }
-
-    public function updateQuestion(Request $request, $id)
-    {
-        $request->validate([
-            'pertanyaan' => 'required|string|max:255',
-        ]);
-        $question = AssessmentQuestion::findOrFail($id);
-        $question->update(['pertanyaan' => $request->pertanyaan]);
-        return redirect()->route('assessment.questions.manage')->with('success', 'Pertanyaan berhasil diupdate!');
-    }
-
-    public function destroyQuestion($id)
-    {
-        $question = AssessmentQuestion::findOrFail($id);
-        $question->delete();
-        return redirect()->route('assessment.questions.manage')->with('success', 'Pertanyaan berhasil dihapus!');
     }
 }

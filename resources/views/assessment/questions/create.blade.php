@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Edit Pertanyaan Assessment')
+@section('title', 'Tambah Pertanyaan Assessment')
 
 @section('content')
 <div class="container py-5">
@@ -8,12 +8,11 @@
         <div class="col-md-8">
             <div class="card shadow-sm">
                 <div class="card-header bg-white">
-                    <h4 class="mb-0">✏️ Edit Pertanyaan</h4>
+                    <h4 class="mb-0">➕ Tambah Pertanyaan Baru</h4>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('assessment.questions.update', $question) }}" method="POST">
+                    <form action="{{ route('assessment.questions.store') }}" method="POST">
                         @csrf
-                        @method('PUT')
                         
                         <div class="mb-3">
                             <label for="question" class="form-label">Pertanyaan</label>
@@ -21,7 +20,7 @@
                                       id="question" 
                                       name="question" 
                                       rows="3" 
-                                      required>{{ old('question', $question->question) }}</textarea>
+                                      required>{{ old('question') }}</textarea>
                             @error('question')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -33,7 +32,7 @@
                                    class="form-control @error('order') is-invalid @enderror" 
                                    id="order" 
                                    name="order" 
-                                   value="{{ old('order', $question->order) }}" 
+                                   value="{{ old('order', 0) }}" 
                                    min="0" 
                                    required>
                             @error('order')
@@ -41,27 +40,12 @@
                             @enderror
                         </div>
 
-                        <div class="mb-3">
-                            <div class="form-check">
-                                <input type="checkbox" 
-                                       class="form-check-input @error('is_active') is-invalid @enderror" 
-                                       id="is_active" 
-                                       name="is_active" 
-                                       value="1" 
-                                       {{ old('is_active', $question->is_active) ? 'checked' : '' }}>
-                                <label class="form-check-label" for="is_active">Pertanyaan Aktif</label>
-                                @error('is_active')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                        </div>
-
                         <div class="d-flex justify-content-between">
                             <a href="{{ route('assessment.questions.index') }}" class="btn btn-secondary">
                                 <i class="fas fa-arrow-left"></i> Kembali
                             </a>
                             <button type="submit" class="btn btn-primary">
-                                <i class="fas fa-save"></i> Simpan Perubahan
+                                <i class="fas fa-save"></i> Simpan
                             </button>
                         </div>
                     </form>
