@@ -87,4 +87,39 @@ class ConsultationController extends Controller
             ->get();
         return view('psikolog.jadwal_konsultasi', compact('bookings', 'psikolog'));
     }
+
+    public function editBooking(Booking $booking)
+    {
+        if ($booking->user_id !== Auth::id() || $booking->status !== 'pending') {
+            return redirect()->route('konsultasi.jadwal.user')->with('error', 'Tidak diizinkan mengedit booking ini.');
+        }
+        return view('konsultasi.edit_booking', compact('booking'));
+    }
+
+    public function updateBooking(Request $request, Booking $booking)
+    {
+        if ($booking->user_id !== Auth::id() || $booking->status !== 'pending') {
+            return redirect()->route('konsultasi.jadwal.user')->with('error', 'Tidak diizinkan mengedit booking ini.');
+        }
+        $request->validate([
+            'tanggal' => 'required|date|after_or_equal:today',
+            'jam' => 'required',
+            'catatan' => 'nullable|string',
+        ]);
+        $booking->update([
+            'tanggal' => $request->tanggal,
+            'jam' => $request->jam,
+            'catatan' => $request->catatan,
+        ]);
+        return redirect()->route('konsultasi.jadwal.user')->with('success', 'Booking berhasil diupdate!');
+    }
+
+    public function deleteBooking(Booking $booking)
+    {
+        if ($booking->user_id !== Auth::id() || $booking->status !== 'pending') {
+            return redirect()->route('konsultasi.jadwal.user')->with('error', 'Tidak diizinkan menghapus booking ini.');
+        }
+        $booking->delete();
+        return redirect()->route('konsultasi.jadwal.user')->with('success', 'Booking berhasil dihapus!');
+    }
 } 

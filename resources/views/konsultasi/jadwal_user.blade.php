@@ -25,10 +25,14 @@
                             <p class="card-text"><strong>Catatan:</strong> {{ $booking->catatan }}</p>
                         @endif
                         @if($booking->status === 'pending')
-                            <form method="POST" action="{{ route('konsultasi.booking.bayar', $booking->id) }}" class="mt-2">
-                                @csrf
-                                <button type="submit" class="btn btn-warning w-100">Bayar Sekarang</button>
-                            </form>
+                            <div class="d-flex gap-2 mt-2">
+                                <a href="{{ route('konsultasi.booking.edit', $booking->id) }}" class="btn btn-primary flex-fill">Edit</a>
+                                <form method="POST" action="{{ route('konsultasi.booking.delete', $booking->id) }}" onsubmit="return confirm('Yakin ingin menghapus booking ini?')" class="flex-fill">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger w-100">Hapus</button>
+                                </form>
+                            </div>
                         @endif
                     </div>
                 </div>
