@@ -7,6 +7,8 @@
     <title>@yield('title', config('app.name', 'Teman Jiwa'))</title>
     <link rel="icon" href="{{ asset('WhatsApp Image 2025-03-28 at 21.17.58_adbf7a26.jpg') }}" type="image/x-icon">
 
+    <title>{{ config('app.name', 'Teman Jiwa') }}</title>
+
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap" rel="stylesheet">
 
@@ -22,9 +24,6 @@
     <style>
         body {
             font-family: 'Ubuntu', sans-serif;
-        }
-        .nav-link.active {
-            border-bottom: 2px solid #0d6efd;
         }
     </style>
 </head>
@@ -46,20 +45,27 @@
                     <ul class="navbar-nav me-auto">
                         @auth
                             <li class="nav-item">
-                                <a class="nav-link {{ Route::is('dashboard') ? 'active fw-bold text-primary' : '' }}" href="{{ route('dashboard') }}">
-                                    Home
-                                </a>
+                                @if(Auth::guard('psychologist')->check())
+                                    <a class="nav-link" href="{{ route('psikolog.dashboard') }}">Home</a>
+                                @else
+                                    <a class="nav-link" href="{{ route('dashboard') }}">Home</a>
+                                @endif
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link {{ Route::is('assessment.index') ? 'active fw-bold text-primary' : '' }}" href="{{ route('assessment.index') }}">
-                                    Assessment
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link {{ Route::is('assessment.questions.*') ? 'active fw-bold text-primary' : '' }}" href="{{ route('assessment.questions.index') }}">
-                                    Kelola Pertanyaan
-                                </a>
-                            </li>
+                            @if(Auth::guard('web')->check())
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('assessment.index') }}">Assessment</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('konsultasi.index') }}">Konsultasi</a>
+                                </li>
+                            @elseif(Auth::guard('psychologist')->check())
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('psikolog.assessment.index') }}">Assessment</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('psikolog.jadwal.konsultasi') }}">Jadwal Konsultasi</a>
+                                </li>
+                            @endif
                         @endauth
                     </ul>
 
@@ -78,23 +84,34 @@
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    {{ Auth::user()->name }}
+                                    {{ Auth::user()->nama ?? Auth::user()->name }}
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <li>
-                                        <a class="dropdown-item" href="{{ route('assessment.history') }}">
-                                            Riwayat Assessment
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="{{ route('logout') }}"
-                                           onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                            Logout
-                                        </a>
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                            @csrf
-                                        </form>
-                                    </li>
+                                    @if(Auth::guard('psychologist')->check())
+                                        <!-- Hanya tampilkan menu untuk psikolog -->
+                                        <li>
+                                            <a class="dropdown-item" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                                            <form id="logout-form" action="{{ route('psikolog.logout') }}" method="POST" style="display: none;">
+                                                @csrf
+                                            </form>
+                                        </li>
+                                    @else
+                                        <li>
+                                            <a class="dropdown-item" href="{{ route('profile.edit') }}">Edit Profil</a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="{{ route('assessment.history') }}">Riwayat Assessment</a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="{{ route('konsultasi.jadwal.user') }}">Jadwal Konsultasi</a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                @csrf
+                                            </form>
+                                        </li>
+                                    @endif
                                 </ul>
                             </li>
                         @endguest

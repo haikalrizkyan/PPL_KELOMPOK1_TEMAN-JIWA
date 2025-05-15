@@ -9,14 +9,24 @@ class Assessment extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'answers'];
-
-    protected $casts = [
-        'answers' => 'array',
+    protected $fillable = [
+        'judul',
+        'deskripsi',
+        'psychologist_id',
     ];
 
-    public function user()
+    public function psychologist()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Psychologist::class);
     }
-}
+
+    public function questions()
+    {
+        return $this->hasMany(Question::class);
+    }
+
+    public function userAssessments()
+    {
+        return $this->hasMany(UserAssessment::class);
+    }
+} 

@@ -16,10 +16,16 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
-        'name',
+        'nama',
         'email',
         'password',
-        'saldo', // Menambahkan saldo ke dalam fillable
+        'saldo',
+        'tanggal_lahir',
+        'jenis_kelamin',
+        'alamat',
+        'nomor_telepon',
+        'foto_profil',
+        'status'
     ];
 
     /**
@@ -42,7 +48,8 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
-            'saldo' => 'float', // Mengatur saldo agar selalu di-cast sebagai float
+            'saldo' => 'float',
+            'tanggal_lahir' => 'date',
         ];
     }
 }
