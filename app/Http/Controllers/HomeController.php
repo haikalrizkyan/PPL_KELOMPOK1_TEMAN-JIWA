@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -28,28 +27,34 @@ class HomeController extends Controller
     {
         // Mendapatkan data pengguna yang sedang login
         $user = Auth::user();
+        // Ambil hasil assessment terakhir user yang sudah selesai
+        $lastAssessment = \App\Models\UserAssessment::with('assessment')
+            ->where('user_id', $user->id)
+            ->where('selesai', true)
+            ->orderByDesc('updated_at')
+            ->first();
+        // Mengirimkan data pengguna dan hasil assessment terakhir ke view dashboard
+        return view('dashboard', compact('user', 'lastAssessment'));
+    }
 
-        // Ambil assessment terakhir user
-        $lastAssessment = \App\Models\Assessment::where('user_id', $user->id)->latest()->first();
+    public function editProfile()
+    {
+        $user = auth()->user();
+        return view('profile.edit', compact('user'));
+    }
 
-        // Ambil 3 assessment terakhir untuk recent activity
-        $recentAssessments = \App\Models\Assessment::where('user_id', $user->id)->latest()->take(3)->get();
-        foreach ($recentAssessments as $assessment) {
-            $assessment->activity_type = 'assessment';
-        }
-
-        // Ambil 3 top up terakhir untuk recent activity
-        $recentTopups = DB::table('topup_logs')->where('user_id', $user->id)->latest()->take(3)->get();
-        foreach ($recentTopups as $topup) {
-            $topup->activity_type = 'topup';
-        }
-
-        // Gabungkan dan urutkan berdasarkan waktu terbaru
-        $recentActivities = collect($recentAssessments)->merge($recentTopups)->sortByDesc(function($item) {
-            return $item->created_at;
-        })->take(3);
-
-        // Mengirimkan data pengguna, assessment terakhir, dan recent activity ke view dashboard
-        return view('dashboard', compact('user', 'lastAssessment', 'recentActivities'));
+    public function updateProfile(Request $request)
+    {
+        $user = auth()->user();
+        $request->validate([
+            'nama' => 'required|string|max:255',
+            'email' => 'required|email|max:255|unique:users,email,' . $user->id,
+            'tanggal_lahir' => 'nullable|date',
+            'jenis_kelamin' => 'nullable|in:Laki-laki,Perempuan',
+            'alamat' => 'nullable|string',
+            'nomor_telepon' => 'nullable|string',
+        ]);
+        $user->update($request->only('nama', 'email', 'tanggal_lahir', 'jenis_kelamin', 'alamat', 'nomor_telepon'));
+        return redirect()->route('profile.edit')->with('success', 'Profil berhasil diperbarui!');
     }
 }

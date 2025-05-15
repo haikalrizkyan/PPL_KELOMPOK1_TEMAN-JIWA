@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 class TopUpController extends Controller
 {
@@ -24,15 +23,6 @@ class TopUpController extends Controller
         $user = Auth::user(); // Mendapatkan pengguna yang sedang login
         $user->saldo += $amount; // Menambahkan saldo baru ke saldo yang sudah ada
         $user->save(); // Menyimpan perubahan ke database
-
-        // Catat ke tabel topup_logs
-        DB::table('topup_logs')->insert([
-            'user_id' => $user->id,
-            'amount' => $amount,
-            'payment_method' => $paymentMethod,
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
 
         // Redirect kembali ke dashboard dengan pesan sukses
         return redirect()->route('dashboard')->with('success', 'Top up saldo berhasil! Saldo Anda: Rp ' . number_format($user->saldo, 0, ',', '.'));

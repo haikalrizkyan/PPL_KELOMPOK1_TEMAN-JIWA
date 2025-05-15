@@ -50,14 +50,19 @@
                 @else
                     <div class="flex flex-col space-y-4">
                         <a href="{{ route('login') }}" class="btn-primary text-white py-3 px-6 rounded-lg font-medium text-center flex items-center justify-center">
-                            <i class="fas fa-sign-in-alt mr-2"></i> Masuk
+                            <i class="fas fa-sign-in-alt mr-2"></i> Masuk User
                         </a>
-                        
+                        <a href="{{ route('psikolog.login') }}" class="btn-primary text-white py-3 px-6 rounded-lg font-medium text-center flex items-center justify-center bg-green-600 hover:bg-green-700">
+                            <i class="fas fa-user-md mr-2"></i> Masuk Psikolog
+                        </a>
                         @if (Route::has('register'))
                             <a href="{{ route('register') }}" class="btn-outline border border-gray-300 text-gray-700 py-3 px-6 rounded-lg font-medium text-center flex items-center justify-center">
-                                <i class="fas fa-user-plus mr-2"></i> Daftar
+                                <i class="fas fa-user-plus mr-2"></i> Daftar User
                             </a>
                         @endif
+                        <a href="{{ route('psikolog.register') }}" class="btn-outline border border-green-400 text-green-700 py-3 px-6 rounded-lg font-medium text-center flex items-center justify-center">
+                            <i class="fas fa-user-plus mr-2"></i> Daftar Psikolog
+                        </a>
                     </div>
                 @endauth
             @endif

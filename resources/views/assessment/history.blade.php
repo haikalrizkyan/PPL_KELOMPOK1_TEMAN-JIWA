@@ -1,63 +1,42 @@
 @extends('layouts.app')
 
-@section('title', 'Riwayat Assessment')
-
 @section('content')
-<div class="container py-5">
-    <h2 class="mb-4">📊 Riwayat Assessment</h2>
-
-    @if(session('success'))
-        <div class="alert alert-success">{{ session('success') }}</div>
-    @endif
-
-    @forelse($assessments as $assessment)
-        @php
-            $jawaban = $assessment->answers;
-            $labels = [
-                'Tidak Pernah' => 'secondary',
-                'Jarang' => 'info',
-                'Kadang-kadang' => 'warning',
-                'Sering' => 'primary',
-                'Sangat Sering' => 'danger',
-            ];
-        @endphp
-
-        <div class="card mb-4 shadow-sm rounded-4">
-            <div class="card-body">
-                <h5 class="card-title mb-3">📝 Assessment #{{ $loop->iteration }}</h5>
-
-                <div class="table-responsive">
-                    <table class="table table-bordered table-striped">
-                        <thead class="table-light">
-                            <tr>
-                                <th>Pertanyaan</th>
-                                <th>Jawaban</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($jawaban as $key => $value)
-                                <tr>
-                                    <td>{{ Str::replace('question', 'Pertanyaan ', $key) }}</td>
-                                    <td>
-                                        <span class="badge bg-{{ $labels[$value] ?? 'secondary' }} px-3 py-2">
-                                            {{ $value }}
-                                        </span>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-
-                <div class="mt-3">
-                    <p><strong>📅 Tanggal:</strong> {{ \Carbon\Carbon::parse($assessment->created_at)->format('d M Y, H:i') }}</p>
-                    <p><strong>💯 Skor:</strong> <span class="text-success fw-bold">{{ $assessment->score }}</span></p>
-                    <p><strong>🧾 Hasil:</strong> {{ $assessment->result }}</p>
-                </div>
-            </div>
+<div class="container">
+    <h2>Riwayat Assessment</h2>
+    <div class="card mt-4">
+        <div class="card-body">
+            @if($riwayat->isEmpty())
+                <p>Belum ada riwayat assessment.</p>
+            @else
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Nama Assessment</th>
+                        <th>Skor</th>
+                        <th>Kategori</th>
+                        <th>Tanggal</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($riwayat as $i => $item)
+                    <tr>
+                        <td>{{ $i+1 }}</td>
+                        <td>{{ $item->assessment->judul ?? '-' }}</td>
+                        <td>{{ $item->skor }}</td>
+                        <td><span class="badge bg-primary">{{ $item->kategori }}</span></td>
+                        <td>{{ $item->updated_at->format('d-m-Y H:i') }}</td>
+                        <td>
+                            <a href="{{ route('assessment.result', $item->id) }}" class="btn btn-info btn-sm">Lihat Hasil</a>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+            @endif
+            <a href="{{ url('/') }}" class="btn btn-secondary mt-3">Kembali ke Beranda</a>
         </div>
-    @empty
-        <div class="alert alert-info">Belum ada data assessment.</div>
-    @endforelse
+    </div>
 </div>
-@endsection
+@endsection 

@@ -4,246 +4,171 @@
 
 
 @section('content')
-<div class="container py-4">
-    <div class="row justify-content-center">
-        <div class="col-12 col-md-10 col-lg-8 mx-auto">
-            <div class="text-center py-4">
-                <h2 class="mb-4">Haloo!!</h2>
-                <p class="text-muted">Selamat datang, {{ $user->name }}!</p>
-
-                @if(!is_null($lastAssessment))
-                <!-- Monitoring Mental Health Section -->
-                <div class="alert alert-success mb-4 p-4 shadow rounded-4" style="background: #e6f9f0;">
-                    <strong style="font-size: 1.2rem;">Monitoring Mental Health:</strong><br>
-                    <span>Skor Assessment Terakhir: <b style="font-size: 1.1rem;">{{ optional($lastAssessment)->score }}</b></span><br>
-                    <span>Hasil: <b style="font-size: 1.1rem;">{{ optional($lastAssessment)->result }}</b></span>
-                </div>
-                @endif
-
-                <!-- Recent Activity Section -->
-                <div class="mb-4 recent-activity-bg p-4 rounded-4 shadow-sm">
-                    <div class="d-flex align-items-center gap-2 mb-3">
-                        <span class="fs-4 text-primary"><i class="fas fa-history"></i></span>
-                        <h5 class="mb-0" style="font-weight: bold; letter-spacing: 1px;">Recent Activity</h5>
-                    </div>
-                    @if($recentActivities->count() > 0)
-                        <div class="recent-activity-list">
-                        @foreach($recentActivities as $activity)
-                            @if(isset($activity->activity_type) && $activity->activity_type === 'assessment')
-                                <div class="activity-card d-flex align-items-center mb-3 p-3 rounded-4 shadow-sm" style="background: #fff; animation: fadeInUp 0.7s cubic-bezier(.39,.575,.56,1.000);">
-                                    <div class="me-3 text-center" style="min-width:56px;">
-                                        <div class="bg-primary text-white rounded-3 px-2 py-1 mb-1" style="font-size:0.95rem;">
-                                            <i class="fas fa-calendar-alt me-1"></i><br>{{ \Carbon\Carbon::parse($activity->created_at)->format('d M') }}<br><span style="font-size:0.85em;">{{ \Carbon\Carbon::parse($activity->created_at)->format('H:i') }}</span>
-                                        </div>
-                                    </div>
-                                    <div class="flex-grow-1">
-                                        <div class="fw-bold mb-1" style="font-size:1.1rem;">Skor: <span class="text-primary">{{ $activity->score }}</span></div>
-                                        <div>
-                                            <span class="badge {{ $activity->result == 'Tidak ada indikasi gangguan mental' ? 'bg-success' : ($activity->result == 'Indikasi gangguan ringan' ? 'bg-info text-dark' : ($activity->result == 'Indikasi gangguan sedang' ? 'bg-warning text-dark' : 'bg-danger')) }} px-3 py-2" style="font-size:1em;">
-                                                <i class="fas fa-brain me-1"></i>{{ $activity->result }}
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            @elseif(isset($activity->activity_type) && $activity->activity_type === 'topup')
-                                <div class="activity-card d-flex align-items-center mb-3 p-3 rounded-4 shadow-sm" style="background: #e6f9f0; animation: fadeInUp 0.7s cubic-bezier(.39,.575,.56,1.000);">
-                                    <div class="me-3 text-center" style="min-width:56px;">
-                                        <div class="bg-success text-white rounded-3 px-2 py-1 mb-1" style="font-size:0.95rem;">
-                                            <i class="fas fa-money-bill-wave me-1"></i><br>{{ \Carbon\Carbon::parse($activity->created_at)->format('d M') }}<br><span style="font-size:0.85em;">{{ \Carbon\Carbon::parse($activity->created_at)->format('H:i') }}</span>
-                                        </div>
-                                    </div>
-                                    <div class="flex-grow-1">
-                                        <div class="fw-bold mb-1" style="font-size:1.1rem; color:#198754;">+Rp {{ number_format($activity->amount, 0, ',', '.') }}</div>
-                                        <div>
-                                            <span class="badge bg-success px-3 py-2" style="font-size:1em;"><i class="fas fa-wallet me-1"></i>Top Up Saldo</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endif
-                        @endforeach
+<style>
+    body {
+        background: #f4f6fb;
+    }
+    .dashboard-title {
+        font-size: 2.5rem;
+        font-weight: 800;
+        color: #4f46e5;
+        letter-spacing: 1px;
+        margin-bottom: 0.5rem;
+    }
+    .dashboard-subtitle {
+        font-size: 1.2rem;
+        color: #6b7280;
+        margin-bottom: 2rem;
+    }
+    .dashboard-section {
+        margin-bottom: 2.5rem;
+    }
+    .dashboard-divider {
+        border-top: 2px dashed #e0e7ff;
+        margin: 2.5rem 0 2rem 0;
+    }
+    .dashboard-icon {
+        font-size: 2.2rem;
+        color: #6366f1;
+        margin-bottom: 0.5rem;
+    }
+    .btn-custom {
+        background: linear-gradient(90deg, #6366f1 0%, #7c3aed 100%);
+        color: #fff;
+        border: none;
+        border-radius: 2rem;
+        font-weight: 600;
+        padding: 0.7rem 2.2rem;
+        transition: background 0.2s, box-shadow 0.2s;
+        box-shadow: 0 4px 16px 0 rgba(99, 102, 241, 0.12);
+    }
+    .btn-custom:hover {
+        background: linear-gradient(90deg, #7c3aed 0%,rgb(244, 14, 14) 100%);
+        color: #fff;
+        box-shadow: 0 8px 24px 0 rgba(99, 102, 241, 0.18);
+    }
+    .card-modern {
+        border-radius: 1.5rem;
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.10);
+        border: none;
+    }
+    .card-header-modern {
+        background: linear-gradient(90deg,rgb(247, 12, 12) 0%, #7c3aed 100%);
+        color: #fff;
+        font-size: 1.3rem;
+        font-weight: 700;
+        border-radius: 1.5rem 1.5rem 0 0;
+        letter-spacing: 1px;
+        border: none;
+    }
+    .badge-soft {
+        background: #e0e7ff;
+        color: #3730a3;
+        font-size: 1.1em;
+        border-radius: 1rem;
+        padding: 0.5em 1.2em;
+        font-weight: 600;
+    }
+</style>
+<div class="container">
+    <div class="text-center py-5">
+        <div class="dashboard-title mb-2">👋 Haloo!!</div>
+        <div class="dashboard-subtitle">Selamat datang di <b>Teman Jiwa</b>!</div>
+        <div class="alert alert-info shadow-sm mb-4" style="max-width: 400px; margin: 0 auto;">
+            <strong>Saldo Anda:</strong>
+            <span id="saldo-value">*****</span>
+            <button id="toggle-saldo" type="button" class="btn btn-link p-0 ms-2" style="vertical-align:middle; text-decoration:none;">
+                <i id="icon-saldo" class="fa-solid fa-eye"></i>
+            </button>
+        </div>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const saldoValue = document.getElementById('saldo-value');
+                const toggleBtn = document.getElementById('toggle-saldo');
+                const icon = document.getElementById('icon-saldo');
+                let visible = false;
+                const saldoAsli = 'Rp {{ number_format($user->saldo, 0, ",", ".") }}';
+                toggleBtn.addEventListener('click', function() {
+                    visible = !visible;
+                    if (visible) {
+                        saldoValue.textContent = saldoAsli;
+                        icon.classList.remove('fa-eye');
+                        icon.classList.add('fa-eye-slash');
+                    } else {
+                        saldoValue.textContent = '*****';
+                        icon.classList.remove('fa-eye-slash');
+                        icon.classList.add('fa-eye');
+                    }
+                });
+            });
+        </script>
+        <button type="button" class="btn btn-custom btn-lg mb-4" style="font-size:1.2rem; min-width:220px;" data-bs-toggle="modal" data-bs-target="#topupModal">Top Up Saldo</button>
+        <div class="dashboard-section">
+            <div class="row justify-content-center mb-4">
+                <div class="col-md-7">
+                    <div class="card card-modern">
+                        <div class="card-header card-header-modern text-center">
+                            <span class="dashboard-icon"><i class="fa-solid fa-heart-pulse"></i></span><br>
+                            Monitoring Mental Health
                         </div>
-                    @else
-                        <div class="text-muted">Belum ada aktivitas assessment atau top up.</div>
-                    @endif
+                        <div class="card-body text-center p-4">
+                            @if($lastAssessment)
+                                <div class="mb-3">
+                                    <span class="fw-semibold text-secondary">Assessment:</span> <span class="text-dark">{{ $lastAssessment->assessment->judul ?? '-' }}</span>
+                                </div>
+                                <div class="mb-3">
+                                    <span class="fw-semibold text-secondary">Tanggal:</span> <span class="text-dark">{{ $lastAssessment->updated_at->format('d-m-Y H:i') }}</span>
+                                </div>
+                                <div class="mb-3">
+                                    <span class="fw-semibold text-secondary">Skor:</span> <span class="badge badge-soft shadow-sm">{{ $lastAssessment->skor }}</span>
+                                </div>
+                                <div class="mb-3">
+                                    <span class="fw-semibold text-secondary">Kategori:</span> <span class="badge bg-success fs-5 px-3 py-2 shadow-sm" style="border-radius:1rem; font-size:1.1em">{{ $lastAssessment->kategori }}</span>
+                                </div>
+                                <a href="{{ route('assessment.result', $lastAssessment->id) }}" class="btn btn-custom mt-2">Lihat Detail</a>
+                            @else
+                                <div class="text-muted">Belum ada hasil assessment. Silakan lakukan assessment untuk memantau kesehatan mental Anda.</div>
+                            @endif
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+        <div class="dashboard-divider"></div>
     </div>
-</div>
-
-<!-- Floating Action Button for Top Up + Label -->
-<div class="fab-topup-container">
-  <button type="button" class="btn btn-primary btn-lg rounded-circle shadow fab-topup" data-bs-toggle="modal" data-bs-target="#topupModal" title="Top Up Saldo">
-      <i class="fas fa-plus"></i>
-  </button>
-  <span class="fab-topup-label">TOP UP</span>
 </div>
 
 <!-- Modal Top Up Saldo -->
 <div class="modal fade" id="topupModal" tabindex="-1" aria-labelledby="topupModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content rounded-4">
-      <div class="modal-header border-0">
-        <h5 class="modal-title fw-bold" id="topupModalLabel">Top Up Saldo</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <div class="modal-content" style="border-radius:2rem; box-shadow:0 8px 32px 0 rgba(99,102,241,0.15); overflow:hidden;">
+      <div class="modal-header" style="background: linear-gradient(90deg, #6366f1 0%, #7c3aed 100%); color: #fff; border-radius: 2rem 2rem 0 0; border-bottom: none;">
+        <h5 class="modal-title fw-bold" id="topupModalLabel"><i class="fa-solid fa-wallet me-2"></i>Top Up Saldo</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body p-4" style="background:#fff;">
         <form action="{{ route('topup') }}" method="POST">
           @csrf
-          <div class="mb-3">
-            <label for="amount" class="form-label">Jumlah Saldo</label>
-            <input type="number" class="form-control" id="amount" name="amount" placeholder="Masukkan jumlah saldo" required>
+          <div class="mb-4">
+            <label for="amount" class="form-label fw-semibold">Jumlah Saldo</label>
+            <input type="number" class="form-control form-control-lg" id="amount" name="amount" placeholder="Masukkan jumlah saldo" required style="border-radius:1rem;">
           </div>
-          <div class="mb-3">
-            <label for="payment_method" class="form-label">Metode Pembayaran</label>
-            <select class="form-select" id="payment_method" name="payment_method" required>
+          <div class="mb-4">
+            <label for="payment_method" class="form-label fw-semibold">Metode Pembayaran</label>
+            <select class="form-select form-select-lg" id="payment_method" name="payment_method" required style="border-radius:1rem;">
               <option value="bank_transfer">Transfer Bank</option>
               <option value="gopay">Gopay</option>
               <option value="ovo">OVO</option>
               <option value="dana">DANA</option>
             </select>
           </div>
-          <div class="d-flex justify-content-end gap-2">
-            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Batal</button>
-            <button type="submit" class="btn btn-primary">Top Up</button>
+          <div class="d-flex gap-3 justify-content-between align-items-center mt-4">
+            <button type="submit" class="btn btn-custom flex-grow-1 py-2" style="font-size:1.1rem; border-radius:2rem;">Top Up</button>
+            <button type="button" class="btn btn-outline-secondary rounded-pill px-4 py-2" data-bs-dismiss="modal">Batal</button>
           </div>
         </form>
       </div>
     </div>
   </div>
 </div>
-
-<style>
-  .fab-topup-container {
-    position: fixed;
-    bottom: 32px;
-    right: 32px;
-    z-index: 1055;
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-  }
-  .fab-topup-label {
-    background: #fff;
-    color: #0d6efd;
-    font-weight: 700;
-    border-radius: 1rem;
-    padding: 0.5rem 1.1rem;
-    box-shadow: 0 2px 8px 0 rgba(13,110,253,0.08);
-    font-size: 1.1rem;
-    letter-spacing: 1px;
-    border: 2px solid #0d6efd;
-    transition: background 0.2s, color 0.2s;
-  }
-  .fab-topup-container:hover .fab-topup-label {
-    background: #0d6efd;
-    color: #fff;
-  }
-  .fab-topup {
-    width: 64px;
-    height: 64px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2rem;
-    background: linear-gradient(90deg, #0d6efd 60%, #0dcaf0 100%);
-    border: none;
-    transition: box-shadow 0.2s, background 0.2s;
-  }
-  .fab-topup:hover {
-    box-shadow: 0 6px 24px 0 rgba(13,110,253,0.18);
-    background: linear-gradient(90deg, #0dcaf0 60%, #0d6efd 100%);
-  }
-  @media (max-width: 768px) {
-    .fab-topup-container {
-      bottom: 20px;
-      right: 20px;
-      gap: 0.5rem;
-    }
-    .fab-topup {
-      width: 56px;
-      height: 56px;
-      font-size: 1.5rem;
-    }
-    .fab-topup-label {
-      font-size: 1rem;
-      padding: 0.4rem 0.8rem;
-    }
-  }
-  @keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  .recent-activity-bg {
-    background: #f4f8fb;
-    border-radius: 1.5rem;
-    padding: 2rem 1.5rem;
-  }
-  .activity-card {
-    transition: box-shadow 0.2s;
-    background: #fff !important;
-    border-radius: 1.2rem;
-  }
-  .activity-card:hover {
-    box-shadow: 0 6px 24px 0 rgba(13,110,253,0.13);
-    background: #eaf6ff !important;
-  }
-  .question-card {
-    background: #fff;
-    border: 1.5px solid #f0f0f0;
-    box-shadow: 0 4px 16px 0 rgba(13,110,253,0.07);
-    transition: box-shadow 0.2s;
-  }
-  .question-card:hover {
-    box-shadow: 0 8px 32px 0 rgba(13,110,253,0.13);
-  }
-  .question-number {
-    background: #0d6efd;
-    color: #fff;
-    font-weight: bold;
-    width: 38px;
-    height: 38px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.2rem;
-  }
-  .custom-radio {
-    position: relative;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    margin-right: 1.5rem;
-  }
-  .custom-radio input[type=\"radio\"] {
-    display: none;
-  }
-  .radio-label {
-    padding: 0.5rem 1.2rem;
-    border-radius: 2rem;
-    background: #f4f8fb;
-    color: #222;
-    font-weight: 500;
-    transition: background 0.2s, color 0.2s;
-    border: 2px solid transparent;
-  }
-  .custom-radio input[type=\"radio\"]:checked + .radio-label {
-    background: #0d6efd;
-    color: #fff;
-    border-color: #0d6efd;
-  }
-  .radio-label.tidak-pernah { background: #e9ecef; color: #198754; }
-  .radio-label.jarang { background: #e0f7fa; color: #0dcaf0; }
-  .radio-label.kadang-kadang { background: #fff3cd; color: #ffc107; }
-  .radio-label.sering { background: #ffe5e5; color: #fd7e14; }
-  .radio-label.sangat-sering { background: #f8d7da; color: #dc3545; }
-  .custom-radio input[type=\"radio\"]:checked + .radio-label.tidak-pernah { background: #198754; color: #fff; }
-  .custom-radio input[type=\"radio\"]:checked + .radio-label.jarang { background: #0dcaf0; color: #fff; }
-  .custom-radio input[type=\"radio\"]:checked + .radio-label.kadang-kadang { background: #ffc107; color: #fff; }
-  .custom-radio input[type=\"radio\"]:checked + .radio-label.sering { background: #fd7e14; color: #fff; }
-  .custom-radio input[type=\"radio\"]:checked + .radio-label.sangat-sering { background: #dc3545; color: #fff; }
-</style>
 @endsection
-
-
