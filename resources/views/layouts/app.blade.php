@@ -58,12 +58,18 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('konsultasi.index') }}">Konsultasi</a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('article.index') }}">Article</a>
+                                </li>
                             @elseif(Auth::guard('psychologist')->check())
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('psikolog.assessment.index') }}">Assessment</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('psikolog.jadwal.konsultasi') }}">Jadwal Konsultasi</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('psikolog.article.list') }}">Article</a>
                                 </li>
                             @endif
                         @endauth

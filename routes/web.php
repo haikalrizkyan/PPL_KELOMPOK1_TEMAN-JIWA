@@ -71,3 +71,17 @@ Route::middleware(['auth:psychologist'])->get('/psikolog/jadwal-konsultasi', [Ap
 Route::middleware(['auth'])->get('/jadwal-konsultasi/{booking}/edit', [App\Http\Controllers\ConsultationController::class, 'editBooking'])->name('konsultasi.booking.edit');
 Route::middleware(['auth'])->put('/jadwal-konsultasi/{booking}', [App\Http\Controllers\ConsultationController::class, 'updateBooking'])->name('konsultasi.booking.update');
 Route::middleware(['auth'])->delete('/jadwal-konsultasi/{booking}', [App\Http\Controllers\ConsultationController::class, 'deleteBooking'])->name('konsultasi.booking.delete');
+
+// Route Article untuk user
+Route::get('/article', [App\Http\Controllers\ArticleController::class, 'index'])->name('article.index');
+Route::get('/article/{article}', [App\Http\Controllers\ArticleController::class, 'show'])->name('article.show');
+
+// Route Article untuk psikolog (CRUD)
+Route::middleware(['auth:psychologist'])->prefix('psikolog')->name('psikolog.')->group(function () {
+    Route::get('/article', [App\Http\Controllers\ArticleController::class, 'listMyArticles'])->name('article.list');
+    Route::get('/article/create', [App\Http\Controllers\ArticleController::class, 'create'])->name('article.create');
+    Route::post('/article', [App\Http\Controllers\ArticleController::class, 'store'])->name('article.store');
+    Route::get('/article/{article}/edit', [App\Http\Controllers\ArticleController::class, 'edit'])->name('article.edit');
+    Route::put('/article/{article}', [App\Http\Controllers\ArticleController::class, 'update'])->name('article.update');
+    Route::delete('/article/{article}', [App\Http\Controllers\ArticleController::class, 'destroy'])->name('article.destroy');
+});

@@ -1,0 +1,114 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Models\Article;
+use Illuminate\Support\Facades\Auth;
+
+class ArticleController extends Controller
+{
+    // List artikel untuk user
+    public function index()
+    {
+        $articles = Article::with('psychologist')->latest()->get();
+        return view('article.index', compact('articles'));
+    }
+
+    // Detail artikel untuk user
+    public function show(Article $article)
+    {
+        return view('article.show', compact('article'));
+    }
+
+    // List artikel milik psikolog yang login
+    public function listMyArticles()
+    {
+        $psikolog = Auth::guard('psychologist')->user();
+        $articles = Article::where('psychologist_id', $psikolog->id)->latest()->get();
+        return view('psikolog.article.list', compact('articles'));
+    }
+
+    // Form tambah artikel (psikolog)
+    public function create()
+    {
+        return view('psikolog.article.create');
+    }
+
+    // Simpan artikel baru (psikolog)
+    public function store(Request $request)
+    {
+        $psikolog = Auth::guard('psychologist')->user();
+        $data = $request->validate([
+            'title' => 'required|string|max:255',
+            'cover' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'first_section_description' => 'required|string',
+            'first_section_attachment' => 'nullable|file|max:4096',
+            'second_section_description' => 'nullable|string',
+            'second_section_attachment' => 'nullable|file|max:4096',
+        ]);
+        // Handle file upload
+        if ($request->hasFile('cover')) {
+            $data['cover'] = $request->file('cover')->store('articles/covers', 'public');
+        }
+        if ($request->hasFile('first_section_attachment')) {
+            $data['first_section_attachment'] = $request->file('first_section_attachment')->store('articles/attachments', 'public');
+        }
+        if ($request->hasFile('second_section_attachment')) {
+            $data['second_section_attachment'] = $request->file('second_section_attachment')->store('articles/attachments', 'public');
+        }
+        $data['psychologist_id'] = $psikolog->id;
+        Article::create($data);
+        return redirect()->route('psikolog.article.list')->with('success', 'Artikel berhasil ditambahkan!');
+    }
+
+    // Form edit artikel (psikolog)
+    public function edit(Article $article)
+    {
+        $psikolog = Auth::guard('psychologist')->user();
+        if ($article->psychologist_id !== $psikolog->id) {
+            abort(403);
+        }
+        return view('psikolog.article.edit', compact('article'));
+    }
+
+    // Update artikel (psikolog)
+    public function update(Request $request, Article $article)
+    {
+        $psikolog = Auth::guard('psychologist')->user();
+        if ($article->psychologist_id !== $psikolog->id) {
+            abort(403);
+        }
+        $data = $request->validate([
+            'title' => 'required|string|max:255',
+            'cover' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'first_section_description' => 'required|string',
+            'first_section_attachment' => 'nullable|file|max:4096',
+            'second_section_description' => 'nullable|string',
+            'second_section_attachment' => 'nullable|file|max:4096',
+        ]);
+        // Handle file upload
+        if ($request->hasFile('cover')) {
+            $data['cover'] = $request->file('cover')->store('articles/covers', 'public');
+        }
+        if ($request->hasFile('first_section_attachment')) {
+            $data['first_section_attachment'] = $request->file('first_section_attachment')->store('articles/attachments', 'public');
+        }
+        if ($request->hasFile('second_section_attachment')) {
+            $data['second_section_attachment'] = $request->file('second_section_attachment')->store('articles/attachments', 'public');
+        }
+        $article->update($data);
+        return redirect()->route('psikolog.article.list')->with('success', 'Artikel berhasil diupdate!');
+    }
+
+    // Hapus artikel (psikolog)
+    public function destroy(Article $article)
+    {
+        $psikolog = Auth::guard('psychologist')->user();
+        if ($article->psychologist_id !== $psikolog->id) {
+            abort(403);
+        }
+        $article->delete();
+        return redirect()->route('psikolog.article.list')->with('success', 'Artikel berhasil dihapus!');
+    }
+}

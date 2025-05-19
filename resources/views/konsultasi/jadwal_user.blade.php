@@ -26,6 +26,10 @@
                         @endif
                         @if($booking->status === 'pending')
                             <div class="d-flex gap-2 mt-2">
+                                <form method="POST" action="{{ route('konsultasi.booking.bayar', $booking->id) }}" class="flex-fill">
+                                    @csrf
+                                    <button type="submit" class="btn btn-warning w-100">Bayar Sekarang</button>
+                                </form>
                                 <a href="{{ route('konsultasi.booking.edit', $booking->id) }}" class="btn btn-primary flex-fill">Edit</a>
                                 <form method="POST" action="{{ route('konsultasi.booking.delete', $booking->id) }}" onsubmit="return confirm('Yakin ingin menghapus booking ini?')" class="flex-fill">
                                     @csrf
