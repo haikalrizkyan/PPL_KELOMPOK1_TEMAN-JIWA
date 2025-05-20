@@ -64,7 +64,6 @@ Route::middleware(['auth'])->get('/konsultasi/{psychologist}/booking', [App\Http
 Route::middleware(['auth'])->post('/konsultasi/{psychologist}/booking', [App\Http\Controllers\ConsultationController::class, 'bookingStore'])->name('konsultasi.booking.store');
 
 Route::middleware(['auth'])->get('/jadwal-konsultasi', [App\Http\Controllers\ConsultationController::class, 'jadwalUser'])->name('konsultasi.jadwal.user');
-Route::middleware(['auth'])->post('/jadwal-konsultasi/{booking}/bayar', [App\Http\Controllers\ConsultationController::class, 'bayarBooking'])->name('konsultasi.booking.bayar');
 
 Route::middleware(['auth:psychologist'])->get('/psikolog/jadwal-konsultasi', [App\Http\Controllers\ConsultationController::class, 'jadwalPsikolog'])->name('psikolog.jadwal.konsultasi');
 

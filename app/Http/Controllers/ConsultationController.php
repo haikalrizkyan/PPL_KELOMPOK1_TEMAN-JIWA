@@ -29,16 +29,29 @@ class ConsultationController extends Controller
             'catatan' => 'nullable|string',
         ]);
 
-        Booking::create([
-            'user_id' => Auth::id(),
+        $user = Auth::user();
+        $biaya = $psychologist->biaya_konsultasi;
+
+        // Check if user has sufficient balance
+        if ($user->saldo < $biaya) {
+            return redirect()->back()->with('error', 'Saldo tidak cukup untuk melakukan booking. Silakan top up saldo terlebih dahulu.');
+        }
+
+        // Create booking
+        $booking = Booking::create([
+            'user_id' => $user->id,
             'psychologist_id' => $psychologist->id,
             'tanggal' => $request->tanggal,
             'jam' => $request->jam,
             'catatan' => $request->catatan,
-            'status' => 'pending',
+            'status' => 'paid', // Set status langsung ke paid karena sudah dibayar
         ]);
 
-        return redirect()->route('konsultasi.index')->with('success', 'Booking konsultasi berhasil!');
+        // Deduct balance
+        $user->saldo -= $biaya;
+        $user->save();
+
+        return redirect()->route('konsultasi.index')->with('success', 'Booking konsultasi berhasil! Saldo Anda telah dikurangi sebesar Rp ' . number_format($biaya, 0, ',', '.'));
     }
 
     public function jadwalUser()
@@ -49,32 +62,6 @@ class ConsultationController extends Controller
             ->orderBy('jam', 'desc')
             ->get();
         return view('konsultasi.jadwal_user', compact('bookings'));
-    }
-
-    public function bayarBooking(Request $request, Booking $booking)
-    {
-        $user = Auth::user();
-        $biaya = $booking->psychologist->biaya_konsultasi;
-
-        if ($booking->user_id !== $user->id) {
-            return back()->with('error', 'Akses tidak diizinkan.');
-        }
-        if ($booking->status !== 'pending') {
-            return back()->with('error', 'Booking sudah dibayar atau tidak valid.');
-        }
-        if ($user->saldo < $biaya) {
-            return back()->with('error', 'Saldo tidak cukup untuk melakukan pembayaran.');
-        }
-
-        // Kurangi saldo user
-        $user->saldo -= $biaya;
-        $user->save();
-
-        // Update status booking
-        $booking->status = 'paid';
-        $booking->save();
-
-        return back()->with('success', 'Pembayaran berhasil! Anda bisa mulai konsultasi.');
     }
 
     public function jadwalPsikolog()
