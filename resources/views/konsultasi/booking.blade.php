@@ -1,40 +1,55 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <h2 class="mb-4">Booking Konsultasi dengan {{ $psychologist->nama }}</h2>
+<div class="container py-5">
+    <div class="text-center mb-5">
+        <h2 class="fw-bold">Booking Konsultasi</h2>
+        <p class="text-muted">Bersama <strong>{{ $psychologist->nama }}</strong></p>
+    </div>
+
     <div class="row justify-content-center">
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-body">
+        <div class="col-md-7">
+            <div class="card shadow-lg border-0 rounded-4">
+                <div class="card-body p-4">
                     <form method="POST" action="{{ route('konsultasi.booking.store', $psychologist->id) }}">
                         @csrf
-                        <div class="mb-3">
-                            <label for="tanggal" class="form-label">Tanggal Konsultasi</label>
+
+                        <div class="mb-4">
+                            <label for="tanggal" class="form-label fw-semibold">📅 Tanggal Konsultasi</label>
                             <input type="date" name="tanggal" id="tanggal" class="form-control @error('tanggal') is-invalid @enderror" required min="{{ date('Y-m-d') }}">
                             @error('tanggal')
-                                <span class="invalid-feedback">{{ $message }}</span>
+                                <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
-                        <div class="mb-3">
-                            <label for="jam" class="form-label">Jam Konsultasi</label>
+
+                        <div class="mb-4">
+                            <label for="jam" class="form-label fw-semibold">⏰ Jam Konsultasi</label>
                             <input type="time" name="jam" id="jam" class="form-control @error('jam') is-invalid @enderror" required>
                             @error('jam')
-                                <span class="invalid-feedback">{{ $message }}</span>
+                                <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
-                        <div class="mb-3">
-                            <label for="catatan" class="form-label">Catatan (Opsional)</label>
-                            <textarea name="catatan" id="catatan" class="form-control @error('catatan') is-invalid @enderror" rows="3"></textarea>
+
+                        <div class="mb-4">
+                            <label for="catatan" class="form-label fw-semibold">📝 Catatan (Opsional)</label>
+                            <textarea name="catatan" id="catatan" class="form-control @error('catatan') is-invalid @enderror" rows="3" placeholder="Contoh: Saya ingin membahas tentang kecemasan..."></textarea>
                             @error('catatan')
-                                <span class="invalid-feedback">{{ $message }}</span>
+                                <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
-                        <button type="submit" class="btn btn-success w-100">Booking Sekarang</button>
+
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary btn-lg rounded-pill">
+                                Booking Sekarang 🚀
+                            </button>
+                        </div>
                     </form>
                 </div>
+            </div>
+            <div class="text-center mt-4 text-muted small">
+                Butuh bantuan? Hubungi kami melalui <a href="#">pusat bantuan</a>.
             </div>
         </div>
     </div>
 </div>
-@endsection 
+@endsection
