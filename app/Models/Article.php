@@ -14,6 +14,7 @@ class Article extends Model
         'first_section_attachment',
         'second_section_description',
         'second_section_attachment',
+        'youtube_url',
     ];
 
     public function psychologist()

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Article;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class ArticleController extends Controller
 {
@@ -42,11 +43,13 @@ class ArticleController extends Controller
         $data = $request->validate([
             'title' => 'required|string|max:255',
             'cover' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'youtube_url' => 'nullable|url',
             'first_section_description' => 'required|string',
             'first_section_attachment' => 'nullable|file|max:4096',
             'second_section_description' => 'nullable|string',
             'second_section_attachment' => 'nullable|file|max:4096',
         ]);
+
         // Handle file upload
         if ($request->hasFile('cover')) {
             $data['cover'] = $request->file('cover')->store('articles/covers', 'public');
@@ -57,6 +60,12 @@ class ArticleController extends Controller
         if ($request->hasFile('second_section_attachment')) {
             $data['second_section_attachment'] = $request->file('second_section_attachment')->store('articles/attachments', 'public');
         }
+
+        // Convert YouTube URL to embed format if provided
+        if ($request->filled('youtube_url')) {
+            $data['youtube_url'] = $this->convertToEmbedUrl($request->youtube_url);
+        }
+
         $data['psychologist_id'] = $psikolog->id;
         Article::create($data);
         return redirect()->route('psikolog.article.list')->with('success', 'Artikel berhasil ditambahkan!');
@@ -82,21 +91,41 @@ class ArticleController extends Controller
         $data = $request->validate([
             'title' => 'required|string|max:255',
             'cover' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'youtube_url' => 'nullable|url',
             'first_section_description' => 'required|string',
             'first_section_attachment' => 'nullable|file|max:4096',
             'second_section_description' => 'nullable|string',
             'second_section_attachment' => 'nullable|file|max:4096',
         ]);
+
         // Handle file upload
         if ($request->hasFile('cover')) {
+            // Delete old cover if exists
+            if ($article->cover) {
+                Storage::disk('public')->delete($article->cover);
+            }
             $data['cover'] = $request->file('cover')->store('articles/covers', 'public');
         }
         if ($request->hasFile('first_section_attachment')) {
+            // Delete old attachment if exists
+            if ($article->first_section_attachment) {
+                Storage::disk('public')->delete($article->first_section_attachment);
+            }
             $data['first_section_attachment'] = $request->file('first_section_attachment')->store('articles/attachments', 'public');
         }
         if ($request->hasFile('second_section_attachment')) {
+            // Delete old attachment if exists
+            if ($article->second_section_attachment) {
+                Storage::disk('public')->delete($article->second_section_attachment);
+            }
             $data['second_section_attachment'] = $request->file('second_section_attachment')->store('articles/attachments', 'public');
         }
+
+        // Convert YouTube URL to embed format if provided
+        if ($request->filled('youtube_url')) {
+            $data['youtube_url'] = $this->convertToEmbedUrl($request->youtube_url);
+        }
+
         $article->update($data);
         return redirect()->route('psikolog.article.list')->with('success', 'Artikel berhasil diupdate!');
     }
@@ -110,5 +139,36 @@ class ArticleController extends Controller
         }
         $article->delete();
         return redirect()->route('psikolog.article.list')->with('success', 'Artikel berhasil dihapus!');
+    }
+
+    // Helper function to convert YouTube URL to embed format
+    private function convertToEmbedUrl($url)
+    {
+        // If it's already an embed URL, return as is
+        if (strpos($url, 'youtube.com/embed/') !== false) {
+            return $url;
+        }
+
+        // Extract video ID using parse_url and parse_str
+        $videoId = null;
+        
+        // Handle youtu.be URLs
+        if (strpos($url, 'youtu.be/') !== false) {
+            $path = parse_url($url, PHP_URL_PATH);
+            $videoId = substr($path, 1);
+        }
+        // Handle youtube.com URLs
+        else if (strpos($url, 'youtube.com') !== false) {
+            parse_str(parse_url($url, PHP_URL_QUERY), $params);
+            $videoId = $params['v'] ?? null;
+        }
+
+        // If we found a video ID, return the embed URL
+        if ($videoId) {
+            return "https://www.youtube.com/embed/" . $videoId;
+        }
+
+        // If we couldn't parse the URL, return the original
+        return $url;
     }
 }

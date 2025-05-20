@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <h2 class="text-center fw-bold my-4">Article List</h2>
+    <h2 class="text-center fw-bold my-4">Daftar Artikel</h2>
     <div class="row justify-content-center">
         @forelse($articles as $article)
             <div class="col-md-4 col-sm-6 mb-4 d-flex align-items-stretch">
@@ -13,7 +13,7 @@
                     <div class="card-body d-flex flex-column">
                         <h5 class="card-title fw-bold">{{ $article->title }}</h5>
                         <p class="card-text flex-grow-1">{{ Str::limit($article->first_section_description, 120) }}</p>
-                        <a href="{{ route('article.show', $article->id) }}" class="btn btn-primary mt-2 align-self-end">Read More</a>
+                        <a href="{{ route('article.show', $article->id) }}" class="btn btn-primary mt-2 align-self-end">Baca Selengkapnya</a>
                     </div>
                 </div>
             </div>
@@ -24,4 +24,4 @@
         @endforelse
     </div>
 </div>
-@endsection 
+@endsection

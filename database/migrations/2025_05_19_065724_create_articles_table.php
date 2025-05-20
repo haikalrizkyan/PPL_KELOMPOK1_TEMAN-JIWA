@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('first_section_attachment')->nullable();
             $table->text('second_section_description')->nullable();
             $table->string('second_section_attachment')->nullable();
+            $table->string('video')->nullable();
             $table->timestamps();
         });
     }
