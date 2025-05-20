@@ -11,7 +11,7 @@ class ConsultationController extends Controller
 {
     public function index()
     {
-        // Ambil semua psikolog yang statusnya aktif
+        
         $psikologs = Psychologist::where('status', 'aktif')->get();
         return view('konsultasi.index', compact('psikologs'));
     }
@@ -32,22 +32,22 @@ class ConsultationController extends Controller
         $user = Auth::user();
         $biaya = $psychologist->biaya_konsultasi;
 
-        // Check if user has sufficient balance
+        
         if ($user->saldo < $biaya) {
             return redirect()->back()->with('error', 'Saldo tidak cukup untuk melakukan booking. Silakan top up saldo terlebih dahulu.');
         }
 
-        // Create booking
+        
         $booking = Booking::create([
             'user_id' => $user->id,
             'psychologist_id' => $psychologist->id,
             'tanggal' => $request->tanggal,
             'jam' => $request->jam,
             'catatan' => $request->catatan,
-            'status' => 'paid', // Set status langsung ke paid karena sudah dibayar
+            'status' => 'paid', 
         ]);
 
-        // Deduct balance
+        
         $user->saldo -= $biaya;
         $user->save();
 
