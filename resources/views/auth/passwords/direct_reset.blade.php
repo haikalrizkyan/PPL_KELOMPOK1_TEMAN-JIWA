@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Psychologist Login - Teman Jiwa</title>
+  <title>Direct Reset Password - Teman Jiwa</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
@@ -16,7 +16,7 @@
       margin: 0 auto 20px;
       max-width: 120px;
     }
-    .login-container {
+    .reset-container {
       max-width: 400px;
       margin: 4rem auto;
       background: #fff;
@@ -44,7 +44,7 @@
       border-color: #4CA9A3;
       box-shadow: 0 0 0 0.2rem rgba(76,169,163,0.15);
     }
-    .login-title {
+    .reset-title {
       font-size: 1.5rem;
       font-weight: 700;
       color: #264653;
@@ -61,23 +61,20 @@
   </style>
 </head>
 <body>
-  <div class="login-container">
+  <div class="reset-container">
     <img src="{{ asset('WhatsApp Image 2025-03-28 at 21.17.58_adbf7a26.jpg') }}" alt="Teman Jiwa Logo" class="logo">
-    <div class="login-title">Sign In as Psychologist</div>
-    @if($errors->any())
-      <div class="alert alert-danger">
-        <ul class="mb-0">
-          @foreach($errors->all() as $error)
-            <li>{{ $error }}</li>
-          @endforeach
-        </ul>
-      </div>
+    <div class="reset-title">Reset Your Password</div>
+    @if(session('success'))
+      <div class="alert alert-success">{{ session('success') }}</div>
     @endif
-    <form method="POST" action="{{ route('psikolog.login.submit') }}">
+    @if(session('error'))
+      <div class="alert alert-danger">{{ session('error') }}</div>
+    @endif
+    <form method="POST" action="">
       @csrf
       <div class="form-group mb-3">
         <label for="email" class="form-label">Email Address</label>
-        <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="Enter your email">
+        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="Enter your email">
         @error('email')
           <span class="invalid-feedback" role="alert">
             <strong>{{ $message }}</strong>
@@ -85,8 +82,8 @@
         @enderror
       </div>
       <div class="form-group mb-3">
-        <label for="password" class="form-label">Password</label>
-        <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" required autocomplete="current-password" placeholder="Enter your password">
+        <label for="password" class="form-label">New Password</label>
+        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="Enter new password">
         @error('password')
           <span class="invalid-feedback" role="alert">
             <strong>{{ $message }}</strong>
@@ -94,20 +91,13 @@
         @enderror
       </div>
       <div class="form-group mb-3">
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-          <label class="form-check-label" for="remember">
-            Remember Me
-          </label>
-        </div>
+        <label for="password_confirmation" class="form-label">Confirm New Password</label>
+        <input id="password_confirmation" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" placeholder="Confirm new password">
       </div>
-      <button type="submit" class="btn btn-temanjiwa btn-block w-100 mb-2">Sign In</button>
-      @if (Route::has('password.direct.reset'))
-        <p class="mt-2 text-center">
-          <a href="{{ route('password.direct.reset') }}" class="login-link">Forgot your password?</a>
-        </p>
-      @endif
-      <p class="mt-3 text-center">Don't have an account? <a href="{{ route('psikolog.register') }}" class="login-link">Register here</a></p>
+      <button type="submit" class="btn btn-temanjiwa btn-block w-100 mb-2">Reset Password</button>
+      <p class="mt-3 text-center">
+        <a href="{{ url()->previous() }}" class="login-link">Back</a>
+      </p>
     </form>
   </div>
 </body>

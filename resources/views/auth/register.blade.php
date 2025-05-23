@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,69 +10,92 @@
   <style>
     body {
       font-family: 'Ubuntu', sans-serif;
-      background-color: #f8f9fa;
+      background-color: #F4FAF9;
     }
     .logo {
       display: block;
       margin: 0 auto 20px;
-      max-width: 250px;
+      max-width: 120px;
     }
-    .container {
-      max-width: 500px;
-      margin-top: 5rem;
+    .register-container {
+      max-width: 400px;
+      margin: 4rem auto;
+      background: #fff;
+      border-radius: 1.5rem;
+      box-shadow: 0 8px 32px 0 rgba(76,169,163,0.10);
+      padding: 2.5rem 2rem 2rem 2rem;
     }
-    .btn-success {
-      background-color: #28a745;
-      border-color: #28a745;
+    .btn-temanjiwa {
+      background: #4CA9A3;
+      color: #fff;
+      font-weight: 600;
+      border-radius: 2rem;
+      border: none;
+      transition: background 0.2s;
     }
-    .btn-success:hover {
-      background-color: #218838;
-      border-color: #1e7e34;
+    .btn-temanjiwa:hover {
+      background: #3D8C87;
+      color: #fff;
+    }
+    .form-label {
+      color: #264653;
+      font-weight: 500;
+    }
+    .form-control:focus {
+      border-color: #4CA9A3;
+      box-shadow: 0 0 0 0.2rem rgba(76,169,163,0.15);
+    }
+    .register-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #264653;
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+    .login-link {
+      color: #4CA9A3;
+      text-decoration: underline;
+    }
+    .login-link:hover {
+      color: #3D8C87;
     }
   </style>
 </head>
-<body class="bg-light">
-  <div class="container mt-5">
-    <!-- Logo -->
+<body>
+  <div class="register-container">
     <img src="{{ asset('WhatsApp Image 2025-03-28 at 21.17.58_adbf7a26.jpg') }}" alt="Teman Jiwa Logo" class="logo">
-
-    <h2 class="text-center mb-4">Create Your Account</h2>
-
+    <div class="register-title">Create Your Account</div>
     @if($errors->any())
       <div class="alert alert-danger">
-        <ul>
+        <ul class="mb-0">
           @foreach($errors->all() as $error)
             <li>{{ $error }}</li>
           @endforeach
         </ul>
       </div>
     @endif
-
     <form method="POST" action="{{ route('register') }}">
       @csrf
-
-      <div class="form-group">
-        <label for="name">Full Name</label>
-        <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus placeholder="Enter full name">
+      <div class="form-group mb-3">
+        <label for="name" class="form-label">Full Name</label>
+        <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus placeholder="Enter your full name">
         @error('name')
           <span class="invalid-feedback" role="alert">
             <strong>{{ $message }}</strong>
           </span>
         @enderror
       </div>
-
-      <div class="form-group">
-        <label for="email">Email address</label>
-        <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="Enter email">
+      <div class="form-group mb-3">
+        <label for="email" class="form-label">Email Address</label>
+        <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="Enter your email">
         @error('email')
           <span class="invalid-feedback" role="alert">
             <strong>{{ $message }}</strong>
           </span>
         @enderror
       </div>
-
-      <div class="form-group">
-        <label for="password">Password</label>
+      <div class="form-group mb-3">
+        <label for="password" class="form-label">Password</label>
         <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" required autocomplete="new-password" placeholder="Create password (min 8 characters)">
         @error('password')
           <span class="invalid-feedback" role="alert">
@@ -80,14 +103,12 @@
           </span>
         @enderror
       </div>
-
-      <div class="form-group">
-        <label for="password-confirm">Confirm Password</label>
+      <div class="form-group mb-3">
+        <label for="password-confirm" class="form-label">Confirm Password</label>
         <input type="password" class="form-control" id="password-confirm" name="password_confirmation" required autocomplete="new-password" placeholder="Confirm password">
       </div>
-
-      <button type="submit" class="btn btn-success btn-block">Register</button>
-      <p class="mt-3 text-center">Already have an account? <a href="{{ route('login') }}">Login here</a></p>
+      <button type="submit" class="btn btn-temanjiwa btn-block w-100 mb-2">Register</button>
+      <p class="mt-3 text-center">Already have an account? <a href="{{ route('login') }}" class="login-link">Login here</a></p>
     </form>
   </div>
 

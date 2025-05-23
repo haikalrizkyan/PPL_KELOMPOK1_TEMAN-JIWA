@@ -84,3 +84,6 @@ Route::middleware(['auth:psychologist'])->prefix('psikolog')->name('psikolog.')-
     Route::put('/article/{article}', [App\Http\Controllers\ArticleController::class, 'update'])->name('article.update');
     Route::delete('/article/{article}', [App\Http\Controllers\ArticleController::class, 'destroy'])->name('article.destroy');
 });
+
+// Direct reset password untuk user & psikolog
+Route::match(['get', 'post'], '/reset-password-direct', [App\Http\Controllers\Auth\DirectResetPasswordController::class, 'handle'])->name('password.direct.reset');
