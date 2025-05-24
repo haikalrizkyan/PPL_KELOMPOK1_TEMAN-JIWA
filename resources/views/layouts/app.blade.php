@@ -44,34 +44,60 @@
                     <!-- Left Side -->
                     <ul class="navbar-nav me-auto">
                         @auth
-                            <li class="nav-item">
-                                @if(Auth::guard('psychologist')->check())
-                                    <a class="nav-link" href="{{ route('psikolog.dashboard') }}">Home</a>
-                                @else
-                                    <a class="nav-link" href="{{ route('dashboard') }}">Home</a>
-                                @endif
-                            </li>
-                            @if(Auth::guard('web')->check())
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('assessment.index') }}">Assessment</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('konsultasi.index') }}">Konsultasi</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('article.index') }}">Article</a>
-                                </li>
+                        <li class="nav-item">
+    @if(Auth::guard('psychologist')->check())
+        <a class="nav-link {{ request()->routeIs('psikolog.dashboard') ? 'text-info fw-bold border-bottom border-info' : '' }}" 
+           href="{{ route('psikolog.dashboard') }}">
+            Home
+        </a>
+    @else
+        <a class="nav-link {{ request()->routeIs('dashboard') ? 'text-info fw-bold border-bottom border-info' : '' }}" 
+           href="{{ route('dashboard') }}">
+            Home
+        </a>
+    @endif
+</li>
+
+@if(Auth::guard('web')->check())
+    <li class="nav-item">
+        <a class="nav-link {{ request()->routeIs('assessment.*') ? 'text-info fw-bold border-bottom border-info' : '' }}"
+           href="{{ route('assessment.index') }}">
+            Assessment
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link {{ request()->routeIs('konsultasi.index') ? 'text-info fw-bold border-bottom border-info' : '' }}"
+           href="{{ route('konsultasi.index') }}">
+            Konsultasi
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link {{ request()->routeIs('article.index') ? 'text-info fw-bold border-bottom border-info' : '' }}"
+           href="{{ route('article.index') }}">
+            Article
+        </a>
+    </li>
                             @elseif(Auth::guard('psychologist')->check())
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('psikolog.assessment.index') }}">Assessment</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('psikolog.jadwal.konsultasi') }}">Jadwal Konsultasi</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('psikolog.article.list') }}">Article</a>
-                                </li>
-                            @endif
+    <li class="nav-item">
+        <a class="nav-link {{ request()->routeIs('psikolog.assessment.*') ? 'text-info fw-bold border-bottom border-info' : '' }}" 
+           href="{{ route('psikolog.assessment.index') }}">
+            Assessment
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link {{ request()->routeIs('psikolog.jadwal.konsultasi') ? 'text-info fw-bold border-bottom border-info' : '' }}" 
+           href="{{ route('psikolog.jadwal.konsultasi') }}">
+            Jadwal Konsultasi
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link {{ request()->routeIs('psikolog.article.*') ? 'text-info fw-bold border-bottom border-info' : '' }}" 
+           href="{{ route('psikolog.article.list') }}">
+            Article
+        </a>
+    </li>
+@endif
+
                         @endauth
                     </ul>
 
