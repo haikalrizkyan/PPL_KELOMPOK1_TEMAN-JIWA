@@ -88,7 +88,7 @@
                 </table>
             </div>
             @endif
-            <a href="{{ url('/') }}" class="btn btn-secondary mt-3">Back to Home</a>
+            <a href="{{ route('dashboard') }}" class="btn btn-secondary mt-3" aria-label="Kembali ke dashboard user">Back to Home</a>
         </div>
     </div>
 </div>

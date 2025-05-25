@@ -1,6 +1,39 @@
 @extends('layouts.app')
 
 @section('content')
+<style>
+    body {
+        background-color: #F5FAFA !important; /* Sinkronisasi dengan aplikasi */
+    }
+    .card {
+        border-radius: 1.5rem;
+        box-shadow: 0 8px 32px 0 rgba(76,169,163,0.10);
+        border: none;
+    }
+    .card-header {
+        background-color: #4CA9A3;
+        color: #fff;
+        border-radius: 1.5rem 1.5rem 0 0 !important;
+    }
+    .btn-primary {
+        background-color: #4CA9A3;
+        border: none;
+        border-radius: 2rem;
+        transition: background 0.2s;
+    }
+    .btn-primary:hover {
+        background-color: #3D8C87;
+    }
+    .alert-danger, .alert-warning, .alert-info {
+        border-radius: 1rem;
+    }
+    .badge.bg-danger {
+        background-color: #4CA9A3 !important;
+    }
+    h2.fw-bold {
+        color: #264653;
+    }
+</style>
 <div class="container py-5">
     <div class="text-center mb-5">
         <h2 class="fw-bold">Booking Konsultasi</h2>

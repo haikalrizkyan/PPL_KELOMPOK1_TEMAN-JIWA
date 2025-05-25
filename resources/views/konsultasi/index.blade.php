@@ -4,7 +4,7 @@
 <style>
     body {
         font-family: 'Ubuntu', sans-serif !important;
-        background-color: #F4FAF9 !important;
+        background-color: #F5FAFA !important; /* Diubah dari #F4FAF9 ke #F5FAFA */
     }
     .psikolog-card {
         border-radius: 1.5rem;
@@ -70,6 +70,9 @@
     .psikolog-info strong {
         color: #3b7c7c;
     }
+    .alert-info {
+        border-radius: 1rem;
+    }
     @media (max-width: 767px) {
         .psikolog-card { min-height: unset; }
     }
@@ -133,4 +136,4 @@
     });
 </script>
 @endif
-@endsection 
+@endsection

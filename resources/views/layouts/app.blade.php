@@ -24,6 +24,7 @@
     <style>
         body {
             font-family: 'Ubuntu', sans-serif;
+            background-color: #F5FAFA; /* Ditambahkan untuk konsistensi */
         }
     </style>
 </head>

@@ -63,7 +63,7 @@
             <hr class="my-4">
             <div class="text-center">
                 <a href="{{ route('assessment.history') }}" class="btn btn-temanjiwa me-2">View Assessment History</a>
-                <a href="{{ url('/') }}" class="btn btn-secondary">Back to Home</a>
+                <a href="{{ route('dashboard') }}" class="btn btn-secondary mt-3" aria-label="Kembali ke dashboard user">Back to Home</a>
             </div>
         </div>
     </div>

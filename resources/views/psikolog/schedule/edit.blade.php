@@ -1,10 +1,44 @@
 @extends('layouts.app')
 
 @section('content')
+<style>
+    body {
+        background-color: #F5FAFA !important; /* Konsisten dengan aplikasi */
+    }
+    .card {
+        border-radius: 1.5rem;
+        box-shadow: 0 8px 32px 0 rgba(76,169,163,0.10);
+        border: none;
+    }
+    .card-header {
+        background-color: #4CA9A3;
+        color: #fff;
+        border-radius: 1.5rem 1.5rem 0 0 !important;
+    }
+    .btn-primary {
+        background-color: #4CA9A3;
+        border: none;
+        border-radius: 2rem;
+        transition: background 0.2s;
+    }
+    .btn-primary:hover {
+        background-color: #3D8C87;
+    }
+    .btn-outline-secondary {
+        border-radius: 2rem;
+    }
+    .alert-danger, .alert-info {
+        border-radius: 1rem;
+    }
+    h2.card-title {
+        color: #264653;
+    }
+</style>
 <div class="container py-4">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card shadow-sm">
+                <div class="card-header">Edit Jadwal Konsultasi</div>
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-center mb-4">
                         <h2 class="card-title mb-0">Edit Jadwal Konsultasi</h2>
@@ -65,7 +99,7 @@
                         </div>
 
                         <div class="d-grid">
-                            <button type="submit" class="btn btn-primary">
+                            <button type="submit" class="btn btn-primary" aria-label="Simpan perubahan jadwal">
                                 <i class="fas fa-save"></i> Simpan Perubahan
                             </button>
                         </div>
@@ -98,4 +132,4 @@
     });
 </script>
 @endpush
-@endsection 
+@endsection
