@@ -2,15 +2,20 @@
 
 @section('content')
 <style>
+    body {
+        font-family: 'Ubuntu', sans-serif !important;
+        background-color: #F4FAF9 !important;
+    }
     .psikolog-card {
         border-radius: 1.5rem;
-        box-shadow: 0 4px 24px 0 rgba(122,195,195,0.10);
+        box-shadow: 0 8px 32px 0 rgba(76,169,163,0.10);
         border: none;
         transition: box-shadow 0.2s, transform 0.2s;
         min-height: 350px;
+        background: #fff;
     }
     .psikolog-card:hover {
-        box-shadow: 0 8px 32px 0 rgba(122,195,195,0.18);
+        box-shadow: 0 12px 36px 0 rgba(76,169,163,0.18);
         transform: translateY(-4px) scale(1.02);
     }
     .psikolog-avatar {
@@ -24,8 +29,8 @@
         align-items: center;
         justify-content: center;
         font-size: 2.5rem;
-        color: #7AC3C3;
-        border: 3px solid #7AC3C3;
+        color: #4CA9A3;
+        border: 3px solid #4CA9A3;
     }
     .badge-spesialisasi {
         background: #e0f7f7;
@@ -38,20 +43,20 @@
         display: inline-block;
     }
     .btn-book {
-        background: linear-gradient(90deg, #7AC3C3 0%, #a7e3e3 100%);
+        background: #4CA9A3;
         color: #fff;
         border: none;
-        border-radius: 1.2rem;
+        border-radius: 2rem;
         font-weight: 600;
         font-size: 1.1rem;
         padding: 0.7rem 0;
         transition: background 0.2s, box-shadow 0.2s;
-        box-shadow: 0 2px 8px 0 rgba(122,195,195,0.10);
+        box-shadow: 0 2px 8px 0 rgba(76,169,163,0.10);
     }
     .btn-book:hover {
-        background: linear-gradient(90deg, #a7e3e3 0%, #7AC3C3 100%);
+        background: #3D8C87;
         color: #fff;
-        box-shadow: 0 4px 16px 0 rgba(122,195,195,0.18);
+        box-shadow: 0 4px 16px 0 rgba(76,169,163,0.18);
     }
     .psikolog-info {
         margin: 1rem 0;
@@ -70,31 +75,35 @@
     }
 </style>
 <div class="container py-5">
-    <h2 class="mb-4 fw-bold text-center">Daftar Psikolog</h2>
+    <h2 class="mb-4 fw-bold text-center" style="color:#264653;">Psychologist List</h2>
     <div class="row justify-content-center">
         @forelse($psikologs as $psikolog)
             <div class="col-md-4 col-sm-6 mb-4 d-flex align-items-stretch">
                 <div class="card psikolog-card w-100">
                     <div class="card-body text-center d-flex flex-column justify-content-between">
                         <div>
-                            <div class="psikolog-avatar mx-auto mb-3">
-                                <i class="fa-solid fa-user"></i>
-                            </div>
+                            @if($psikolog->foto_profil)
+                                <img src="{{ asset('storage/' . $psikolog->foto_profil) }}" class="psikolog-avatar mx-auto mb-3" alt="Psychologist Photo" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 3px solid #4CA9A3;">
+                            @else
+                                <div class="psikolog-avatar mx-auto mb-3" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 3px solid #4CA9A3;">
+                                    <i class="fa-solid fa-user"></i>
+                                </div>
+                            @endif
                             <h5 class="card-title fw-bold mb-2">{{ $psikolog->nama }}</h5>
                             <span class="badge-spesialisasi">{{ $psikolog->spesialisasi }}</span>
                             <div class="psikolog-info">
-                                <p><strong>Pengalaman:</strong> {{ $psikolog->pengalaman }} tahun</p>
-                                <p><strong>Biaya Konsultasi:</strong> Rp {{ number_format($psikolog->biaya_konsultasi, 0, ',', '.') }}</p>
+                                <p><strong>Experience:</strong> {{ $psikolog->pengalaman }} years</p>
+                                <p><strong>Consultation Fee:</strong> Rp {{ number_format($psikolog->biaya_konsultasi, 0, ',', '.') }}</p>
                             </div>
                             <p class="card-text text-muted small mb-3">{{ $psikolog->deskripsi }}</p>
                         </div>
-                        <a href="{{ route('konsultasi.booking.form', $psikolog->id) }}" class="btn btn-book w-100 mt-2">Book Konsultasi</a>
+                        <a href="{{ route('konsultasi.booking.form', $psikolog->id) }}" class="btn btn-book w-100 mt-2">Book Consultation</a>
                     </div>
                 </div>
             </div>
         @empty
             <div class="col-12">
-                <div class="alert alert-info text-center">Belum ada psikolog yang tersedia.</div>
+                <div class="alert alert-info text-center">No psychologists available at the moment.</div>
             </div>
         @endforelse
     </div>
@@ -105,14 +114,14 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="successModalLabel">Booking Berhasil</h5>
+                <h5 class="modal-title" id="successModalLabel">Booking Successful</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 {{ session('success') }}
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
