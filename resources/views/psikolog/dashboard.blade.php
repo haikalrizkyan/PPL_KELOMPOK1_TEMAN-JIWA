@@ -4,8 +4,8 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
-            <div class="card">
-                <div class="card-header">{{ __('Dashboard Psikolog') }}</div>
+            <div class="card shadow-sm">
+                <div class="card-header bg-white fw-bold">Dashboard Psikolog</div>
 
                 <div class="card-body">
                     @if (session('success'))
@@ -15,86 +15,55 @@
                     @endif
 
                     <div class="row">
+                        <!-- Profile Photo & Basic Info -->
                         <div class="col-md-4">
-                            <div class="card mb-4">
-                                <div class="card-body text-center">
-                                    <h5 class="card-title">{{ $psikolog->nama }}</h5>
-                                    <p class="card-text text-muted">{{ $psikolog->spesialisasi }}</p>
+                            <div class="card text-center border-0">
+                                <div class="card-body">
+                                <img src="{{ asset('storage/' . $psikolog->foto_profil) }}" class="rounded-circle mb-3" width="120" height="120" alt="Foto Psikolog">
+                                    <h5 class="fw-bold">{{ $psikolog->nama }}</h5>
+                                    <p class="text-muted mb-1">{{ $psikolog->spesialisasi }}</p>
+                                    <p class="text-muted small">Psikolog</p>
                                 </div>
                             </div>
                         </div>
 
+                        <!-- Profile Detail Info -->
                         <div class="col-md-8">
-                            <div class="card mb-4">
-                                <div class="card-header">
-                                    Informasi Profil
-                                </div>
+                            <div class="card mb-3">
+                                <div class="card-header bg-white fw-semibold">Informasi Profil</div>
                                 <div class="card-body">
-                                    <div class="row mb-3">
-                                        <div class="col-sm-3">
-                                            <p class="mb-0">Email</p>
+                                    @php
+                                        $fields = [
+                                            'Email' => $psikolog->email,
+                                            'Nomor Lisensi' => $psikolog->nomor_lisensi,
+                                            'Spesialisasi' => $psikolog->spesialisasi,
+                                            'Pengalaman' => $psikolog->pengalaman . ' tahun',
+                                            'Biaya Konsultasi' => 'Rp ' . number_format($psikolog->biaya_konsultasi, 0, ',', '.'),
+                                            'Deskripsi' => $psikolog->deskripsi
+                                        ];
+                                    @endphp
+                                    @foreach ($fields as $label => $value)
+                                        <div class="row mb-2">
+                                            <div class="col-sm-4 text-muted">{{ $label }}</div>
+                                            <div class="col-sm-8">{{ $value }}</div>
                                         </div>
-                                        <div class="col-sm-9">
-                                            <p class="text-muted mb-0">{{ $psikolog->email }}</p>
-                                        </div>
-                                    </div>
-                                    <div class="row mb-3">
-                                        <div class="col-sm-3">
-                                            <p class="mb-0">Nomor Lisensi</p>
-                                        </div>
-                                        <div class="col-sm-9">
-                                            <p class="text-muted mb-0">{{ $psikolog->nomor_lisensi }}</p>
-                                        </div>
-                                    </div>
-                                    <div class="row mb-3">
-                                        <div class="col-sm-3">
-                                            <p class="mb-0">Pengalaman</p>
-                                        </div>
-                                        <div class="col-sm-9">
-                                            <p class="text-muted mb-0">{{ $psikolog->pengalaman }} tahun</p>
-                                        </div>
-                                    </div>
-                                    <div class="row mb-3">
-                                        <div class="col-sm-3">
-                                            <p class="mb-0">Biaya Konsultasi</p>
-                                        </div>
-                                        <div class="col-sm-9">
-                                            <p class="text-muted mb-0">Rp {{ number_format($psikolog->biaya_konsultasi, 0, ',', '.') }}</p>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-3">
-                                            <p class="mb-0">Deskripsi</p>
-                                        </div>
-                                        <div class="col-sm-9">
-                                            <p class="text-muted mb-0">{{ $psikolog->deskripsi }}</p>
-                                        </div>
-                                    </div>
+                                    @endforeach
                                 </div>
                             </div>
 
-                            <div class="card">
-                                <div class="card-header">
-                                    Menu Cepat
-                                </div>
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-md-6 mb-3">
-                                            <a href="{{ route('psikolog.profile') }}" class="btn btn-primary w-100">
-                                                Edit Profil
-                                            </a>
-                                        </div>
-                                        <div class="col-md-6 mb-3">
-                                            <form method="POST" action="{{ route('psikolog.logout') }}">
-                                                @csrf
-                                                <button type="submit" class="btn btn-danger w-100">
-                                                    Logout
-                                                </button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
+                            <!-- Action Buttons -->
+                            <div class="d-flex justify-content-between">
+                                <a href="{{ route('psikolog.profile') }}" class="btn btn-info text-white px-4">
+                                    <i class="fas fa-edit me-2"></i>Edit Profil
+                                </a>
+                                <form id="logout-form" action="{{ route('psikolog.logout') }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="btn btn-danger text-white px-4">
+                                        <i class="fas fa-sign-out-alt me-2"></i>Logout
+                                    </button>
+                                </form>
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -102,4 +71,5 @@
         </div>
     </div>
 </div>
-@endsection 
+
+@endsection

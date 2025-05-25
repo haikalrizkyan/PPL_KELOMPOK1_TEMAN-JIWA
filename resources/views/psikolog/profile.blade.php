@@ -19,6 +19,10 @@
                         @method('PUT')
 
                         <div class="mb-3">
+                            <label for="foto" class="form-label">Foto Profil</label>
+                            <input type="file" class="form-control" name="foto" id="foto">
+                        </div>
+                        <div class="mb-3">
                             <label for="nama" class="form-label">{{ __('Nama Lengkap') }}</label>
                             <input id="nama" type="text" class="form-control @error('nama') is-invalid @enderror" name="nama" value="{{ old('nama', $psikolog->nama) }}" required>
                             @error('nama')
