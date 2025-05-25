@@ -148,18 +148,18 @@
                     <div class="card card-modern">
                         <div class="card-header card-header-modern text-center">
                             <span class="dashboard-icon"><i class="fa-solid fa-heart-pulse"></i></span>
-                            <div class="monitoring-title">Monitoring Mental Health</div>
+                            <div class="monitoring-title">Pemantauan Kesehatan Mental</div>
                         </div>
                         <div class="card-body text-center p-3">
                             @if($lastAssessment)
                                 <div class="mb-2 monitoring-info">
-                                    <span class="monitoring-label">Assessment:</span> <span class="monitoring-value">{{ $lastAssessment->assessment->judul ?? '-' }}</span>
+                                    <span class="monitoring-label">Penilaian:</span> <span class="monitoring-value">{{ $lastAssessment->assessment->judul ?? '-' }}</span>
                                 </div>
                                 <div class="mb-2 monitoring-info">
                                     <span class="monitoring-label">Tanggal:</span> <span class="monitoring-value">{{ $lastAssessment->updated_at->format('d-m-Y H:i') }}</span>
                                 </div>
                                 <div class="mb-2 monitoring-info">
-                                    <span class="monitoring-label">Skor:</span> <span class="badge badge-soft shadow-sm">{{ $lastAssessment->skor }}</span>
+                                    <span class="monitoring-label">Poin:</span> <span class="badge badge-soft shadow-sm">{{ $lastAssessment->skor }}</span>
                                 </div>
                                 <div class="mb-2 monitoring-info">
                                     <span class="monitoring-label">Kategori:</span> 
@@ -207,7 +207,7 @@
             </select>
           </div>
           <div class="d-flex gap-3 justify-content-between align-items-center mt-4">
-            <button type="submit" class="btn btn-custom flex-grow-1 py-2" style="font-size:1.1rem; border-radius:2rem;">Top Up</button>
+            <button type="submit" class="btn btn-custom flex-grow-1 py-2" style="font-size:1.1rem; border-radius:2rem;">Tambah Saldo</button>
             <button type="button" class="btn btn-outline-secondary rounded-pill px-4 py-2" data-bs-dismiss="modal">Batal</button>
           </div>
         </form>

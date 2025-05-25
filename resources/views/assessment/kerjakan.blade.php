@@ -107,19 +107,19 @@
 </style>
 <div class="container py-5">
     <div class="assessment-card">
-        <div class="assessment-title">Take Assessment</div>
+        <div class="assessment-title">Memulai Penilaian</div>
         <div class="mb-4">
-            <div class="scale-instructions">Scale Instructions:</div>
+            <div class="scale-instructions">Petunjuk Skala Penilaian:</div>
             <div class="d-flex justify-content-center gap-3 flex-wrap scale-options">
-                <span><b>1</b> = Very rarely</span>
-                <span><b>2</b> = Rarely</span>
-                <span><b>3</b> = Sometimes</span>
-                <span><b>4</b> = Often</span>
-                <span><b>5</b> = Very often</span>
+                <span><b>1</b> = Sangat jarang</span>
+                <span><b>2</b> = Jarang</span>
+                <span><b>3</b> = Kadang-kadang</span>
+                <span><b>4</b> = Sering</span>
+                <span><b>5</b> = Sangat sering</span>
             </div>
         </div>
         @if($userAssessment->assessment->questions->count() == 0)
-            <div class="alert alert-warning text-center">No questions available for this assessment.</div>
+            <div class="alert alert-warning text-center">Tidak ada pertanyaan yang tersedia untuk penilaian ini.</div>
         @else
         <form method="POST" action="{{ route('assessment.submit', $userAssessment->id) }}" id="assessmentForm">
             @csrf
@@ -127,7 +127,7 @@
                 <div class="assessment-progress-bar" id="progressBar" style="width: 0%"></div>
             </div>
             <div class="question-count">
-                <span id="answeredCount">0</span> / {{ $userAssessment->assessment->questions->count() }} Answered
+                <span id="answeredCount">0</span> / {{ $userAssessment->assessment->questions->count() }} Jawaban
             </div>
             @foreach($userAssessment->assessment->questions as $index => $question)
                 <div class="assessment-question">
@@ -143,7 +143,7 @@
                 </div>
             @endforeach
             <div class="text-center">
-                <button type="submit" class="btn btn-temanjiwa">Finish & View Results</button>
+                <button type="submit" class="btn btn-temanjiwa">Selesai & Lihat Hasil</button>
             </div>
         </form>
         @endif

@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <h2 class="mb-4">Edit Booking Konsultasi dengan {{ $booking->psychologist->nama }}</h2>
+    <h2 class="mb-4">Edit Pemesanan Konsultasi dengan {{ $booking->psychologist->nama }}</h2>
     <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="card">
@@ -31,7 +31,7 @@
                                 <span class="invalid-feedback">{{ $message }}</span>
                             @enderror
                         </div>
-                        <button type="submit" class="btn btn-success w-100">Update Booking</button>
+                        <button type="submit" class="btn btn-success w-100">Perbarui Pemesanan</button>
                         <a href="{{ route('konsultasi.jadwal.user') }}" class="btn btn-secondary w-100 mt-2">Batal</a>
                     </form>
                 </div>

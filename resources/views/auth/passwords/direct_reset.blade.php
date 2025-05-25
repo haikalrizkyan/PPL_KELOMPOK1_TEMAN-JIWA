@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Direct Reset Password - Teman Jiwa</title>
+  <title>Atur ulang kata sandi - Teman Jiwa</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
@@ -63,7 +63,7 @@
 <body>
   <div class="reset-container">
     <img src="{{ asset('WhatsApp Image 2025-03-28 at 21.17.58_adbf7a26.jpg') }}" alt="Teman Jiwa Logo" class="logo">
-    <div class="reset-title">Reset Your Password</div>
+    <div class="reset-title">Atur ulang kata sandi</div>
     @if(session('success'))
       <div class="alert alert-success">{{ session('success') }}</div>
     @endif
@@ -73,7 +73,7 @@
     <form method="POST" action="">
       @csrf
       <div class="form-group mb-3">
-        <label for="email" class="form-label">Email Address</label>
+        <label for="email" class="form-label">Alamat Email</label>
         <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="Enter your email">
         @error('email')
           <span class="invalid-feedback" role="alert">
@@ -82,7 +82,7 @@
         @enderror
       </div>
       <div class="form-group mb-3">
-        <label for="password" class="form-label">New Password</label>
+        <label for="password" class="form-label">Kata Sandi Baru</label>
         <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="Enter new password">
         @error('password')
           <span class="invalid-feedback" role="alert">
@@ -91,12 +91,12 @@
         @enderror
       </div>
       <div class="form-group mb-3">
-        <label for="password_confirmation" class="form-label">Confirm New Password</label>
+        <label for="password_confirmation" class="form-label">Konfirmasi Kata Sandi Baru</label>
         <input id="password_confirmation" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" placeholder="Confirm new password">
       </div>
-      <button type="submit" class="btn btn-temanjiwa btn-block w-100 mb-2">Reset Password</button>
+      <button type="submit" class="btn btn-temanjiwa btn-block w-100 mb-2">Atur Ulang Kata Sandi</button>
       <p class="mt-3 text-center">
-        <a href="{{ url()->previous() }}" class="login-link">Back</a>
+        <a href="{{ url()->previous() }}" class="login-link">Kembali</a>
       </p>
     </form>
   </div>

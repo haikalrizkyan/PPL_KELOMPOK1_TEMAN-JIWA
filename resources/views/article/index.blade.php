@@ -81,7 +81,7 @@
     }
 </style>
 <div class="container py-5">
-    <h2 class="text-center article-header">Article List</h2>
+    <h2 class="text-center article-header">Daftar Artikel</h2>
     <div class="row justify-content-center">
         @forelse($articles as $article)
             <div class="col-md-4 col-sm-6 mb-4 d-flex">
@@ -98,13 +98,13 @@
                             By {{ $article->psychologist->nama ?? '-' }} | {{ $article->created_at->format('F d, Y') }}
                         </div>
                         <p class="card-text flex-grow-1">{{ Str::limit($article->first_section_description, 120) }}</p>
-                        <a href="{{ route('article.show', $article->id) }}" class="btn btn-outline-temanjiwa">Read More</a>
+                        <a href="{{ route('article.show', $article->id) }}" class="btn btn-outline-temanjiwa">Baca Selengkapnya</a>
                     </div>
                 </div>
             </div>
         @empty
             <div class="col-12">
-                <div class="alert alert-info text-center">No articles available yet.</div>
+                <div class="alert alert-info text-center">Belum ada artikel yang tersedia.</div>
             </div>
         @endforelse
     </div>

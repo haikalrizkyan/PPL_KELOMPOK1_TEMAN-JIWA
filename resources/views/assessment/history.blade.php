@@ -53,22 +53,22 @@
     }
 </style>
 <div class="container py-4">
-    <h2 class="history-header">Assessment History</h2>
+    <h2 class="history-header">Hasil Penilaian</h2>
     <div class="card history-card">
         <div class="card-body">
             @if($riwayat->isEmpty())
-                <div class="alert alert-info text-center">No assessment history available.</div>
+                <div class="alert alert-info text-center">Tidak ada riwayat penilaian yang tersedia.</div>
             @else
             <div class="table-responsive">
                 <table class="table table-bordered align-middle">
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Assessment Name</th>
-                            <th>Score</th>
-                            <th>Category</th>
-                            <th>Date</th>
-                            <th>Action</th>
+                            <th>Nama Penilaian</th>
+                            <th>Poin</th>
+                            <th>Kategori</th>
+                            <th>Tanggal</th>
+                            <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -80,7 +80,7 @@
                             <td><span class="badge bg-primary badge-category">{{ $item->kategori }}</span></td>
                             <td>{{ $item->updated_at->format('d-m-Y H:i') }}</td>
                             <td>
-                                <a href="{{ route('assessment.result', $item->id) }}" class="btn btn-info btn-sm btn-view-result">View Result</a>
+                                <a href="{{ route('assessment.result', $item->id) }}" class="btn btn-info btn-sm btn-view-result">Lihat Hasil</a>
                             </td>
                         </tr>
                         @endforeach
@@ -88,7 +88,7 @@
                 </table>
             </div>
             @endif
-            <a href="{{ route('dashboard') }}" class="btn btn-secondary mt-3" aria-label="Kembali ke dashboard user">Back to Home</a>
+            <a href="{{ route('dashboard') }}" class="btn btn-secondary mt-3" aria-label="Kembali ke dashboard user">Kembali ke Beranda</a>
         </div>
     </div>
 </div>

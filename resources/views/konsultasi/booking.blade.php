@@ -36,7 +36,7 @@
 </style>
 <div class="container py-5">
     <div class="text-center mb-5">
-        <h2 class="fw-bold">Booking Konsultasi</h2>
+        <h2 class="fw-bold">Pemesanan Konsultasi ke Psikolog</h2>
         <p class="text-muted">Bersama <strong>{{ $psychologist->nama }}</strong></p>
     </div>
 
@@ -136,7 +136,7 @@
                         <div class="d-grid">
                             <button type="submit" class="btn btn-primary btn-lg rounded-pill" 
                                 {{ Auth::user()->saldo < $psychologist->biaya_konsultasi || $availableSchedules->isEmpty() ? 'disabled' : '' }}>
-                                Booking Sekarang 🚀
+                                Pesan Sekarang 🚀
                             </button>
                         </div>
                     </form>

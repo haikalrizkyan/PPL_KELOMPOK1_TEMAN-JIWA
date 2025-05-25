@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Reset Password - Teman Jiwa</title>
+  <title>Atur Ulang Kata Sandi - Teman Jiwa</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{{ asset('css/temanjiwa.css') }}">
@@ -86,12 +86,12 @@
 <body>
   <div class="article-form-container">
     <img src="{{ asset('WhatsApp Image 2025-03-28 at 21.17.58_adbf7a26.jpg') }}" alt="Teman Jiwa Logo" class="logo">
-    <div class="form-title">Reset Your Password</div>
+    <div class="form-title">Atur Ulang Kata Sandi</div>
     <form method="POST" action="{{ route('password.update') }}">
       @csrf
       <input type="hidden" name="token" value="{{ $token }}">
       <div class="form-group mb-3">
-        <label for="email" class="form-label">Email Address</label>
+        <label for="email" class="form-label">Alamat Email</label>
         <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $email ?? old('email') }}" required autocomplete="email" autofocus placeholder="Enter your email">
         @error('email')
           <span class="invalid-feedback" role="alert">
@@ -100,7 +100,7 @@
         @enderror
       </div>
       <div class="form-group mb-3">
-        <label for="password" class="form-label">New Password</label>
+        <label for="password" class="form-label">Kata Sandi Baru</label>
         <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="Enter new password">
         @error('password')
           <span class="invalid-feedback" role="alert">
@@ -109,13 +109,13 @@
         @enderror
       </div>
       <div class="form-group mb-3">
-        <label for="password-confirm" class="form-label">Confirm New Password</label>
+        <label for="password-confirm" class="form-label">Konfirmasi Kata Sandi Baru</label>
         <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" placeholder="Confirm new password">
       </div>
-      <button type="submit" class="btn btn-temanjiwa btn-block mt-3">Reset Password</button>
+      <button type="submit" class="btn btn-temanjiwa btn-block mt-3">Atur Ulang Kata Sandi</button>
     </form>
     @if (request('role') === 'psychologist')
-        <a href="{{ route('psikolog.login') }}" class="login-link d-block text-center mt-2">Back</a>
+        <a href="{{ route('psikolog.login') }}" class="login-link d-block text-center mt-2">Kembali</a>
     @else
         <a href="{{ route('login') }}" class="login-link d-block text-center mt-2">Back</a>
     @endif

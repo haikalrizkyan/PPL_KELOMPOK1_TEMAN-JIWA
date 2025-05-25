@@ -54,7 +54,7 @@
     @else
         <a class="nav-link {{ request()->routeIs('dashboard') ? 'text-info fw-bold border-bottom border-info' : '' }}" 
            href="{{ route('dashboard') }}">
-            Home
+            Beranda
         </a>
     @endif
 </li>
@@ -63,7 +63,7 @@
     <li class="nav-item">
         <a class="nav-link {{ request()->routeIs('assessment.*') ? 'text-info fw-bold border-bottom border-info' : '' }}"
            href="{{ route('assessment.index') }}">
-            Assessment
+            Penilaian
         </a>
     </li>
     <li class="nav-item">
@@ -75,7 +75,7 @@
     <li class="nav-item">
         <a class="nav-link {{ request()->routeIs('article.index') ? 'text-info fw-bold border-bottom border-info' : '' }}"
            href="{{ route('article.index') }}">
-            Article
+            Artikel
         </a>
     </li>
                             @elseif(Auth::guard('psychologist')->check())

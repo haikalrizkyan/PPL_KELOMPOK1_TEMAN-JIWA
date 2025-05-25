@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome - Teman Jiwa</title>
+    <title>Selamat Datang - Teman Jiwa</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="icon" href="{{ asset('WhatsApp Image 2025-03-28 at 21.17.58_adbf7a26.jpg') }}" type="image/x-icon">
@@ -63,14 +63,14 @@
 <body>
     <div class="welcome-container">
         <img src="{{ asset('WhatsApp Image 2025-03-28 at 21.17.58_adbf7a26.jpg') }}" alt="Teman Jiwa Logo" class="logo">
-        <div class="welcome-title">Welcome</div>
-        <div class="welcome-subtitle">Start by signing in or creating a new account</div>
-        <a href="{{ route('login') }}" class="btn btn-outline-temanjiwa btn-block">Sign In as User</a>
-        <a href="{{ route('psikolog.login') }}" class="btn btn-outline-temanjiwa btn-block">Sign In as Psychologist</a>
-        <a href="{{ route('register') }}" class="btn btn-outline-temanjiwa btn-block">Register as User</a>
-        <a href="{{ route('psikolog.register') }}" class="btn btn-outline-temanjiwa btn-block">Register as Psychologist</a>
+        <div class="welcome-title">Selamat Datang</div>
+        <div class="welcome-subtitle">Mulailah dengan masuk atau membuat akun baru</div>
+        <a href="{{ route('login') }}" class="btn btn-outline-temanjiwa btn-block">Masuk sebagai Pengguna</a>
+        <a href="{{ route('psikolog.login') }}" class="btn btn-outline-temanjiwa btn-block">Masuk sebagai Psikolog</a>
+        <a href="{{ route('register') }}" class="btn btn-outline-temanjiwa btn-block">Daftar sebagai Pengguna</a>
+        <a href="{{ route('psikolog.register') }}" class="btn btn-outline-temanjiwa btn-block">Daftar sebagai Psikolog</a>
         <div class="policy-text">
-            By continuing, you agree to our <a href="#">Terms</a> and <a href="#">Privacy Policy</a>.
+            Dengan melanjutkan, Anda menyetujui ketentuan kami <a href="#">Terms</a> and <a href="#">Kebijakan Privasi</a>.
         </div>
     </div>
 </body>

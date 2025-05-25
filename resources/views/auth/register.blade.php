@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Register - Teman Jiwa</title>
+  <title>Daftar Akun - Teman Jiwa</title>
   <link rel="icon" href="{{ asset('WhatsApp Image 2025-03-28 at 21.17.58_adbf7a26.jpg') }}" type="image/x-icon">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap" rel="stylesheet">
@@ -64,7 +64,7 @@
 <body>
   <div class="register-container">
     <img src="{{ asset('WhatsApp Image 2025-03-28 at 21.17.58_adbf7a26.jpg') }}" alt="Teman Jiwa Logo" class="logo">
-    <div class="register-title">Create Your Account</div>
+    <div class="register-title">Buat Akun</div>
     @if($errors->any())
       <div class="alert alert-danger">
         <ul class="mb-0">
@@ -77,7 +77,7 @@
     <form method="POST" action="{{ route('register') }}">
       @csrf
       <div class="form-group mb-3">
-        <label for="name" class="form-label">Full Name</label>
+        <label for="name" class="form-label">Nama Lengkap</label>
         <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus placeholder="Enter your full name">
         @error('name')
           <span class="invalid-feedback" role="alert">
@@ -86,7 +86,7 @@
         @enderror
       </div>
       <div class="form-group mb-3">
-        <label for="email" class="form-label">Email Address</label>
+        <label for="email" class="form-label">Alamat Email</label>
         <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="Enter your email">
         @error('email')
           <span class="invalid-feedback" role="alert">
@@ -95,7 +95,7 @@
         @enderror
       </div>
       <div class="form-group mb-3">
-        <label for="password" class="form-label">Password</label>
+        <label for="password" class="form-label">Kata Sandi</label>
         <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" required autocomplete="new-password" placeholder="Create password (min 8 characters)">
         @error('password')
           <span class="invalid-feedback" role="alert">
@@ -104,11 +104,11 @@
         @enderror
       </div>
       <div class="form-group mb-3">
-        <label for="password-confirm" class="form-label">Confirm Password</label>
+        <label for="password-confirm" class="form-label">Konfirmasi Kata Sandi</label>
         <input type="password" class="form-control" id="password-confirm" name="password_confirmation" required autocomplete="new-password" placeholder="Confirm password">
       </div>
-      <button type="submit" class="btn btn-temanjiwa btn-block w-100 mb-2">Register</button>
-      <p class="mt-3 text-center">Already have an account? <a href="{{ route('login') }}" class="login-link">Login here</a></p>
+      <button type="submit" class="btn btn-temanjiwa btn-block w-100 mb-2">Daftar</button>
+      <p class="mt-3 text-center">Already have an account? <a href="{{ route('login') }}" class="login-link">Masuk</a></p>
     </form>
   </div>
 

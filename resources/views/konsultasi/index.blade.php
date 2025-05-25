@@ -78,7 +78,7 @@
     }
 </style>
 <div class="container py-5">
-    <h2 class="mb-4 fw-bold text-center" style="color:#264653;">Psychologist List</h2>
+    <h2 class="mb-4 fw-bold text-center" style="color:#264653;">Daftar Psikologi</h2>
     <div class="row justify-content-center">
         @forelse($psikologs as $psikolog)
             <div class="col-md-4 col-sm-6 mb-4 d-flex align-items-stretch">
@@ -95,18 +95,18 @@
                             <h5 class="card-title fw-bold mb-2">{{ $psikolog->nama }}</h5>
                             <span class="badge-spesialisasi">{{ $psikolog->spesialisasi }}</span>
                             <div class="psikolog-info">
-                                <p><strong>Experience:</strong> {{ $psikolog->pengalaman }} years</p>
-                                <p><strong>Consultation Fee:</strong> Rp {{ number_format($psikolog->biaya_konsultasi, 0, ',', '.') }}</p>
+                                <p><strong>Pengalaman:</strong> {{ $psikolog->pengalaman }} tahun</p>
+                                <p><strong>Harga Konsultasi:</strong> Rp {{ number_format($psikolog->biaya_konsultasi, 0, ',', '.') }}</p>
                             </div>
                             <p class="card-text text-muted small mb-3">{{ $psikolog->deskripsi }}</p>
                         </div>
-                        <a href="{{ route('konsultasi.booking.form', $psikolog->id) }}" class="btn btn-book w-100 mt-2">Book Consultation</a>
+                        <a href="{{ route('konsultasi.booking.form', $psikolog->id) }}" class="btn btn-book w-100 mt-2">Konsultasi Sekarang</a>
                     </div>
                 </div>
             </div>
         @empty
             <div class="col-12">
-                <div class="alert alert-info text-center">No psychologists available at the moment.</div>
+                <div class="alert alert-info text-center">Tidak ada psikolog yang tersedia saat ini.</div>
             </div>
         @endforelse
     </div>
@@ -117,14 +117,14 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="successModalLabel">Booking Successful</h5>
+                <h5 class="modal-title" id="successModalLabel">Pemesanan Berhasil</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 {{ session('success') }}
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Keluar</button>
             </div>
         </div>
     </div>
