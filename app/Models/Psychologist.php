@@ -33,4 +33,14 @@ class Psychologist extends Authenticatable
         'password' => 'hashed',
         'biaya_konsultasi' => 'float',
     ];
+
+    public function bookings()
+    {
+        return $this->hasMany(Booking::class);
+    }
+
+    public function schedules()
+    {
+        return $this->hasMany(PsychologistSchedule::class);
+    }
 } 

@@ -91,6 +91,12 @@
         </a>
     </li>
     <li class="nav-item">
+        <a class="nav-link {{ request()->routeIs('psikolog.schedule.*') ? 'text-info fw-bold border-bottom border-info' : '' }}" 
+           href="{{ route('psikolog.schedule.index') }}">
+            Kelola Jadwal
+        </a>
+    </li>
+    <li class="nav-item">
         <a class="nav-link {{ request()->routeIs('psikolog.article.*') ? 'text-info fw-bold border-bottom border-info' : '' }}" 
            href="{{ route('psikolog.article.list') }}">
             Article

@@ -18,7 +18,24 @@ class ConsultationController extends Controller
 
     public function bookingForm(Psychologist $psychologist)
     {
-        return view('konsultasi.booking', compact('psychologist'));
+        // Get available schedules for the next 7 days
+        $startDate = now();
+        $endDate = now()->addDays(7);
+        
+        $availableSchedules = $psychologist->schedules()
+            ->where('is_available', true)
+            ->whereBetween('tanggal', [$startDate, $endDate])
+            ->orderBy('tanggal')
+            ->orderBy('jam_mulai')
+            ->get()
+            ->groupBy('tanggal');
+
+        // Get existing bookings for the same period
+        $existingBookings = Booking::where('psychologist_id', $psychologist->id)
+            ->whereBetween('tanggal', [$startDate, $endDate])
+            ->get();
+
+        return view('konsultasi.booking', compact('psychologist', 'availableSchedules', 'existingBookings'));
     }
 
     public function bookingStore(Request $request, Psychologist $psychologist)
@@ -29,29 +46,55 @@ class ConsultationController extends Controller
             'catatan' => 'nullable|string',
         ]);
 
+        // Check if the selected time slot is available
+        $schedule = $psychologist->schedules()
+            ->where('tanggal', $request->tanggal)
+            ->where('jam_mulai', '<=', $request->jam)
+            ->where('jam_selesai', '>', $request->jam)
+            ->where('is_available', true)
+            ->first();
+
+        if (!$schedule) {
+            return redirect()->back()
+                ->withInput()
+                ->withErrors(['jam' => 'Jadwal yang dipilih tidak tersedia.']);
+        }
+
+        // Check if the time slot is already booked
+        $existingBooking = Booking::where('psychologist_id', $psychologist->id)
+            ->where('tanggal', $request->tanggal)
+            ->where('jam', $request->jam)
+            ->exists();
+
+        if ($existingBooking) {
+            return redirect()->back()
+                ->withInput()
+                ->withErrors(['jam' => 'Jadwal ini sudah dipesan oleh pasien lain.']);
+        }
+
         $user = Auth::user();
         $biaya = $psychologist->biaya_konsultasi;
 
-        
         if ($user->saldo < $biaya) {
-            return redirect()->back()->with('error', 'Saldo tidak cukup untuk melakukan booking. Silakan top up saldo terlebih dahulu.');
+            return redirect()->back()
+                ->withInput()
+                ->withErrors(['saldo' => 'Saldo tidak cukup untuk melakukan booking. Silakan top up saldo terlebih dahulu.']);
         }
 
-        
         $booking = Booking::create([
             'user_id' => $user->id,
             'psychologist_id' => $psychologist->id,
             'tanggal' => $request->tanggal,
             'jam' => $request->jam,
             'catatan' => $request->catatan,
-            'status' => 'paid', 
+            'status' => 'paid',
         ]);
 
-        
         $user->saldo -= $biaya;
         $user->save();
 
-        return redirect()->route('konsultasi.index')->with('success', 'Booking konsultasi berhasil! Saldo Anda telah dikurangi sebesar Rp ' . number_format($biaya, 0, ',', '.'));
+        return redirect()->route('konsultasi.index')
+            ->with('success', 'Booking konsultasi berhasil! Saldo Anda telah dikurangi sebesar Rp ' . number_format($biaya, 0, ',', '.'));
     }
 
     public function jadwalUser()

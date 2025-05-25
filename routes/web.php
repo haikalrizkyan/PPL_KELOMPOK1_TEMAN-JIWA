@@ -56,6 +56,15 @@ Route::middleware(['auth:psychologist'])->prefix('psikolog')->name('psikolog.')-
     Route::get('assessment/{assessment}/edit-question/{question}', [App\Http\Controllers\Psychologist\AssessmentController::class, 'editQuestion'])->name('assessment.editQuestion');
     Route::put('assessment/{assessment}/update-question/{question}', [App\Http\Controllers\Psychologist\AssessmentController::class, 'updateQuestion'])->name('assessment.updateQuestion');
     Route::delete('assessment/{assessment}/delete-question/{question}', [App\Http\Controllers\Psychologist\AssessmentController::class, 'destroyQuestion'])->name('assessment.deleteQuestion');
+    
+    // Schedule Management Routes
+    Route::get('/schedule', [App\Http\Controllers\Psychologist\ScheduleController::class, 'index'])->name('schedule.index');
+    Route::get('/schedule/create', [App\Http\Controllers\Psychologist\ScheduleController::class, 'create'])->name('schedule.create');
+    Route::post('/schedule', [App\Http\Controllers\Psychologist\ScheduleController::class, 'store'])->name('schedule.store');
+    Route::get('/schedule/{schedule}/edit', [App\Http\Controllers\Psychologist\ScheduleController::class, 'edit'])->name('schedule.edit');
+    Route::put('/schedule/{schedule}', [App\Http\Controllers\Psychologist\ScheduleController::class, 'update'])->name('schedule.update');
+    Route::delete('/schedule/{schedule}', [App\Http\Controllers\Psychologist\ScheduleController::class, 'destroy'])->name('schedule.destroy');
+    Route::post('/schedule/{schedule}/toggle', [App\Http\Controllers\Psychologist\ScheduleController::class, 'toggleAvailability'])->name('schedule.toggle');
 });
 
 // Route halaman konsultasi untuk user

@@ -60,22 +60,38 @@ class PsychologistAuthController extends Controller
 
     public function login(Request $request)
     {
+        \Log::info('Attempting psychologist login', [
+            'email' => $request->email,
+            'session' => session()->all()
+        ]);
+
         $validator = Validator::make($request->all(), [
             'email' => 'required|string|email',
             'password' => 'required|string',
         ]);
 
         if ($validator->fails()) {
+            \Log::warning('Psychologist login validation failed', [
+                'errors' => $validator->errors()->toArray()
+            ]);
             return redirect()->back()
                 ->withErrors($validator)
                 ->withInput();
         }
 
         if (!Auth::guard('psychologist')->attempt($request->only('email', 'password'))) {
+            \Log::warning('Psychologist login failed - invalid credentials', [
+                'email' => $request->email
+            ]);
             return redirect()->back()
                 ->withErrors(['email' => 'Email atau password salah'])
                 ->withInput();
         }
+
+        \Log::info('Psychologist login successful', [
+            'user' => Auth::guard('psychologist')->user(),
+            'session' => session()->all()
+        ]);
 
         return redirect()->route('psikolog.dashboard')
             ->with('success', 'Login berhasil!');
