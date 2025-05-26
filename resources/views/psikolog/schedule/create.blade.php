@@ -65,9 +65,6 @@
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-center mb-4">
                         <h2 class="card-title mb-0" style="visibility: hidden; height: 0;">Tambah Jadwal Konsultasi</h2>
-                        <a href="{{ route('psikolog.schedule.index') }}" class="btn btn-secondary ms-auto">
-                            <i class="fas fa-arrow-left me-2"></i> Kembali
-                        </a>
                     </div>
 
                     @if($errors->any())
@@ -116,16 +113,18 @@
                             <i class="fas fa-info-circle me-2"></i>
                             Pastikan jadwal yang Anda tambahkan tidak bertabrakan dengan jadwal yang sudah ada.
                         </div>
-
-                        <div class="d-grid mt-4">
-                            <button type="submit" class="btn btn-temanjiwa">
-                                <i class="fas fa-save me-2"></i> Simpan Jadwal
-                            </button>
-                        </div>
                     </form>
                 </div>
             </div>
         </div>
+    </div>
+    <div class="d-flex justify-content-center mt-4">
+        <a href="{{ route('psikolog.schedule.index') }}" class="btn btn-secondary me-2">
+            <i class="fas fa-arrow-left me-2"></i> Kembali
+        </a>
+        <button type="submit" form="psikolog-schedule-form" class="btn btn-temanjiwa">
+            <i class="fas fa-save me-2"></i> Simpan Jadwal
+        </button>
     </div>
 </div>
 

@@ -118,11 +118,11 @@
                         <div class="mb-3 form-group">
                             <label for="cover" class="form-label">Gambar Sampul</label>
                             <div class="d-flex align-items-center flex-wrap">
-                                @if($article->cover)
+                            @if($article->cover)
                                     <div class="mb-2 me-3">
                                         <img src="{{ asset('storage/' . $article->cover) }}" alt="Sampul saat ini" class="img-thumbnail" style="max-height: 100px; height: auto;">
-                                    </div>
-                                @endif
+                                </div>
+                            @endif
                                 <input type="file" name="cover" id="cover" class="form-control flex-grow-1" accept="image/*">
                             </div>
                             <small class="form-text text-muted">Ukuran maks: 2MB. Format yang diizinkan: JPG, JPEG, PNG</small>
@@ -130,13 +130,13 @@
                         <div class="mb-3 form-group">
                             <label for="youtube_url" class="form-label">URL Video YouTube</label>
                             <div class="d-flex align-items-center flex-wrap">
-                                @if($article->youtube_url)
+                            @if($article->youtube_url)
                                     <div class="mb-2 me-3" style="max-width: 150px;">
-                                        <div class="ratio ratio-16x9">
-                                            <iframe src="{{ $article->youtube_url }}" title="Video YouTube" allowfullscreen></iframe>
-                                        </div>
+                                    <div class="ratio ratio-16x9">
+                                        <iframe src="{{ $article->youtube_url }}" title="Video YouTube" allowfullscreen></iframe>
                                     </div>
-                                @endif
+                                </div>
+                            @endif
                                 <input type="url" name="youtube_url" id="youtube_url" class="form-control flex-grow-1" placeholder="https://www.youtube.com/watch?v=..." value="{{ old('youtube_url', $article->youtube_url) }}">
                             </div>
                             <small class="form-text text-muted">Masukkan URL video YouTube yang valid (misal: https://www.youtube.com/watch?v=... atau https://youtu.be/...)</small>

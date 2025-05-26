@@ -90,8 +90,8 @@
                                 <img src="{{ asset('storage/' . $psikolog->foto_profil) }}" class="psikolog-avatar mx-auto mb-3" alt="Psychologist Photo" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 3px solid #4CA9A3;">
                             @else
                                 <div class="psikolog-avatar mx-auto mb-3" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 3px solid #4CA9A3;">
-                                    <i class="fa-solid fa-user"></i>
-                                </div>
+                                <i class="fa-solid fa-user"></i>
+                            </div>
                             @endif
                             <h5 class="card-title psikolog-name mb-2">{{ $psikolog->nama }}</h5>
                             <span class="badge-spesialisasi">{{ $psikolog->spesialisasi }}</span>
@@ -137,4 +137,4 @@
     });
 </script>
 @endif
-@endsection
+@endsection 

@@ -103,7 +103,7 @@
         background: #fff3cd;
         color: #664d03;
         border-color: #ffecb5;
-     }
+    }
 </style>
 <div class="container py-5">
     <div class="assessment-card">
@@ -133,12 +133,12 @@
                 <div class="assessment-question">
                     <div class="assessment-question-title">{{ $index+1 }}. {{ $question->pertanyaan }}</div>
                     <div class="assessment-choice">
-                        @foreach($question->choices as $choice)
+                    @foreach($question->choices as $choice)
                             <label>
-                                <input type="radio" name="question_{{ $question->id }}" value="{{ $choice->id }}" required>
-                                {{ $choice->isi_pilihan }}
-                            </label>
-                        @endforeach
+                            <input type="radio" name="question_{{ $question->id }}" value="{{ $choice->id }}" required>
+                            {{ $choice->isi_pilihan }}
+                        </label>
+                    @endforeach
                     </div>
                 </div>
             @endforeach

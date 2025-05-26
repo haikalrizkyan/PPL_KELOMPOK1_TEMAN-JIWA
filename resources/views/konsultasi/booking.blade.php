@@ -78,7 +78,7 @@
      .alert-warning {
         background: #fff3cd;
         color: #664d03;
-     }
+    }
     .badge.bg-danger {
         background-color: #dc3545 !important;
         border-radius: 0.5rem !important;
@@ -208,7 +208,7 @@
       }
       .alert {
           margin-bottom: 1.5rem !important; /* Consistent margin below alerts */
-      }
+    }
 </style>
 <div class="container py-5">
     <div class="text-center mb-5">
@@ -334,13 +334,13 @@
 
         dateCards.forEach(card => {
             const radioButtons = card.querySelectorAll('input[type="radio"]');
-            radioButtons.forEach(radio => {
-                radio.addEventListener('change', function() {
-                    if (this.checked) {
+        radioButtons.forEach(radio => {
+            radio.addEventListener('change', function() {
+                if (this.checked) {
                         // Update the hidden tanggal input in the main form with the selected date
                         const selectedDateInput = this.closest('.card-body').querySelector('input[name="tanggal"]');
                         form.querySelector('input[name="tanggal"]').value = selectedDateInput.value;
-                    }
+                }
                 });
             });
         });

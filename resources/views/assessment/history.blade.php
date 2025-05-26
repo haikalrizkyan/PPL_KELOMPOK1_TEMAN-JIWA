@@ -61,31 +61,31 @@
             @else
             <div class="table-responsive">
                 <table class="table table-bordered align-middle">
-                    <thead>
-                        <tr>
-                            <th>No</th>
+                <thead>
+                    <tr>
+                        <th>No</th>
                             <th>Nama Penilaian</th>
                             <th>Poin</th>
-                            <th>Kategori</th>
-                            <th>Tanggal</th>
-                            <th>Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($riwayat as $i => $item)
-                        <tr>
-                            <td>{{ $i+1 }}</td>
-                            <td>{{ $item->assessment->judul ?? '-' }}</td>
-                            <td>{{ $item->skor }}</td>
+                        <th>Kategori</th>
+                        <th>Tanggal</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($riwayat as $i => $item)
+                    <tr>
+                        <td>{{ $i+1 }}</td>
+                        <td>{{ $item->assessment->judul ?? '-' }}</td>
+                        <td>{{ $item->skor }}</td>
                             <td><span class="badge bg-primary badge-category">{{ $item->kategori }}</span></td>
-                            <td>{{ $item->updated_at->format('d-m-Y H:i') }}</td>
-                            <td>
+                        <td>{{ $item->updated_at->format('d-m-Y H:i') }}</td>
+                        <td>
                                 <a href="{{ route('assessment.result', $item->id) }}" class="btn btn-info btn-sm btn-view-result">Lihat Hasil</a>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
             </div>
             @endif
             <a href="{{ route('assessment.index') }}" class="btn btn-secondary mt-3" aria-label="Kembali">Kembali</a>

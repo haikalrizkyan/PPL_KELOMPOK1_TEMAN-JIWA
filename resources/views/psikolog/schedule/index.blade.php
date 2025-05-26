@@ -125,43 +125,43 @@
                                 <td>{{ \Carbon\Carbon::parse($schedule->tanggal)->format('d F Y') }}</td>
                                 <td>{{ \Carbon\Carbon::parse($schedule->jam_mulai)->format('H:i') }} - {{ \Carbon\Carbon::parse($schedule->jam_selesai)->format('H:i') }}</td>
                                 <td>
-                                    <span class="badge {{ $schedule->is_available ? 'bg-success' : 'bg-danger' }}">
-                                        {{ $schedule->is_available ? 'Tersedia' : 'Tidak Tersedia' }}
-                                    </span>
+                                            <span class="badge {{ $schedule->is_available ? 'bg-success' : 'bg-danger' }}">
+                                                {{ $schedule->is_available ? 'Tersedia' : 'Tidak Tersedia' }}
+                                            </span>
                                 </td>
                                 <td style="width: 350px;">
                                     <div class="d-flex gap-2 justify-content-center align-items-center">
                                         <a href="{{ route('psikolog.schedule.edit', $schedule) }}" class="btn btn-edit btn-sm" aria-label="Edit jadwal">
                                             <i class="fas fa-edit me-1"></i> Edit
-                                        </a>
+                                            </a>
                                         <form action="{{ route('psikolog.schedule.toggle', $schedule) }}" method="POST">
-                                            @csrf
+                                                @csrf
                                             <button type="submit" class="btn {{ $schedule->is_available ? 'btn-danger' : 'btn-success' }} btn-sm" 
-                                                    aria-label="{{ $schedule->is_available ? 'Tandai tidak tersedia' : 'Tandai tersedia' }}">
+                                                        aria-label="{{ $schedule->is_available ? 'Tandai tidak tersedia' : 'Tandai tersedia' }}">
                                                 <i class="fas {{ $schedule->is_available ? 'fa-times me-1' : 'fa-check me-1' }}"></i>
-                                                {{ $schedule->is_available ? 'Tidak Tersedia' : 'Tersedia' }}
-                                            </button>
-                                        </form>
+                                                    {{ $schedule->is_available ? 'Tidak Tersedia' : 'Tersedia' }}
+                                                </button>
+                                            </form>
                                         <form action="{{ route('psikolog.schedule.destroy', $schedule) }}" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger btn-sm" 
-                                                    onclick="return confirm('Apakah Anda yakin ingin menghapus jadwal ini?')" 
-                                                    aria-label="Hapus jadwal">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger btn-sm" 
+                                                        onclick="return confirm('Apakah Anda yakin ingin menghapus jadwal ini?')" 
+                                                        aria-label="Hapus jadwal">
                                                 <i class="fas fa-trash me-1"></i> Hapus
-                                            </button>
-                                        </form>
+                                                </button>
+                                            </form>
                                     </div>
                                 </td>
                             </tr>
-                        @empty
+            @empty
                             <tr>
                                 <td colspan="4" class="text-center text-muted">Belum ada jadwal yang ditambahkan.</td>
                             </tr>
                         @endforelse
                     </tbody>
                 </table>
-            </div>
+                </div>
         </div>
     </div>
 </div>

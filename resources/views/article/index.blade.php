@@ -96,7 +96,7 @@
                         <h5 class="article-title mt-0 mb-1">{{ $article->title }}</h5>
                         <div class="article-meta mb-2">
                             By {{ $article->psychologist->nama ?? '-' }} | {{ $article->created_at->format('F d, Y') }}
-                        </div>
+                    </div>
                         <p class="card-text flex-grow-1 mb-3">{{ Str::limit($article->first_section_description, 120) }}</p>
                         <a href="{{ route('article.show', $article->id) }}" class="btn btn-outline-temanjiwa mt-auto">Baca Selengkapnya</a>
                     </div>
