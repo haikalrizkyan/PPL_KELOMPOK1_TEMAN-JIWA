@@ -1,7 +1,54 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<style>
+    body {
+        font-family: 'Ubuntu', sans-serif !important;
+        background-color: #F4FAF9 !important;
+    }
+    .card { /* Applying styles to the existing card class */
+        border-radius: 1.5rem !important;
+        box-shadow: 0 8px 32px 0 rgba(76,169,163,0.10) !important;
+        background: #fff !important;
+        border: none !important;
+    }
+    .card-header {
+        background: linear-gradient(90deg, #4CA9A3 0%, #A8E6CF 100%);
+        color: #fff;
+        font-size: 1.2rem;
+        font-weight: 700;
+        border-radius: 1.5rem 1.5rem 0 0;
+        padding: 1rem 1.5rem;
+    }
+    .btn-temanjiwa {
+        background: #4CA9A3;
+        color: #fff;
+        font-weight: 600;
+        border-radius: 2rem;
+        border: none;
+        transition: background 0.2s;
+        padding: 0.75rem 1.5rem;
+        font-size: 1.1rem;
+    }
+    .btn-temanjiwa:hover {
+        background: #3D8C87;
+        color: #fff;
+    }
+     .btn-secondary {
+        border-radius: 2rem;
+        padding: 0.75rem 1.5rem;
+        font-size: 1.1rem;
+        font-weight: 600;
+     }
+     .profile-image {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        border-radius: 50%; /* Make it round */
+        margin-bottom: 1rem;
+     }
+</style>
+<div class="container py-4">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -15,6 +62,7 @@
                     <form method="POST" action="{{ route('profile.update') }}">
                         @csrf
                         @method('PUT')
+
                         <div class="mb-3">
                             <label for="nama" class="form-label">Nama Lengkap</label>
                             <input id="nama" type="text" class="form-control @error('nama') is-invalid @enderror" name="nama" value="{{ old('nama', $user->nama) }}" required>
@@ -73,7 +121,7 @@
                                 </span>
                             @enderror
                         </div>
-                        <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                        <button type="submit" class="btn btn-temanjiwa">Simpan Perubahan</button>
                         <a href="{{ route('dashboard') }}" class="btn btn-secondary">Kembali</a>
                     </form>
                 </div>
