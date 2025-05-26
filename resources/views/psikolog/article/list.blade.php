@@ -48,49 +48,49 @@
 </style>
 <div class="container py-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2 class="article-header mb-0">My Articles</h2>
-        <a href="{{ route('psikolog.article.create') }}" class="btn btn-temanjiwa">Add Article</a>
+        <h2 class="article-header mb-0">Artikel Saya</h2>
+        <a href="{{ route('psikolog.article.create') }}" class="btn btn-temanjiwa"><i class="fas fa-plus"></i> Tambah Artikel</a>
     </div>
     @if(session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
     <div class="card article-card">
         <div class="card-body">
-            <div class="table-responsive">
-                <table class="table table-bordered align-middle">
-                    <thead class="table-light">
-                        <tr>
-                            <th>No.</th>
-                            <th>Title</th>
-                            <th>Uploaded Time</th>
-                            <th>Description</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @forelse($articles as $i => $article)
-                            <tr>
-                                <td>{{ $i+1 }}</td>
-                                <td>{{ $article->title }}</td>
-                                <td>{{ $article->created_at->format('Y-m-d H:i:s') }}</td>
-                                <td>{{ Str::limit($article->first_section_description, 80) }}</td>
-                                <td class="d-flex gap-2">
+    <div class="table-responsive">
+        <table class="table table-bordered align-middle">
+            <thead class="table-light">
+                <tr>
+                    <th>No.</th>
+                    <th>Judul</th>
+                    <th>Waktu Unggah</th>
+                    <th>Deskripsi</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                @forelse($articles as $i => $article)
+                    <tr>
+                        <td>{{ $i+1 }}</td>
+                        <td>{{ $article->title }}</td>
+                        <td>{{ $article->created_at->format('Y-m-d H:i:s') }}</td>
+                        <td>{{ Str::limit($article->first_section_description, 80) }}</td>
+                        <td class="d-flex gap-2">
                                     <a href="{{ route('article.show', $article->id) }}" class="btn btn-info btn-sm btn-detail">Detail</a>
                                     <a href="{{ route('psikolog.article.edit', $article->id) }}" class="btn btn-primary btn-sm btn-edit">Edit</a>
-                                    <form method="POST" action="{{ route('psikolog.article.destroy', $article->id) }}" onsubmit="return confirm('Are you sure you want to delete this article?')">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm btn-delete">Delete</button>
-                                    </form>
-                                </td>
-                            </tr>
-                        @empty
-                            <tr>
-                                <td colspan="5" class="text-center text-muted">No articles yet.</td>
-                            </tr>
-                        @endforelse
-                    </tbody>
-                </table>
+                                    <form method="POST" action="{{ route('psikolog.article.destroy', $article->id) }}" onsubmit="return confirm('Apakah Anda yakin ingin menghapus artikel ini?')">
+                                @csrf
+                                @method('DELETE')
+                                        <button type="submit" class="btn btn-danger btn-sm btn-delete">Hapus</button>
+                            </form>
+                        </td>
+                    </tr>
+                @empty
+                    <tr>
+                                <td colspan="5" class="text-center text-muted">Belum ada artikel.</td>
+                    </tr>
+                @endforelse
+            </tbody>
+        </table>
             </div>
         </div>
     </div>

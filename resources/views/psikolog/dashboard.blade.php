@@ -17,9 +17,11 @@
         font-weight: 700;
         color: #264653;
         border-bottom: none !important;
-        font-size: 1.2rem;
+        font-size: 1.3rem;
         border-radius: 1.5rem 1.5rem 0 0;
         text-align: center;
+        padding: 1.5rem 2rem 1rem 2rem;
+        margin-bottom: 1.5rem;
     }
     .profile-label {
         color: #264653;
@@ -49,7 +51,7 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card dashboard-card">
-                <div class="card-header dashboard-header">Psychologist Dashboard</div>
+                <div class="card-header dashboard-header" style="background: #fff !important; border-bottom: none !important; border-radius: 1.5rem 1.5rem 0 0;">Dashboard Psikolog</div>
                 <div class="card-body">
                     @if (session('success'))
                         <div class="alert alert-success" role="alert">
@@ -71,16 +73,16 @@
                         <!-- Profile Detail Info -->
                         <div class="col-md-8">
                             <div class="card mb-3" style="border-radius: 1rem;">
-                                <div class="card-header bg-white fw-semibold" style="border-radius: 1rem 1rem 0 0; font-weight:600; color:#264653;">Profile Information</div>
+                                <div class="card-header bg-white fw-semibold" style="border-radius: 1rem 1rem 0 0; font-weight:600; color:#264653;">Informasi Profil</div>
                                 <div class="card-body">
                                     @php
                                         $fields = [
                                             'Email' => $psikolog->email,
-                                            'License Number' => $psikolog->nomor_lisensi,
-                                            'Specialization' => $psikolog->spesialisasi,
-                                            'Experience' => $psikolog->pengalaman . ' years',
-                                            'Consultation Fee' => 'Rp ' . number_format($psikolog->biaya_konsultasi, 0, ',', '.'),
-                                            'Description' => $psikolog->deskripsi
+                                            'Nomor Lisensi' => $psikolog->nomor_lisensi,
+                                            'Spesialisasi' => $psikolog->spesialisasi,
+                                            'Pengalaman' => $psikolog->pengalaman . ' tahun',
+                                            'Biaya Konsultasi' => 'Rp ' . number_format($psikolog->biaya_konsultasi, 0, ',', '.'),
+                                            'Deskripsi' => $psikolog->deskripsi
                                         ];
                                     @endphp
                                     @foreach ($fields as $label => $value)
@@ -92,15 +94,12 @@
                                 </div>
                             </div>
                             <!-- Action Buttons -->
-                            <div class="d-flex justify-content-between">
+                            <div class="d-flex justify-content-between align-items-center">
                                 <a href="{{ route('psikolog.profile') }}" class="btn btn-temanjiwa">
-                                    <i class="fas fa-edit me-2"></i>Edit Profile
+                                    <i class="fas fa-edit me-2"></i>Edit Profil
                                 </a>
                                 <form id="logout-form" action="{{ route('psikolog.logout') }}" method="POST">
                                     @csrf
-                                    <button type="submit" class="btn btn-danger text-white btn-logout">
-                                        <i class="fas fa-sign-out-alt me-2"></i>Logout
-                                    </button>
                                 </form>
                             </div>
                         </div>

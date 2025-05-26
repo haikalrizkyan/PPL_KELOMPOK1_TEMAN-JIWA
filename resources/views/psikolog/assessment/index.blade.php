@@ -48,9 +48,9 @@
 </style>
 <div class="container py-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2 class="assessment-header mb-0">My Assessments</h2>
+        <h2 class="assessment-header mb-0">Daftar Assessment Saya</h2>
         <a href="{{ route('psikolog.assessment.create') }}" class="btn btn-temanjiwa">
-            <i class="fas fa-plus"></i> Add Assessment
+            <i class="fas fa-plus"></i> Tambah Assessment
         </a>
     </div>
     @if(session('success'))
@@ -62,8 +62,8 @@
             <table class="table table-bordered">
                 <thead>
                     <tr>
-                        <th>Question</th>
-                        <th style="width: 140px;">Action</th>
+                        <th>Pertanyaan</th>
+                        <th style="width: 140px;">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -73,10 +73,10 @@
                                 <td>{{ $no++ }}. {{ $q->pertanyaan }}</td>
                                 <td>
                                     <a href="{{ route('psikolog.assessment.editQuestion', [$assessment->id, $q->id]) }}" class="btn btn-sm btn-primary btn-edit">Edit</a>
-                                    <form action="{{ route('psikolog.assessment.deleteQuestion', [$assessment->id, $q->id]) }}" method="POST" class="d-inline" onsubmit="return confirm('Are you sure you want to delete this question?')">
+                                    <form action="{{ route('psikolog.assessment.deleteQuestion', [$assessment->id, $q->id]) }}" method="POST" class="d-inline" onsubmit="return confirm('Apakah Anda yakin ingin menghapus pertanyaan ini?')">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-danger btn-delete">Delete</button>
+                                        <button type="submit" class="btn btn-sm btn-danger btn-delete">Hapus</button>
                                     </form>
                                 </td>
                             </tr>
@@ -85,7 +85,7 @@
                 </tbody>
             </table>
             @if($assessments->sum(fn($a) => $a->questions->count()) == 0)
-                <div class="text-center text-muted">No assessments yet. Click the add button to create a new assessment.</div>
+                <div class="text-center text-muted">Belum ada assessment. Klik tombol tambah untuk membuat assessment baru.</div>
             @endif
         </div>
     </div>

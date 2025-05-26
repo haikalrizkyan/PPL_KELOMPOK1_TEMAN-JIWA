@@ -107,9 +107,9 @@
 </style>
 <div class="container py-5">
     <div class="assessment-card">
-        <div class="assessment-title">Memulai Penilaian</div>
+        <div class="assessment-title">Memulai Assessment</div>
         <div class="mb-4">
-            <div class="scale-instructions">Petunjuk Skala Penilaian:</div>
+            <div class="scale-instructions">Assessment Scale Instructions:</div>
             <div class="d-flex justify-content-center gap-3 flex-wrap scale-options">
                 <span><b>1</b> = Sangat jarang</span>
                 <span><b>2</b> = Jarang</span>

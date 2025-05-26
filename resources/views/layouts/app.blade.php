@@ -54,7 +54,7 @@
     @else
         <a class="nav-link {{ request()->routeIs('dashboard') ? 'text-info fw-bold border-bottom border-info' : '' }}" 
            href="{{ route('dashboard') }}">
-            Beranda
+            Home
         </a>
     @endif
 </li>
@@ -63,7 +63,7 @@
     <li class="nav-item">
         <a class="nav-link {{ request()->routeIs('assessment.*') ? 'text-info fw-bold border-bottom border-info' : '' }}"
            href="{{ route('assessment.index') }}">
-            Penilaian
+            Assessment
         </a>
     </li>
     <li class="nav-item">
@@ -100,7 +100,7 @@
     <li class="nav-item">
         <a class="nav-link {{ request()->routeIs('psikolog.article.*') ? 'text-info fw-bold border-bottom border-info' : '' }}" 
            href="{{ route('psikolog.article.list') }}">
-            Article
+            Artikel
         </a>
     </li>
 @endif

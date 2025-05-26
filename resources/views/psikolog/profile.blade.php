@@ -60,7 +60,7 @@
         <div class="col-md-8">
             <div class="card profile-card">
                 <div class="card-header" style="background: none; border-bottom: none;">
-                    <h2 class="profile-header">Edit Psychologist Profile</h2>
+                    <h2 class="profile-header">Edit Profil Psikolog</h2>
                 </div>
                 <div class="card-body">
                     @if (session('success'))
@@ -74,7 +74,7 @@
                         @method('PUT')
 
                         <div class="mb-3">
-                            <label for="foto" class="form-label">Profile Photo</label>
+                            <label for="foto" class="form-label">Foto Profil</label>
                              @if($psikolog->foto_profil)
                                 <div class="profile-photo-preview">
                                     <img src="{{ asset('storage/' . $psikolog->foto_profil) }}" alt="Current Profile Photo">
@@ -84,7 +84,7 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="nama" class="form-label">Full Name</label>
+                            <label for="nama" class="form-label">Nama Lengkap</label>
                             <input id="nama" type="text" class="form-control @error('nama') is-invalid @enderror" name="nama" value="{{ old('nama', $psikolog->nama) }}" required>
                             @error('nama')
                                 <span class="invalid-feedback" role="alert">
@@ -94,7 +94,7 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="email" class="form-label">Email Address</label>
+                            <label for="email" class="form-label">Alamat Email</label>
                             <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email', $psikolog->email) }}" required>
                             @error('email')
                                 <span class="invalid-feedback" role="alert">
@@ -104,7 +104,7 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="spesialisasi" class="form-label">Specialization</label>
+                            <label for="spesialisasi" class="form-label">Spesialisasi</label>
                             <input id="spesialisasi" type="text" class="form-control @error('spesialisasi') is-invalid @enderror" name="spesialisasi" value="{{ old('spesialisasi', $psikolog->spesialisasi) }}" required>
                             @error('spesialisasi')
                                 <span class="invalid-feedback" role="alert">
@@ -114,7 +114,7 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="pengalaman" class="form-label">Experience (years)</label>
+                            <label for="pengalaman" class="form-label">Pengalaman (tahun)</label>
                             <input id="pengalaman" type="number" class="form-control @error('pengalaman') is-invalid @enderror" name="pengalaman" value="{{ old('pengalaman', $psikolog->pengalaman) }}" required>
                             @error('pengalaman')
                                 <span class="invalid-feedback" role="alert">
@@ -124,7 +124,7 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="biaya_konsultasi" class="form-label">Consultation Fee</label>
+                            <label for="biaya_konsultasi" class="form-label">Biaya Konsultasi</label>
                             <input id="biaya_konsultasi" type="number" class="form-control @error('biaya_konsultasi') is-invalid @enderror" name="biaya_konsultasi" value="{{ old('biaya_konsultasi', $psikolog->biaya_konsultasi) }}" required>
                             @error('biaya_konsultasi')
                                 <span class="invalid-feedback" role="alert">
@@ -134,7 +134,7 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="deskripsi" class="form-label">Description</label>
+                            <label for="deskripsi" class="form-label">Deskripsi</label>
                             <textarea id="deskripsi" class="form-control @error('deskripsi') is-invalid @enderror" name="deskripsi" rows="4">{{ old('deskripsi', $psikolog->deskripsi) }}</textarea>
                             @error('deskripsi')
                                 <span class="invalid-feedback" role="alert">
@@ -145,10 +145,10 @@
 
                         <div class="mb-0">
                             <button type="submit" class="btn btn-temanjiwa me-2">
-                                Save Changes
+                                Simpan Perubahan
                             </button>
                             <a href="{{ route('psikolog.dashboard') }}" class="btn btn-secondary">
-                                Back
+                                Kembali
                             </a>
                         </div>
                     </form>

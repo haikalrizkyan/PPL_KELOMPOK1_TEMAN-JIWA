@@ -56,14 +56,14 @@
         <div class="assessment-card">
             <div class="text-center mb-3">
                 <span class="assessment-emoji">🧠</span>
-                <div class="assessment-title">Penilaian Kesehatan Mental</div>
+                <div class="assessment-title">Mental Health Assessment</div>
             </div>
             <p class="text-center assessment-desc">
                 Penilaian ini bertujuan untuk membantu Anda lebih memahami kondisi kesehatan mental Anda. Jawablah pertanyaan-pertanyaan yang ada dengan jujur untuk mendapatkan hasil yang paling akurat.
             </p>
             @if($assessment)
                 <div class="text-center">
-                    <a href="{{ route('assessment.start', $assessment->id) }}" class="btn btn-temanjiwa btn-lg">Mulai Penilaian</a>
+                    <a href="{{ route('assessment.start', $assessment->id) }}" class="btn btn-temanjiwa btn-lg">Mulai Assessment</a>
                 </div>
             @else
                 <div class="text-center assessment-empty">Tidak ada penilaian yang tersedia saat ini.</div>

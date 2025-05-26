@@ -90,15 +90,15 @@
                         <img src="{{ asset('storage/' . $article->cover) }}" class="article-cover-img" alt="Article Cover Image">
                     @endif
                     <div class="article-body">
-                         @if($article->category) {{-- Assuming a 'category' attribute exists --}}
-                            <span class="badge badge-category">{{ $article->category->name ?? $article->category }}</span>
+                         @if($article->category)
+                            <span class="badge badge-category mb-2">{{ $article->category->name ?? $article->category }}</span>
                         @endif
-                        <h5 class="article-title">{{ $article->title }}</h5>
-                        <div class="article-meta">
+                        <h5 class="article-title mt-0 mb-1">{{ $article->title }}</h5>
+                        <div class="article-meta mb-2">
                             By {{ $article->psychologist->nama ?? '-' }} | {{ $article->created_at->format('F d, Y') }}
                         </div>
-                        <p class="card-text flex-grow-1">{{ Str::limit($article->first_section_description, 120) }}</p>
-                        <a href="{{ route('article.show', $article->id) }}" class="btn btn-outline-temanjiwa">Baca Selengkapnya</a>
+                        <p class="card-text flex-grow-1 mb-3">{{ Str::limit($article->first_section_description, 120) }}</p>
+                        <a href="{{ route('article.show', $article->id) }}" class="btn btn-outline-temanjiwa mt-auto">Baca Selengkapnya</a>
                     </div>
                 </div>
             </div>

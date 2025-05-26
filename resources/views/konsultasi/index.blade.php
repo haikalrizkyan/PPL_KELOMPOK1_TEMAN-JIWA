@@ -4,7 +4,7 @@
 <style>
     body {
         font-family: 'Ubuntu', sans-serif !important;
-        background-color: #F5FAFA !important; /* Diubah dari #F4FAF9 ke #F5FAFA */
+        background-color: #F4FAF9 !important; /* Ensure consistent background */
     }
     .psikolog-card {
         border-radius: 1.5rem;
@@ -70,15 +70,16 @@
     .psikolog-info strong {
         color: #3b7c7c;
     }
-    .alert-info {
-        border-radius: 1rem;
-    }
     @media (max-width: 767px) {
         .psikolog-card { min-height: unset; }
     }
+    .psikolog-name {
+        font-size: 1.2rem; /* Consistent font size with article titles */
+        font-weight: 700; /* Ensure bold */
+    }
 </style>
 <div class="container py-5">
-    <h2 class="mb-4 fw-bold text-center" style="color:#264653;">Daftar Psikologi</h2>
+    <h2 class="mb-4 fw-bold text-center" style="color:#264653; font-size: 1.5rem;">Daftar Psikologi</h2>
     <div class="row justify-content-center">
         @forelse($psikologs as $psikolog)
             <div class="col-md-4 col-sm-6 mb-4 d-flex align-items-stretch">
@@ -92,13 +93,13 @@
                                     <i class="fa-solid fa-user"></i>
                                 </div>
                             @endif
-                            <h5 class="card-title fw-bold mb-2">{{ $psikolog->nama }}</h5>
+                            <h5 class="card-title psikolog-name mb-2">{{ $psikolog->nama }}</h5>
                             <span class="badge-spesialisasi">{{ $psikolog->spesialisasi }}</span>
                             <div class="psikolog-info">
                                 <p><strong>Pengalaman:</strong> {{ $psikolog->pengalaman }} tahun</p>
                                 <p><strong>Harga Konsultasi:</strong> Rp {{ number_format($psikolog->biaya_konsultasi, 0, ',', '.') }}</p>
                             </div>
-                            <p class="card-text text-muted small mb-3">{{ $psikolog->deskripsi }}</p>
+                            <p class="card-text text-muted small mt-2 mb-3">{{ $psikolog->deskripsi }}</p>
                         </div>
                         <a href="{{ route('konsultasi.booking.form', $psikolog->id) }}" class="btn btn-book w-100 mt-2">Konsultasi Sekarang</a>
                     </div>

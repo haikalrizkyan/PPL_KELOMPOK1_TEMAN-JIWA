@@ -49,8 +49,7 @@ class ConsultationController extends Controller
         // Check if the selected time slot is available
         $schedule = $psychologist->schedules()
             ->where('tanggal', $request->tanggal)
-            ->where('jam_mulai', '<=', $request->jam)
-            ->where('jam_selesai', '>', $request->jam)
+            ->where('jam_mulai', $request->jam)
             ->where('is_available', true)
             ->first();
 

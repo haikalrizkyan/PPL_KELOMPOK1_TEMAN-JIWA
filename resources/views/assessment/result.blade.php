@@ -61,9 +61,9 @@
             <div class="score-category-text"><strong>Poin Kamu:</strong> {{ $skor }}</div>
             <div class="score-category-text"><strong>Kategori:</strong> <span class="badge bg-primary badge-category">{{ $kategori }}</span></div>
             <hr class="my-4">
-            <div class="text-center">
-                <a href="{{ route('assessment.history') }}" class="btn btn-temanjiwa me-2">Lihat Hasil Penilaian</a>
-                <a href="{{ route('dashboard') }}" class="btn btn-secondary mt-3" aria-label="Kembali ke dashboard user">Kembali ke Beranda</a>
+            <div class="d-flex justify-content-center flex-wrap gap-2">
+                <a href="{{ route('assessment.history') }}" class="btn btn-temanjiwa">Lihat Hasil Penilaian</a>
+                <a href="{{ route('dashboard') }}" class="btn btn-secondary" aria-label="Kembali ke home">Kembali ke Home</a>
             </div>
         </div>
     </div>
