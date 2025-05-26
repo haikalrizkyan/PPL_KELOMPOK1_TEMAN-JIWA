@@ -34,6 +34,14 @@
         font-size: 0.9rem;
         font-weight: 600;
     }
+     .badge-sehat-history {
+        background: #66BB6A !important; /* Green color from other pages */
+        color: #fff !important;
+        border-radius: 0.5rem; /* Match history page border radius */
+        padding: 0.3em 0.6em; /* Match history page padding */
+        font-size: 0.9rem; /* Match history page font size */
+        font-weight: 600;
+    }
     .btn-view-result {
         border-radius: 2rem !important;
         padding: 0.25rem 1rem !important;
@@ -53,7 +61,7 @@
     }
 </style>
 <div class="container py-4">
-    <h2 class="history-header">Hasil Penilaian</h2>
+    <h2 class="text-center mb-4" style="color: #264653; font-weight: 700;">Riwayat Assessment</h2>
     <div class="card history-card">
         <div class="card-body">
             @if($riwayat->isEmpty())
@@ -77,7 +85,13 @@
                         <td>{{ $i+1 }}</td>
                         <td>{{ $item->assessment->judul ?? '-' }}</td>
                         <td>{{ $item->skor }}</td>
-                            <td><span class="badge bg-primary badge-category">{{ $item->kategori }}</span></td>
+                            <td>
+                                @if($item->kategori == 'Sehat')
+                                    <span class="badge badge-sehat-history">{{ $item->kategori }}</span>
+                                @else
+                                    <span class="badge bg-primary badge-category">{{ $item->kategori }}</span> {{-- Keep default for other categories --}}
+                                @endif
+                            </td>
                         <td>{{ $item->updated_at->format('d-m-Y H:i') }}</td>
                         <td>
                                 <a href="{{ route('assessment.result', $item->id) }}" class="btn btn-info btn-sm btn-view-result">Lihat Hasil</a>

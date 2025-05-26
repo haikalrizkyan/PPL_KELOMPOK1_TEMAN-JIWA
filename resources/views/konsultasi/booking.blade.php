@@ -10,16 +10,15 @@
         border-radius: 1.5rem !important;
         box-shadow: 0 8px 32px 0 rgba(76,169,163,0.10) !important;
         border: none !important;
-        /* Consistent padding across cards, adjust as needed */
-        padding: 1.5rem !important;
+        padding: 1.5rem !important; /* Consistent padding */
     }
     .card-header {
         background-color: #fff;
         color: #264653;
         font-weight: 700;
-        font-size: 1.3rem;
+        font-size: 1.2rem; /* Slightly reduced font size for header */
         border-bottom: none;
-        padding: 1.25rem 1.5rem !important;
+        padding: 1rem 1.5rem !important; /* Adjusted padding */
         margin-bottom: 1rem !important;
         text-align: center;
         border-radius: 1.5rem 1.5rem 0 0 !important;
@@ -27,6 +26,7 @@
     .form-label {
         color: #264653;
         font-weight: 500;
+        margin-bottom: 0.5rem; /* Added margin-bottom */
     }
     .form-control:focus {
         border-color: #4CA9A3;
@@ -40,8 +40,8 @@
         border-radius: 2rem;
         border: none;
         transition: background 0.2s;
-        padding-left: 1.5rem;
-        padding-right: 1.5rem;
+        padding: 0.75rem 1.5rem; /* Adjusted padding */
+        font-size: 1.1rem; /* Adjusted font size */
     }
     .btn-temanjiwa:hover {
         background: #3D8C87;
@@ -51,25 +51,30 @@
     .booking-header {
         font-weight: 700;
         color: #264653;
-        font-size: 1.8rem;
+        font-size: 1.8rem; /* Kept main header font size */
         margin-bottom: 0.5rem;
     }
      .booking-subheader {
         color: #264653;
-        margin-bottom: 2rem;
+        margin-bottom: 2.5rem; /* Increased bottom margin */
+        font-size: 1.1rem; /* Adjusted font size */
      }
     .balance-info h5 {
         color: #264653;
         font-weight: 500;
+        font-size: 1rem; /* Adjusted font size */
+        margin-bottom: 0.25rem; /* Reduced bottom margin */
     }
     .balance-info h3 {
          font-weight: 700;
+         font-size: 1.5rem; /* Adjusted font size */
     }
     .alert-danger, .alert-warning, .alert-info {
         border-radius: 1rem;
-        font-size: 1rem;
+        font-size: 1rem; /* Kept font size */
         border: none;
         padding: 0.75rem 1.25rem;
+        margin-bottom: 1.5rem; /* Consistent margin */
     }
     .alert-info {
         background: #e3f8fa;
@@ -89,62 +94,31 @@
         color: #264653;
         font-weight: normal;
         cursor: pointer;
-        display: block;
-        padding: 0.5rem 1rem;
-        border: 1px solid #cccccc; /* Lighter border color */
-        border-radius: 2rem;
-        transition: background-color 0.2s, border-color 0.2s, color 0.2s, box-shadow 0.2s;
-        text-align: center;
         margin-bottom: 0.5rem;
-        background-color: #ffffff; /* Explicitly set background to white */
-        box-shadow: 0 1px 2px rgba(0,0,0,0.08); /* Less prominent subtle box shadow */
+        font-size: 1rem; /* Adjusted font size */
     }
     .form-check-label:hover {
-        background-color: #f8f9fa; /* Very light grey on hover */
-        border-color: #a0a0a0;
-        box-shadow: 0 1px 4px rgba(0,0,0,0.12); /* Slightly more prominent shadow on hover */
     }
      .form-check-input:checked ~ .form-check-label {
-        background-color: #e3f8fa !important;
-        color: #264653 !important;
-        border-color: #4CA9A3 !important;
         font-weight: 600;
-        box-shadow: 0 1px 5px rgba(76,169,163,0.25); /* Shadow matching theme color when checked */
      }
      .form-check-input:checked {
-        display: none;
      }
      .form-check input[type="radio"] {
-         display: none;
      }
     .form-check-input:focus {
         box-shadow: 0 0 0 0.2rem rgba(76,169,163,0.25); /* Keep the default focus ring for accessibility */
     }
     /* Add styles to prevent size change on focus/active */
     .form-check input[type="radio"]:focus ~ .form-check-label {
-        /* Ensure padding, border, and size related properties do not change on focus */
-        padding: 0.5rem 1rem;
-        border-width: 1px;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Keep default shadow on focus */
         transform: none; /* Prevent any scaling on focus */
     }
     .form-check input[type="radio"]:active ~ .form-check-label {
-         /* Ensure padding, border, and size related properties do not change on active (pressed) */
-         padding: 0.5rem 1rem;
-         border-width: 1px;
-         box-shadow: 0 1px 2px rgba(0,0,0,0.08); /* Revert to default shadow or specify desired active shadow */
-         transform: none; /* Prevent any scaling on active */
-         background-color: #e9ecef; /* Subtle background change on active */
-         border-color: #a0a0aa; /* Keep default border color on active */
-         color: #264653; /* Keep default text color on active */
+        transform: none; /* Prevent any scaling on active */
     }
 
     /* Specific override for checked state on active */
     .form-check input[type="radio"]:checked:active ~ .form-check-label {
-        background-color: #d0eaf0 !important; /* Slightly darker background when checked and active */
-        border-color: #4CA9A3 !important; /* Keep theme color border */
-        color: #264653 !important; /* Keep dark text color */
-        box-shadow: 0 1px 5px rgba(76,169,163,0.3); /* Keep checked shadow */
     }
     .text-success {
          color: #28a745 !important;
@@ -157,31 +131,31 @@
         margin-bottom: 0; /* Remove default margin bottom */
     }
      .form-check {
-        padding-left: 0;
-        margin-bottom: 0;
+        padding-left: 1.5em; /* Increased padding for radio button */
+        margin-bottom: 0.5rem; /* Added margin bottom */
      }
      .form-check-input {
         margin-top: 0.3em;
+        margin-left: -1.5em; /* Align radio button */
      }
      .form-check-label {
         margin-bottom: 0;
+        padding-left: 0.5em; /* Added padding for label */
      }
-     .card-body .row.g-2 {
-        margin-left: -0.5rem;
-        margin-right: -0.5rem;
-     }
-     .card-body .row.g-2 > .col-md-3, .card-body .row.g-2 > .col-sm-6 {
-         padding-left: 0.5rem;
-         padding-right: 0.5rem;
-         margin-bottom: 1rem; /* Add margin bottom to columns for spacing between rows of options */
-     }
+     /* Removed grid related styles */
+     /* .card-body .row.g-2 { */
+     /*    margin-left: -0.5rem; */
+     /*    margin-right: -0.5rem; */
+     /* } */
+     /* .card-body .row.g-2 > .col-md-3, .card-body .row.g-2 > .col-sm-6 { */
+     /*     padding-left: 0.5rem; */
+     /*     padding-right: 0.5rem; */
+     /*     margin-bottom: 1rem; */
+     /* } */
      /* Specific style for disabled form check label */
      .form-check input[disabled] ~ label {
          cursor: not-allowed;
          opacity: 0.7;
-         background-color: #e9ecef !important;
-         color: #6c757d !important;
-         border-color: #ccc !important;
          font-weight: normal;
          box-shadow: none;
      }
@@ -265,31 +239,27 @@
                                         <h6 class="mb-0" style="color: #264653;">{{ \Carbon\Carbon::parse($tanggal)->format('d F Y') }}</h6>
                                     </div>
                                     <div class="card-body">
-                                        <div class="row g-2">
-                                            @foreach($schedules as $schedule)
-                                                @php
-                                                    $isBooked = $existingBookings->contains(function($booking) use ($tanggal, $schedule) {
-                                                        return $booking->tanggal == $tanggal && $booking->jam == \Carbon\Carbon::parse($schedule->jam_mulai)->format('H:i');
-                                                    });
-                                                @endphp
-                                                <div class="col-md-3 col-sm-6">
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="radio" 
-                                                            name="jam" id="jam_{{ $schedule->id }}" 
-                                                            value="{{ \Carbon\Carbon::parse($schedule->jam_mulai)->format('H:i') }}"
-                                                            {{ $isBooked ? 'disabled' : '' }}
-                                                            required>
-                                                        <input type="hidden" name="tanggal" value="{{ $tanggal }}">
-                                                        <label class="form-check-label {{ $isBooked ? 'text-muted' : '' }}" for="jam_{{ $schedule->id }}">
-                                                            {{ \Carbon\Carbon::parse($schedule->jam_mulai)->format('H:i') }} - {{ \Carbon\Carbon::parse($schedule->jam_selesai)->format('H:i') }}
-                                                            @if($isBooked)
-                                                                <span class="badge bg-danger ms-1">Sudah Dipesan</span>
-                                                            @endif
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                            @endforeach
-                                        </div>
+                                        @foreach($schedules as $schedule)
+                                            @php
+                                                $isBooked = $existingBookings->contains(function($booking) use ($tanggal, $schedule) {
+                                                    return $booking->tanggal == $tanggal && $booking->jam == \Carbon\Carbon::parse($schedule->jam_mulai)->format('H:i');
+                                                });
+                                            @endphp
+                                            <div class="form-check mb-2">
+                                                <input class="form-check-input" type="radio"
+                                                    name="jam" id="jam_{{ $schedule->id }}"
+                                                    value="{{ \Carbon\Carbon::parse($schedule->jam_mulai)->format('H:i') }}"
+                                                    {{ $isBooked ? 'disabled' : '' }}
+                                                    required>
+                                                <input type="hidden" name="tanggal" value="{{ $tanggal }}">
+                                                <label class="form-check-label {{ $isBooked ? 'text-muted' : '' }}" for="jam_{{ $schedule->id }}">
+                                                    {{ \Carbon\Carbon::parse($schedule->jam_mulai)->format('H:i') }} - {{ \Carbon\Carbon::parse($schedule->jam_selesai)->format('H:i') }}
+                                                    @if($isBooked)
+                                                        <span class="badge bg-danger ms-1">Sudah Dipesan</span>
+                                                    @endif
+                                                </label>
+                                            </div>
+                                        @endforeach
                                     </div>
                                 </div>
                             @empty
@@ -302,7 +272,7 @@
 
                         <div class="mb-4">
                             <label for="catatan" class="form-label fw-semibold">📝 Catatan (Opsional)</label>
-                            <textarea name="catatan" id="catatan" class="form-control @error('catatan') is-invalid @enderror" 
+                            <textarea name="catatan" id="catatan" class="form-control @error('catatan') is-invalid @enderror"
                                 rows="3" placeholder="Contoh: Saya ingin membahas tentang kecemasan...">{{ old('catatan') }}</textarea>
                             @error('catatan')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -310,7 +280,7 @@
                         </div>
 
                         <div class="d-grid">
-                            <button type="submit" class="btn btn-temanjiwa btn-lg rounded-pill" 
+                            <button type="submit" class="btn btn-temanjiwa btn-lg rounded-pill"
                                 {{ Auth::user()->saldo < $psychologist->biaya_konsultasi || $availableSchedules->isEmpty() ? 'disabled' : '' }}>
                                 Pesan Sekarang 🚀
                             </button>
