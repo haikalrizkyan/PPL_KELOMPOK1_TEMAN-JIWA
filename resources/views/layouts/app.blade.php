@@ -32,7 +32,15 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand d-flex align-items-center" href="{{ url('/') }}">
+                <a class="navbar-brand d-flex align-items-center" href="@auth
+                    @if(Auth::guard('psychologist')->check())
+                        {{ route('psikolog.dashboard') }}
+                    @elseif(Auth::guard('web')->check())
+                        {{ route('dashboard') }}
+                    @endif
+                @else
+                    {{ url('/') }}
+                @endauth">
                     <img src="{{ asset('WhatsApp Image 2025-03-28 at 21.17.58_adbf7a26.jpg') }}" alt="Logo Teman Jiwa" style="height: 40px; margin-right: 10px;">
                     <strong>Teman Jiwa</strong>
                 </a>
@@ -100,7 +108,7 @@
     <li class="nav-item">
         <a class="nav-link {{ request()->routeIs('psikolog.article.*') ? 'text-info fw-bold border-bottom border-info' : '' }}" 
            href="{{ route('psikolog.article.list') }}">
-            Artikel
+            Kelola Artikel
         </a>
     </li>
 @endif
