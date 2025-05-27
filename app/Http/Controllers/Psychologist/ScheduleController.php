@@ -52,8 +52,8 @@ class ScheduleController extends Controller
 
         $validator = Validator::make($request->all(), [
             'tanggal' => 'required|date|after_or_equal:today',
-            'jam_mulai' => 'required',
-            'jam_selesai' => 'required|after:jam_mulai',
+            'jam_mulai' => 'required|date_format:H:i',
+            'jam_selesai' => 'required|date_format:H:i|after:jam_mulai',
         ]);
 
         if ($validator->fails()) {
@@ -65,15 +65,19 @@ class ScheduleController extends Controller
                 ->withInput();
         }
 
+        // Format waktu ke format yang benar
+        $jamMulai = date('H:i:s', strtotime($request->jam_mulai));
+        $jamSelesai = date('H:i:s', strtotime($request->jam_selesai));
+
         // Check for overlapping schedules
         $overlapping = PsychologistSchedule::where('psychologist_id', Auth::guard('psychologist')->id())
             ->where('tanggal', $request->tanggal)
-            ->where(function ($query) use ($request) {
-                $query->whereBetween('jam_mulai', [$request->jam_mulai, $request->jam_selesai])
-                    ->orWhereBetween('jam_selesai', [$request->jam_mulai, $request->jam_selesai])
-                    ->orWhere(function ($q) use ($request) {
-                        $q->where('jam_mulai', '<=', $request->jam_mulai)
-                            ->where('jam_selesai', '>=', $request->jam_selesai);
+            ->where(function ($query) use ($jamMulai, $jamSelesai) {
+                $query->whereBetween('jam_mulai', [$jamMulai, $jamSelesai])
+                    ->orWhereBetween('jam_selesai', [$jamMulai, $jamSelesai])
+                    ->orWhere(function ($q) use ($jamMulai, $jamSelesai) {
+                        $q->where('jam_mulai', '<=', $jamMulai)
+                            ->where('jam_selesai', '>=', $jamSelesai);
                     });
             })
             ->exists();
@@ -87,20 +91,31 @@ class ScheduleController extends Controller
                 ->withInput();
         }
 
-        $schedule = PsychologistSchedule::create([
-            'psychologist_id' => Auth::guard('psychologist')->id(),
-            'tanggal' => $request->tanggal,
-            'jam_mulai' => $request->jam_mulai,
-            'jam_selesai' => $request->jam_selesai,
-            'is_available' => true
-        ]);
+        try {
+            $schedule = PsychologistSchedule::create([
+                'psychologist_id' => Auth::guard('psychologist')->id(),
+                'tanggal' => $request->tanggal,
+                'jam_mulai' => $jamMulai,
+                'jam_selesai' => $jamSelesai,
+                'is_available' => true
+            ]);
 
-        \Log::info('Schedule created successfully', [
-            'schedule' => $schedule
-        ]);
+            \Log::info('Schedule created successfully', [
+                'schedule' => $schedule
+            ]);
 
-        return redirect()->route('psikolog.schedule.index')
-            ->with('success', 'Jadwal berhasil ditambahkan');
+            return redirect()->route('psikolog.schedule.index')
+                ->with('success', 'Jadwal berhasil ditambahkan');
+        } catch (\Exception $e) {
+            \Log::error('Failed to create schedule', [
+                'error' => $e->getMessage(),
+                'request' => $request->all()
+            ]);
+            
+            return redirect()->back()
+                ->withErrors(['error' => 'Terjadi kesalahan saat menyimpan jadwal. Silakan coba lagi.'])
+                ->withInput();
+        }
     }
 
     public function edit(PsychologistSchedule $schedule)

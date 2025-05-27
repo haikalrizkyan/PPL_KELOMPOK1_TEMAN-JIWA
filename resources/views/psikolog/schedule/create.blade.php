@@ -77,7 +77,7 @@
                         </div>
                     @endif
 
-                    <form action="{{ route('psikolog.schedule.store') }}" method="POST">
+                    <form action="{{ route('psikolog.schedule.store') }}" method="POST" id="psikolog-schedule-form">
                         @csrf
                         <div class="mb-3">
                             <label for="tanggal" class="form-label">Tanggal</label>
@@ -113,18 +113,19 @@
                             <i class="fas fa-info-circle me-2"></i>
                             Pastikan jadwal yang Anda tambahkan tidak bertabrakan dengan jadwal yang sudah ada.
                         </div>
+
+                        <div class="d-flex justify-content-center mt-4">
+                            <a href="{{ route('psikolog.schedule.index') }}" class="btn btn-secondary me-2">
+                                <i class="fas fa-arrow-left me-2"></i> Kembali
+                            </a>
+                            <button type="submit" class="btn btn-temanjiwa">
+                                <i class="fas fa-save me-2"></i> Simpan Jadwal
+                            </button>
+                        </div>
                     </form>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="d-flex justify-content-center mt-4">
-        <a href="{{ route('psikolog.schedule.index') }}" class="btn btn-secondary me-2">
-            <i class="fas fa-arrow-left me-2"></i> Kembali
-        </a>
-        <button type="submit" form="psikolog-schedule-form" class="btn btn-temanjiwa">
-            <i class="fas fa-save me-2"></i> Simpan Jadwal
-        </button>
     </div>
 </div>
 
