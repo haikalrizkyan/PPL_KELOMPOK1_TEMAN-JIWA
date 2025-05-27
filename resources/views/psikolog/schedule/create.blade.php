@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Tambah Jadwal - Teman Jiwa')
+
 @section('content')
 <style>
     body {

@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Jadwal Konsultasi - Teman Jiwa')
+
 @php use Carbon\Carbon; @endphp
 
 @section('content')

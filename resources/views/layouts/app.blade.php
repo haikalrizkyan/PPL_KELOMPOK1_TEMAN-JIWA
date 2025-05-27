@@ -90,7 +90,7 @@
     <li class="nav-item">
         <a class="nav-link {{ request()->routeIs('psikolog.assessment.*') ? 'text-info fw-bold border-bottom border-info' : '' }}" 
            href="{{ route('psikolog.assessment.index') }}">
-            Assessment
+           Kelola Assessment
         </a>
     </li>
     <li class="nav-item">
@@ -147,16 +147,25 @@
                                         </li>
                                     @else
                                         <li>
-                                            <a class="dropdown-item" href="{{ route('profile.edit') }}">Edit Profil</a>
+                                            <a class="dropdown-item" href="{{ route('profile.edit') }}">
+                                                <i class="fas fa-user me-2"></i>Edit Profil
+                                            </a>
                                         </li>
                                         <li>
-                                            <a class="dropdown-item" href="{{ route('assessment.history') }}">Riwayat Assessment</a>
+                                            <a class="dropdown-item" href="{{ route('assessment.history') }}">
+                                                <i class="fas fa-history me-2"></i>Riwayat Assessment
+                                            </a>
                                         </li>
                                         <li>
-                                            <a class="dropdown-item" href="{{ route('konsultasi.jadwal.user') }}">Jadwal Konsultasi</a>
+                                            <a class="dropdown-item" href="{{ route('konsultasi.jadwal.user') }}">
+                                                <i class="fas fa-calendar-alt me-2"></i>Jadwal Konsultasi
+                                            </a>
                                         </li>
+                                        <li><hr class="dropdown-divider"></li>
                                         <li>
-                                            <a class="dropdown-item" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                                            <a class="dropdown-item text-danger" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                                <i class="fas fa-sign-out-alt me-2"></i>Logout
+                                            </a>
                                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                                 @csrf
                                             </form>

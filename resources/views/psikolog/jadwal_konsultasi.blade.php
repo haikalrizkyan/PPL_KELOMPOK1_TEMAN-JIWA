@@ -2,6 +2,8 @@
 
 @php use Carbon\Carbon; @endphp
 
+@section('title', 'Jadwal Konsultasi - Teman Jiwa')
+
 @section('content')
 <style>
     body {

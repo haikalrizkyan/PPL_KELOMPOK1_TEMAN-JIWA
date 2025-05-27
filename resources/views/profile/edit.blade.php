@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Edit Profile - Teman Jiwa')
+
 @section('content')
 <style>
     body {
