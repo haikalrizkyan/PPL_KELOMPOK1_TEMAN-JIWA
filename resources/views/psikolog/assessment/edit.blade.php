@@ -127,7 +127,7 @@
                                 <input type="text" class="form-control" id="pertanyaan" name="pertanyaan" value="{{ old('pertanyaan') }}" required placeholder="Masukkan teks pertanyaan">
                             </div>
                             <div class="mb-3">
-                                <label class="form-label">Pilihan</label>
+                                <label class="form-label">Pilihan Ganda</label>
                                 <div id="pilihan-container">
                                     <div class="input-group mb-2">
                                         <input type="text" name="choices[0][isi_pilihan]" class="form-control" placeholder="Pilihan 1" required>
@@ -201,7 +201,7 @@
             const container = document.getElementById('pilihan-container');
             const div = document.createElement('div');
             div.className = 'input-group mb-2';
-            div.innerHTML = `<input type=\"text\" name=\"choices[${pilihanIndex}][isi_pilihan]\" class=\"form-control\" placeholder=\"Pilihan ${pilihanIndex+1}\" required>`;
+            div.innerHTML = `<input type=\"text\" name=\"choices[${pilihanIndex}][isi_pilihan]\" class=\"form-control\" placeholder=\"Pilihan ${pilihanIndex+1}\" required><input type=\"number\" name=\"choices[${pilihanIndex}][score]\" class=\"form-control\" placeholder=\"Skor\" value=\"0\" required min=\"0\">`;
             container.appendChild(div);
             pilihanIndex++;
         };

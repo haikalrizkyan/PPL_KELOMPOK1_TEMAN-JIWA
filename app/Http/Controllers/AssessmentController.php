@@ -13,8 +13,9 @@ class AssessmentController extends Controller
     // Halaman awal assessment
     public function index()
     {
-        $assessment = Assessment::first(); // Sementara, ambil assessment pertama
-        return view('assessment.index', compact('assessment'));
+        // Ambil semua assessment yang tersedia
+        $assessments = Assessment::all();
+        return view('assessment.index', compact('assessments'));
     }
 
     // Mulai assessment (buat user_assessment baru)

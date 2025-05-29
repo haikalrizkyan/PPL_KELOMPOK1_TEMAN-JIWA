@@ -54,23 +54,27 @@
     }
 </style>
 <div class="container py-5">
-    <div class="d-flex justify-content-center align-items-center" style="min-height: 60vh;">
-        <div class="assessment-card">
-            <div class="text-center mb-3">
-                <span class="assessment-emoji">🧠</span>
-                <div class="assessment-title">Mental Health Assessment</div>
-            </div>
-            <p class="text-center assessment-desc">
-                Penilaian ini bertujuan untuk membantu Anda lebih memahami kondisi kesehatan mental Anda. Jawablah pertanyaan-pertanyaan yang ada dengan jujur untuk mendapatkan hasil yang paling akurat.
-            </p>
-            @if($assessment)
-                <div class="text-center">
-                    <a href="{{ route('assessment.start', $assessment->id) }}" class="btn btn-temanjiwa btn-lg">Mulai Assessment</a>
+    <h1 class="text-center mb-5">Apa Yang Sedang Kamu Rasakan?</h1>
+    <p class="text-center mb-5">Yuk, pilih perasaan yang sedang kamu hadapi dan temukan bantuan yang kamu butuhkan sekarang!</p>
+
+    <div class="row justify-content-center">
+        @forelse($assessments as $assessment)
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 assessment-card">
+                    <div class="card-body text-center">
+                        {{-- You might want to add an icon or image here based on the assessment type --}}
+                        <span class="assessment-emoji">🧠</span> {{-- Placeholder emoji --}}
+                        <h5 class="card-title assessment-title">{{ $assessment->judul }}</h5>
+                        <p class="card-text assessment-desc">{{ $assessment->deskripsi }}</p>
+                        <a href="{{ route('assessment.start', $assessment->id) }}" class="btn btn-temanjiwa">Mulai Assessment</a>
+                    </div>
                 </div>
-            @else
+            </div>
+        @empty
+            <div class="col-12">
                 <div class="text-center assessment-empty">Tidak ada penilaian yang tersedia saat ini.</div>
-            @endif
-        </div>
+            </div>
+        @endforelse
     </div>
 </div>
 @endsection 

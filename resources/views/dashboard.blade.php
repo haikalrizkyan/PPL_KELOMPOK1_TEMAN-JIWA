@@ -106,6 +106,22 @@
         font-weight: 600;
         display: inline-block;
     }
+            .badge-sedang-history {
+        background-color: #FFC107 !important; /* Orange color */
+        color: #fff !important;
+        border-radius: 0.5rem;
+        padding: 0.3em 0.6em;
+        font-size: 0.9rem;
+        font-weight: 600;
+    }
+    .badge-berat-history {
+        background-color: #DC3545 !important; /* Red color */
+        color: #fff !important;
+        border-radius: 0.5rem;
+        padding: 0.3em 0.6em;
+        font-size: 0.9rem;
+        font-weight: 600;
+    }
     @media (max-width: 600px) {
         .card-modern { max-width: 100%; }
         .card-header-modern { font-size: 1.05rem; padding: 1rem 0.5rem 0.5rem 0.5rem; }

@@ -21,25 +21,25 @@ class AssessmentController extends Controller
     // Form tambah assessment
     public function create()
     {
-        // Cari assessment pertama milik psikolog, jika ada langsung redirect ke edit
-        $assessment = Assessment::where('psychologist_id', Auth::guard('psychologist')->id())->first();
-        if ($assessment) {
-            return redirect()->route('psikolog.assessment.edit', $assessment->id);
-        }
-        // Jika belum ada, buat assessment baru
-        $assessment = Assessment::create([
-            'judul' => '',
-            'deskripsi' => '',
-            'psychologist_id' => Auth::guard('psychologist')->id(),
-        ]);
-        return redirect()->route('psikolog.assessment.edit', $assessment->id);
+        // Return view untuk form tambah assessment
+        return view('psikolog.assessment.create');
     }
 
     // Simpan assessment baru
     public function store(Request $request)
     {
-        // Tidak digunakan lagi, langsung redirect ke create
-        return redirect()->route('psikolog.assessment.create');
+        $request->validate([
+            'judul' => 'required|string|max:255',
+            'deskripsi' => 'nullable|string',
+        ]);
+
+        Assessment::create([
+            'judul' => $request->judul,
+            'deskripsi' => $request->deskripsi,
+            'psychologist_id' => Auth::guard('psychologist')->id(),
+        ]);
+
+        return redirect()->route('psikolog.assessment.index')->with('success', 'Assessment berhasil ditambahkan.');
     }
 
     // Edit assessment & pertanyaan
@@ -81,6 +81,7 @@ class AssessmentController extends Controller
             Choice::create([
                 'question_id' => $question->id,
                 'isi_pilihan' => $choice['isi_pilihan'],
+                'score' => $choice['score'] ?? 0,
                 'is_correct' => false,
             ]);
         }
@@ -117,6 +118,7 @@ class AssessmentController extends Controller
         foreach ($request->choices as $choice) {
             $question->choices()->create([
                 'isi_pilihan' => $choice['isi_pilihan'],
+                'score' => $choice['score'] ?? 0,
                 'is_correct' => false,
             ]);
         }
