@@ -44,6 +44,22 @@
         font-size: 0.9rem; /* Match history page font size */
         font-weight: 600;
     }
+        .badge-sedang-history {
+        background-color: #FFC107 !important; /* Orange color */
+        color: #fff !important;
+        border-radius: 0.5rem;
+        padding: 0.3em 0.6em;
+        font-size: 0.9rem;
+        font-weight: 600;
+    }
+    .badge-berat-history {
+        background-color: #DC3545 !important; /* Red color */
+        color: #fff !important;
+        border-radius: 0.5rem;
+        padding: 0.3em 0.6em;
+        font-size: 0.9rem;
+        font-weight: 600;
+    }
     .btn-view-result {
         border-radius: 2rem !important;
         padding: 0.25rem 1rem !important;
@@ -88,10 +104,14 @@
                         <td>{{ $item->assessment->judul ?? '-' }}</td>
                         <td>{{ $item->skor }}</td>
                             <td>
-                                @if($item->kategori == 'Sehat')
+                                @if($item->kategori == 'Sehat' || $item->kategori == 'Ringan')
                                     <span class="badge badge-sehat-history">{{ $item->kategori }}</span>
+                                @elseif($item->kategori == 'Sedang')
+                                    <span class="badge badge-sedang-history">{{ $item->kategori }}</span>
+                                @elseif($item->kategori == 'Berat')
+                                    <span class="badge badge-berat-history">{{ $item->kategori }}</span>
                                 @else
-                                    <span class="badge bg-primary badge-category">{{ $item->kategori }}</span> {{-- Keep default for other categories --}}
+                                    <span class="badge bg-secondary badge-category">{{ $item->kategori }}</span> {{-- Use secondary for unknown categories --}}
                                 @endif
                             </td>
                         <td>{{ $item->updated_at->format('d-m-Y H:i') }}</td>
