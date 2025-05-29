@@ -60,34 +60,35 @@
     @endif
     <div class="card assessment-card">
         <div class="card-body">
-            @php $no = 1; @endphp
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>Pertanyaan</th>
-                        <th style="width: 140px;">Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($assessments as $assessment)
-                        @foreach($assessment->questions as $q)
+            @if($assessments->isEmpty())
+                <div class="text-center text-muted">Belum ada assessment. Klik tombol tambah untuk membuat assessment baru.</div>
+            @else
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Judul</th>
+                            <th>Deskripsi</th>
+                            <th style="width: 200px;">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($assessments as $assessment)
                             <tr>
-                                <td>{{ $no++ }}. {{ $q->pertanyaan }}</td>
+                                <td>{{ $assessment->judul }}</td>
+                                <td>{{ $assessment->deskripsi ?? '-' }}</td>
                                 <td>
-                                    <a href="{{ route('psikolog.assessment.editQuestion', [$assessment->id, $q->id]) }}" class="btn btn-sm btn-primary btn-edit">Edit</a>
-                                    <form action="{{ route('psikolog.assessment.deleteQuestion', [$assessment->id, $q->id]) }}" method="POST" class="d-inline" onsubmit="return confirm('Apakah Anda yakin ingin menghapus pertanyaan ini?')">
+                                    <a href="{{ route('psikolog.assessment.edit', $assessment->id) }}" class="btn btn-sm btn-secondary btn-edit mb-1">Edit Asesmen</a>
+                                    <form action="{{ route('psikolog.assessment.destroy', $assessment->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Apakah Anda yakin ingin menghapus assessment ini beserta pertanyaan di dalamnya?')">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-danger btn-delete">Hapus</button>
+                                        <button type="submit" class="btn btn-sm btn-danger btn-delete mb-1">Hapus Asesmen</button>
                                     </form>
+                                    <a href="{{ route('psikolog.assessment.edit', $assessment->id) }}#questions-section" class="btn btn-sm btn-info mb-1">Kelola Pertanyaan</a>
                                 </td>
                             </tr>
                         @endforeach
-                    @endforeach
-                </tbody>
-            </table>
-            @if($assessments->sum(fn($a) => $a->questions->count()) == 0)
-                <div class="text-center text-muted">Belum ada assessment. Klik tombol tambah untuk membuat assessment baru.</div>
+                    </tbody>
+                </table>
             @endif
         </div>
     </div>

@@ -29,27 +29,7 @@
                             <textarea class="form-control" id="deskripsi" name="deskripsi" rows="3">{{ old('deskripsi', $assessment->deskripsi ?? '') }}</textarea>
                         </div>
                         <div class="mb-3">
-                            <label for="pertanyaan" class="form-label">Pertanyaan</label>
-                            <input type="text" class="form-control" id="pertanyaan" name="pertanyaan" value="{{ old('pertanyaan') }}" required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Pilihan Ganda</label>
-                            <div id="pilihan-container">
-                                <div class="input-group mb-2">
-                                    <input type="text" name="choices[0][isi_pilihan]" class="form-control" placeholder="Pilihan 1" required>
-                                    <div class="input-group-text">
-                                        <input type="radio" name="correct_choice" value="0" required title="Jawaban Benar">
-                                    </div>
-                                </div>
-                                <div class="input-group mb-2">
-                                    <input type="text" name="choices[1][isi_pilihan]" class="form-control" placeholder="Pilihan 2" required>
-                                    <div class="input-group-text">
-                                        <input type="radio" name="correct_choice" value="1" required title="Jawaban Benar">
-                                    </div>
-                                </div>
                             </div>
-                            <button type="button" class="btn btn-sm btn-secondary" id="tambah-pilihan">Tambah Pilihan</button>
-                            <small class="text-muted d-block mt-2">Pilih salah satu sebagai jawaban benar.</small>
                         </div>
                         <button type="submit" class="btn btn-primary">Simpan Pertanyaan</button>
                         <a href="{{ route('psikolog.assessment.index') }}" class="btn btn-secondary">Selesai</a>
@@ -84,10 +64,7 @@
         const container = document.getElementById('pilihan-container');
         const div = document.createElement('div');
         div.className = 'input-group mb-2';
-        div.innerHTML = `<input type="text" name="choices[${pilihanIndex}][isi_pilihan]" class="form-control" placeholder="Pilihan ${pilihanIndex+1}" required>
-            <div class="input-group-text">
-                <input type="radio" name="correct_choice" value="${pilihanIndex}" title="Jawaban Benar">
-            </div>`;
+        div.innerHTML = `<input type="text" name="choices[${pilihanIndex}][isi_pilihan]" class="form-control" placeholder="Pilihan ${pilihanIndex+1}" required>`;
         container.appendChild(div);
         pilihanIndex++;
     };
