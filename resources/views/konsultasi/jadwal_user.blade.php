@@ -31,6 +31,9 @@
                         @if($booking->catatan)
                             <p class="card-text"><strong>Catatan:</strong> {{ $booking->catatan }}</p>
                         @endif
+                        @if($booking->gmeet_link)
+                            <p class="card-text mb-1"><strong>Link Konsultasi:</strong> <a href="{{ $booking->gmeet_link }}" target="_blank">{{ $booking->gmeet_link }}</a></p>
+                        @endif
                         @if($booking->status === 'pending')
                             <div class="d-flex gap-2 mt-2">
                                 <a href="{{ route('konsultasi.booking.edit', $booking->id) }}" class="btn btn-primary flex-fill">Edit</a>

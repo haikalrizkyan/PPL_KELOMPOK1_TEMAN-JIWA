@@ -65,6 +65,9 @@ Route::middleware(['auth:psychologist'])->prefix('psikolog')->name('psikolog.')-
     Route::put('/schedule/{schedule}', [App\Http\Controllers\Psychologist\ScheduleController::class, 'update'])->name('schedule.update');
     Route::delete('/schedule/{schedule}', [App\Http\Controllers\Psychologist\ScheduleController::class, 'destroy'])->name('schedule.destroy');
     Route::post('/schedule/{schedule}/toggle', [App\Http\Controllers\Psychologist\ScheduleController::class, 'toggleAvailability'])->name('schedule.toggle');
+
+    // Route untuk update Google Meet link oleh psikolog
+    Route::put('/jadwal-konsultasi/{booking}/update-gmeet-link', [App\Http\Controllers\ConsultationController::class, 'updateGmeetLink'])->name('jadwal.updateGmeetLink');
 });
 
 // Route halaman konsultasi untuk user

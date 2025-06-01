@@ -44,6 +44,15 @@
                         @if($booking->catatan)
                             <p class="card-text"><strong>Catatan:</strong> {{ $booking->catatan }}</p>
                         @endif
+                        <form action="{{ route('psikolog.jadwal.updateGmeetLink', $booking->id) }}" method="POST" class="mt-3">
+                            @csrf
+                            @method('PUT')
+                            <div class="mb-3">
+                                <label for="gmeet_link_{{ $booking->id }}" class="form-label">Link Google Meet</label>
+                                <textarea class="form-control" id="gmeet_link_{{ $booking->id }}" name="gmeet_link" rows="2" placeholder="Masukkan link Google Meet">{{ $booking->gmeet_link }}</textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-sm">Simpan Link</button>
+                        </form>
                     </div>
                 </div>
             </div>

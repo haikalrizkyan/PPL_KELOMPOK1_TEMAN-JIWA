@@ -67,13 +67,13 @@
                         <h5 class="card-title assessment-title">{{ $assessment->judul }}</h5>
                         <p class="card-text assessment-desc">{{ $assessment->deskripsi }}</p>
                         <a href="{{ route('assessment.start', $assessment->id) }}" class="btn btn-temanjiwa">Mulai Assessment</a>
-                    </div>
+            </div>
                 </div>
             </div>
         @empty
             <div class="col-12">
                 <div class="text-center assessment-empty">Tidak ada penilaian yang tersedia saat ini.</div>
-            </div>
+        </div>
         @endforelse
     </div>
 </div>
