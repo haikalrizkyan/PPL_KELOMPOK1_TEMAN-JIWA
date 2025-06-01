@@ -46,6 +46,30 @@
         font-size: 0.9rem;
         font-weight: 600;
     }
+    .badge-ringan-result {
+        background-color: #28A745 !important; /* Warna Hijau sedikit berbeda dari sehat */
+        color: #fff !important;
+        border-radius: 0.5rem;
+        padding: 0.3em 0.6em;
+        font-size: 0.9rem;
+        font-weight: 600;
+    }
+     .badge-sedang-result {
+        background-color: #FFC107 !important; /* Warna Orange */
+        color: #fff !important;
+        border-radius: 0.5rem;
+        padding: 0.3em 0.6em;
+        font-size: 0.9rem;
+        font-weight: 600;
+    }
+    .badge-berat-result {
+        background-color: #DC3545 !important; /* Warna Merah */
+        color: #fff !important;
+        border-radius: 0.5rem;
+        padding: 0.3em 0.6em;
+        font-size: 0.9rem;
+        font-weight: 600;
+    }
     .btn-temanjiwa {
         background: #4CA9A3;
         color: #fff;
@@ -83,8 +107,14 @@
                 <div class="score-category-text"><strong>Kategori:</strong>
                      @if($kategori == 'Sehat')
                          <span class="badge badge-sehat-result">{{ $kategori }}</span>
+                     @elseif($kategori == 'Ringan')
+                         <span class="badge badge-ringan-result">{{ $kategori }}</span>
+                     @elseif($kategori == 'Sedang')
+                         <span class="badge badge-sedang-result">{{ $kategori }}</span>
+                     @elseif($kategori == 'Berat')
+                         <span class="badge badge-berat-result">{{ $kategori }}</span>
                      @else
-                         <span class="badge bg-primary badge-category">{{ $kategori }}</span>
+                         <span class="badge bg-secondary badge-category">{{ $kategori }}</span>
                      @endif
                  </div>
              </div>
