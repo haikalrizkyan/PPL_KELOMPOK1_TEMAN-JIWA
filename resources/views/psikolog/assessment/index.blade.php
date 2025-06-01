@@ -63,16 +63,16 @@
             @if($assessments->isEmpty())
                 <div class="text-center text-muted">Belum ada assessment. Klik tombol tambah untuk membuat assessment baru.</div>
             @else
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
                             <th>Judul</th>
                             <th>Deskripsi</th>
                             <th style="width: 200px;">Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($assessments as $assessment)
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($assessments as $assessment)
                             <tr>
                                 <td>{{ $assessment->judul }}</td>
                                 <td>{{ $assessment->deskripsi ?? '-' }}</td>
@@ -86,9 +86,9 @@
                                     <a href="{{ route('psikolog.assessment.edit', $assessment->id) }}#questions-section" class="btn btn-sm btn-info mb-1">Kelola Pertanyaan</a>
                                 </td>
                             </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                    @endforeach
+                </tbody>
+            </table>
             @endif
         </div>
     </div>

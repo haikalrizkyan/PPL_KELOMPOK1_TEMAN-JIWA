@@ -151,4 +151,22 @@ class ConsultationController extends Controller
         $booking->delete();
         return redirect()->route('konsultasi.jadwal.user')->with('success', 'Booking berhasil dihapus!');
     }
+
+    // Metode baru untuk mengupdate Google Meet link
+    public function updateGmeetLink(Request $request, Booking $booking)
+    {
+        // Pastikan psikolog yang login adalah psikolog yang terkait dengan booking ini
+        if ($booking->psychologist_id !== Auth::guard('psychologist')->id()) {
+            return back()->with('error', 'Tidak diizinkan mengupdate booking ini.');
+        }
+
+        $request->validate([
+            'gmeet_link' => 'nullable|url',
+        ]);
+
+        $booking->gmeet_link = $request->gmeet_link;
+        $booking->save();
+
+        return back()->with('success', 'Link Google Meet berhasil diperbarui.');
+    }
 } 
