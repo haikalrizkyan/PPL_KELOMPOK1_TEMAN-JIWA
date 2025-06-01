@@ -113,7 +113,7 @@
         <div class="mb-4">
             <div class="scale-instructions">Assessment Scale Instructions:</div>
             <div class="d-flex justify-content-center gap-3 flex-wrap scale-options">
-                <span><b>1</b> = Sangat jarang</span>
+                <span><b>1</b> = Tidak Pernah</span>
                 <span><b>2</b> = Jarang</span>
                 <span><b>3</b> = Kadang-kadang</span>
                 <span><b>4</b> = Sering</span>

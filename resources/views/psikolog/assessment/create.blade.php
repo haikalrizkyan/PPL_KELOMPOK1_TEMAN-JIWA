@@ -29,7 +29,8 @@
                             <textarea class="form-control" id="deskripsi" name="deskripsi" rows="3">{{ old('deskripsi', $assessment->deskripsi ?? '') }}</textarea>
                         </div>
                         <div class="mb-3">
-                            </div>
+                            <label for="pertanyaan" class="form-label">Pertanyaan</label>
+                            <input type="text" class="form-control" id="pertanyaan" name="pertanyaan" value="{{ old('pertanyaan') }}" required>
                         </div>
                         <button type="submit" class="btn btn-primary">Simpan Pertanyaan</button>
                         <a href="{{ route('psikolog.assessment.index') }}" class="btn btn-secondary">Selesai</a>
@@ -58,15 +59,4 @@
         </div>
     </div>
 </div>
-<script>
-    let pilihanIndex = 2;
-    document.getElementById('tambah-pilihan').onclick = function() {
-        const container = document.getElementById('pilihan-container');
-        const div = document.createElement('div');
-        div.className = 'input-group mb-2';
-        div.innerHTML = `<input type="text" name="choices[${pilihanIndex}][isi_pilihan]" class="form-control" placeholder="Pilihan ${pilihanIndex+1}" required>`;
-        container.appendChild(div);
-        pilihanIndex++;
-    };
-</script>
 @endsection 

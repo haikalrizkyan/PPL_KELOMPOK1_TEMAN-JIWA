@@ -70,18 +70,17 @@ class AssessmentController extends Controller
     {
         $request->validate([
             'pertanyaan' => 'required',
-            'choices' => 'required|array|min:2',
-            'choices.*.isi_pilihan' => 'required',
         ]);
         $question = Question::create([
             'assessment_id' => $assessmentId,
             'pertanyaan' => $request->pertanyaan,
         ]);
-        foreach ($request->choices as $choice) {
+        // Otomatis membuat pilihan 1 sampai 5
+        for ($i = 1; $i <= 5; $i++) {
             Choice::create([
                 'question_id' => $question->id,
-                'isi_pilihan' => $choice['isi_pilihan'],
-                'score' => $choice['score'] ?? 0,
+                'isi_pilihan' => $i, // Isi pilihan adalah angka 1-5
+                'score' => $i, // Skor sama dengan isi pilihan
                 'is_correct' => false,
             ]);
         }

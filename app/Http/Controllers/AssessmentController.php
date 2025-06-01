@@ -51,6 +51,7 @@ class AssessmentController extends Controller
             $answer = $request->input('question_' . $question->id);
             if ($answer) {
                 $choice = $question->choices->where('id', $answer)->first();
+                // Ambil skor langsung dari isi_pilihan (yang berupa angka 1-5)
                 $skor = is_numeric($choice->isi_pilihan) ? intval($choice->isi_pilihan) : 0;
                 $totalSkor += $skor;
                 UserAnswer::updateOrCreate(
@@ -64,15 +65,20 @@ class AssessmentController extends Controller
                 );
             }
         }
-        // Kategori
-        $kategori = 'Sehat';
-        if ($totalSkor >= 40 && $totalSkor <= 59) {
+        // Kategori disesuaikan berdasarkan jumlah soal dan rentang skor 1-5 per soal
+        $skorMaksimum = $jumlahSoal * 5;
+
+        $kategori = 'Sehat'; // Rentang skor terendah
+
+        // Contoh rentang proporsional (bisa disesuaikan)
+        if ($totalSkor >= $skorMaksimum * 0.2 && $totalSkor < $skorMaksimum * 0.4) {
             $kategori = 'Ringan';
-        } elseif ($totalSkor >= 60 && $totalSkor <= 79) {
+        } elseif ($totalSkor >= $skorMaksimum * 0.4 && $totalSkor < $skorMaksimum * 0.6) {
             $kategori = 'Sedang';
-        } elseif ($totalSkor >= 80) {
+        } elseif ($totalSkor >= $skorMaksimum * 0.6) {
             $kategori = 'Berat';
         }
+
         $userAssessment->skor = $totalSkor;
         $userAssessment->kategori = $kategori;
         $userAssessment->selesai = true;

@@ -106,21 +106,32 @@
         font-weight: 600;
         display: inline-block;
     }
-            .badge-sedang-history {
-        background-color: #FFC107 !important; /* Orange color */
+    .badge-ringan {
+        background-color: #28A745 !important; /* Warna Hijau sedikit berbeda dari sehat */
         color: #fff !important;
-        border-radius: 0.5rem;
-        padding: 0.3em 0.6em;
-        font-size: 0.9rem;
+        font-size: 0.9em;
+        border-radius: 1rem;
+        padding: 0.3em 0.8em;
         font-weight: 600;
+        display: inline-block;
     }
-    .badge-berat-history {
-        background-color: #DC3545 !important; /* Red color */
+    .badge-sedang {
+        background-color: #FFC107 !important; /* Warna Orange */
         color: #fff !important;
-        border-radius: 0.5rem;
-        padding: 0.3em 0.6em;
-        font-size: 0.9rem;
+        font-size: 0.9em;
+        border-radius: 1rem;
+        padding: 0.3em 0.8em;
         font-weight: 600;
+        display: inline-block;
+    }
+    .badge-berat {
+        background-color: #DC3545 !important; /* Warna Merah */
+        color: #fff !important;
+        font-size: 0.9em;
+        border-radius: 1rem;
+        padding: 0.3em 0.8em;
+        font-weight: 600;
+        display: inline-block;
     }
     @media (max-width: 600px) {
         .card-modern { max-width: 100%; }
@@ -236,6 +247,12 @@
                                     <span class="monitoring-label">Kategori:</span>
                                     @if($lastAssessment->kategori == 'Sehat')
                                         <span class="badge badge-sehat shadow-sm">{{ $lastAssessment->kategori }}</span>
+                                    @elseif($lastAssessment->kategori == 'Ringan')
+                                        <span class="badge badge-ringan shadow-sm">{{ $lastAssessment->kategori }}</span>
+                                    @elseif($lastAssessment->kategori == 'Sedang')
+                                        <span class="badge badge-sedang shadow-sm">{{ $lastAssessment->kategori }}</span>
+                                    @elseif($lastAssessment->kategori == 'Berat')
+                                        <span class="badge badge-berat shadow-sm">{{ $lastAssessment->kategori }}</span>
                                     @else
                                         <span class="badge bg-success shadow-sm">{{ $lastAssessment->kategori }}</span>
                                     @endif
