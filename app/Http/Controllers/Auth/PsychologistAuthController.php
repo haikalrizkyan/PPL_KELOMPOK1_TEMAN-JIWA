@@ -103,7 +103,7 @@ class PsychologistAuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         
-        return redirect()->route('psikolog.login')
+        return redirect('/')
             ->with('success', 'Logout berhasil!');
     }
 
