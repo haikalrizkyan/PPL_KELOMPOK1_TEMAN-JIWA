@@ -36,12 +36,11 @@
         background: #4CA9A3;
         color: #fff;
         font-weight: 600;
-        border-radius: 2rem;
+        border-radius: 1.5rem;
         border: none;
         transition: background 0.2s;
-        padding-left: 1.5rem;
-        padding-right: 1.5rem;
-        font-size: 1rem;
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
     }
     .btn-temanjiwa:hover {
         background: #3D8C87;
