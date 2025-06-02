@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Psychologist Login - Teman Jiwa</title>
+  <title>Login Psikolog - Teman Jiwa</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
@@ -63,7 +63,7 @@
 <body>
   <div class="login-container">
     <img src="{{ asset('WhatsApp Image 2025-03-28 at 21.17.58_adbf7a26.jpg') }}" alt="Teman Jiwa Logo" class="logo">
-    <div class="login-title">Sign In as Psychologist</div>
+    <div class="login-title">Masuk Sebagai Psikolog</div>
     @if($errors->any())
       <div class="alert alert-danger">
         <ul class="mb-0">
@@ -76,8 +76,8 @@
     <form method="POST" action="{{ route('psikolog.login.submit') }}">
       @csrf
       <div class="form-group mb-3">
-        <label for="email" class="form-label">Email Address</label>
-        <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="Enter your email">
+        <label for="email" class="form-label">Alamat Email</label>
+        <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="Masukkan alamat email Anda">
         @error('email')
           <span class="invalid-feedback" role="alert">
             <strong>{{ $message }}</strong>
@@ -85,8 +85,8 @@
         @enderror
       </div>
       <div class="form-group mb-3">
-        <label for="password" class="form-label">Password</label>
-        <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" required autocomplete="current-password" placeholder="Enter your password">
+        <label for="password" class="form-label">Kata Sandi</label>
+        <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" required autocomplete="current-password" placeholder="Masukkan kata sandi Anda">
         @error('password')
           <span class="invalid-feedback" role="alert">
             <strong>{{ $message }}</strong>
@@ -97,17 +97,17 @@
         <div class="form-check">
           <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
           <label class="form-check-label" for="remember">
-            Remember Me
+            Ingat Saya
           </label>
         </div>
       </div>
-      <button type="submit" class="btn btn-temanjiwa btn-block w-100 mb-2">Sign In</button>
+      <button type="submit" class="btn btn-temanjiwa btn-block w-100 mb-2">Masuk</button>
       @if (Route::has('password.direct.reset'))
         <p class="mt-2 text-center">
-          <a href="{{ route('password.direct.reset') }}" class="login-link">Forgot your password?</a>
+          <a href="{{ route('password.direct.reset') }}" class="login-link">Lupa Kata Sandi?</a>
         </p>
       @endif
-      <p class="mt-3 text-center">Don't have an account? <a href="{{ route('psikolog.register') }}" class="login-link">Register here</a></p>
+      <p class="mt-3 text-center">Belum punya akun? <a href="{{ route('psikolog.register') }}" class="login-link">Daftar disini</a></p>
     </form>
   </div>
 </body>

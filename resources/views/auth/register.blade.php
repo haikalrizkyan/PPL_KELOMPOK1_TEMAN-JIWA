@@ -78,7 +78,7 @@
       @csrf
       <div class="form-group mb-3">
         <label for="name" class="form-label">Nama Lengkap</label>
-        <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus placeholder="Enter your full name">
+        <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus placeholder="Masukkan nama lengkap Anda">
         @error('name')
           <span class="invalid-feedback" role="alert">
             <strong>{{ $message }}</strong>
@@ -87,7 +87,7 @@
       </div>
       <div class="form-group mb-3">
         <label for="email" class="form-label">Alamat Email</label>
-        <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="Enter your email">
+        <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="Masukkan alamat email Anda">
         @error('email')
           <span class="invalid-feedback" role="alert">
             <strong>{{ $message }}</strong>
@@ -96,7 +96,7 @@
       </div>
       <div class="form-group mb-3">
         <label for="password" class="form-label">Kata Sandi</label>
-        <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" required autocomplete="new-password" placeholder="Create password (min 8 characters)">
+        <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" required autocomplete="new-password" placeholder="Buat kata sandi (minimal 8 karakter)">
         @error('password')
           <span class="invalid-feedback" role="alert">
             <strong>{{ $message }}</strong>
@@ -105,10 +105,10 @@
       </div>
       <div class="form-group mb-3">
         <label for="password-confirm" class="form-label">Konfirmasi Kata Sandi</label>
-        <input type="password" class="form-control" id="password-confirm" name="password_confirmation" required autocomplete="new-password" placeholder="Confirm password">
+        <input type="password" class="form-control" id="password-confirm" name="password_confirmation" required autocomplete="new-password" placeholder="Konfirmasi kata sandi">
       </div>
       <button type="submit" class="btn btn-temanjiwa btn-block w-100 mb-2">Daftar</button>
-      <p class="mt-3 text-center">Already have an account? <a href="{{ route('login') }}" class="login-link">Masuk</a></p>
+      <p class="mt-3 text-center">Sudah punya akun? <a href="{{ route('login') }}" class="login-link">Masuk</a></p>
     </form>
   </div>
 
