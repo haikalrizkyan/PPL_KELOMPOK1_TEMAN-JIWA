@@ -69,7 +69,7 @@
 
 @if(Auth::guard('web')->check())
     <li class="nav-item">
-        <a class="nav-link {{ request()->routeIs('assessment.*') ? 'text-info fw-bold border-bottom border-info' : '' }}"
+        <a class="nav-link {{ request()->routeIs('assessment.index') ? 'text-info fw-bold border-bottom border-info' : '' }}"
            href="{{ route('assessment.index') }}">
             Assessment
         </a>
@@ -78,6 +78,12 @@
         <a class="nav-link {{ request()->routeIs('konsultasi.index') ? 'text-info fw-bold border-bottom border-info' : '' }}"
            href="{{ route('konsultasi.index') }}">
             Konsultasi
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link {{ request()->routeIs('konsultasi.jadwal.user') ? 'text-info fw-bold border-bottom border-info' : '' }}"
+           href="{{ route('konsultasi.jadwal.user') }}">
+            Jadwal Konsultasi
         </a>
     </li>
     <li class="nav-item">
@@ -154,11 +160,6 @@
                                         <li>
                                             <a class="dropdown-item" href="{{ route('assessment.history') }}">
                                                 <i class="fas fa-history me-2"></i>Riwayat Assessment
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="dropdown-item" href="{{ route('konsultasi.jadwal.user') }}">
-                                                <i class="fas fa-calendar-alt me-2"></i>Jadwal Konsultasi
                                             </a>
                                         </li>
                                         <li><hr class="dropdown-divider"></li>
