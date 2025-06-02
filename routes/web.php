@@ -83,6 +83,10 @@ Route::middleware(['auth'])->get('/jadwal-konsultasi/{booking}/edit', [App\Http\
 Route::middleware(['auth'])->put('/jadwal-konsultasi/{booking}', [App\Http\Controllers\ConsultationController::class, 'updateBooking'])->name('konsultasi.booking.update');
 Route::middleware(['auth'])->delete('/jadwal-konsultasi/{booking}', [App\Http\Controllers\ConsultationController::class, 'deleteBooking'])->name('konsultasi.booking.delete');
 
+// Route untuk menyelesaikan konsultasi
+Route::middleware(['auth'])->post('/jadwal-konsultasi/{booking}/complete', [App\Http\Controllers\ConsultationController::class, 'completeConsultation'])->name('konsultasi.complete');
+Route::middleware(['auth:psychologist'])->post('/psikolog/jadwal-konsultasi/{booking}/complete', [App\Http\Controllers\ConsultationController::class, 'completeConsultation'])->name('psikolog.konsultasi.complete');
+
 // Route Article untuk user
 Route::get('/article', [App\Http\Controllers\ArticleController::class, 'index'])->name('article.index');
 Route::get('/article/{article}', [App\Http\Controllers\ArticleController::class, 'show'])->name('article.show');

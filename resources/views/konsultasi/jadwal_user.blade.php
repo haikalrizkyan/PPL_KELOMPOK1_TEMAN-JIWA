@@ -26,6 +26,9 @@
                             <span class="badge {{ $booking->status === 'paid' ? 'bg-success' : 'bg-warning' }}">
                                 {{ $booking->status === 'paid' ? 'Terkonfirmasi' : ucfirst($booking->status) }}
                             </span>
+                            @if($booking->completed_at)
+                                <span class="badge bg-info">Selesai</span>
+                            @endif
                         </p>
                         <p class="card-text mb-1"><strong>Biaya Konsultasi:</strong> Rp {{ number_format($booking->psychologist->biaya_konsultasi, 0, ',', '.') }}</p>
                         @if($booking->catatan)
@@ -44,12 +47,21 @@
                                 </form>
                             </div>
                         @endif
+
+                        @if($booking->status === 'paid' && !$booking->completed_at && $booking->gmeet_link)
+                            <form action="{{ route('konsultasi.complete', $booking->id) }}" method="POST" class="mt-3">
+                                @csrf
+                                <button type="submit" class="btn btn-success w-100">
+                                    <i class="fas fa-check-circle me-2"></i>Selesai Konsultasi
+                                </button>
+                            </form>
+                        @endif
                     </div>
                 </div>
             </div>
         @empty
             <div class="col-12">
-                <div class="alert alert-info">Belum ada jadwal konsultasi.</div>
+                <div class="alert alert-info text-center">Belum ada jadwal konsultasi yang dipesan.</div>
             </div>
         @endforelse
     </div>

@@ -169,4 +169,29 @@ class ConsultationController extends Controller
 
         return back()->with('success', 'Link Google Meet berhasil diperbarui.');
     }
+
+    public function completeConsultation(Booking $booking)
+    {
+        // Check if the user is authorized to complete this consultation
+        if (Auth::guard('psychologist')->check()) {
+            if ($booking->psychologist_id !== Auth::guard('psychologist')->id()) {
+                return back()->with('error', 'Tidak diizinkan menyelesaikan konsultasi ini.');
+            }
+        } else {
+            if ($booking->user_id !== Auth::id()) {
+                return back()->with('error', 'Tidak diizinkan menyelesaikan konsultasi ini.');
+            }
+        }
+
+        // Check if the consultation has already been completed
+        if ($booking->completed_at) {
+            return back()->with('error', 'Konsultasi ini sudah diselesaikan.');
+        }
+
+        // Mark the consultation as completed
+        $booking->completed_at = now();
+        $booking->save();
+
+        return back()->with('success', 'Konsultasi berhasil diselesaikan.');
+    }
 } 
