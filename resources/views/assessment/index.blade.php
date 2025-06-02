@@ -12,25 +12,25 @@
         border-radius: 1.5rem !important;
         box-shadow: 0 8px 32px 0 rgba(76,169,163,0.10) !important;
         background: #fff !important;
-        padding: 2.5rem 2rem 2rem 2rem;
-        max-width: 500px;
+        padding: 2rem 1.5rem 1.5rem 1.5rem;
+        max-width: 400px;
         margin: 0 auto;
     }
     .assessment-emoji {
-        font-size: 3rem;
+        font-size: 2.5rem;
         display: block;
         margin-bottom: 0.5rem;
     }
     .assessment-title {
-        font-size: 1.7rem;
+        font-size: 1.5rem;
         font-weight: 700;
         color: #264653;
-        margin-bottom: 1rem;
+        margin-bottom: 0.8rem;
     }
     .assessment-desc {
         color: #264653;
-        font-size: 1.05rem;
-        margin-bottom: 2rem;
+        font-size: 0.95rem;
+        margin-bottom: 1.5rem;
     }
     .btn-temanjiwa {
         background: #4CA9A3;
@@ -39,9 +39,9 @@
         border-radius: 2rem;
         border: none;
         transition: background 0.2s;
-        padding-left: 2rem;
-        padding-right: 2rem;
-        font-size: 1.1rem;
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+        font-size: 1rem;
     }
     .btn-temanjiwa:hover {
         background: #3D8C87;
@@ -59,7 +59,7 @@
 
     <div class="row justify-content-center">
         @forelse($assessments as $assessment)
-            <div class="col-md-4 mb-4">
+            <div class="col-md-3 mb-4">
                 <div class="card h-100 assessment-card">
                     <div class="card-body text-center">
                         {{-- You might want to add an icon or image here based on the assessment type --}}
