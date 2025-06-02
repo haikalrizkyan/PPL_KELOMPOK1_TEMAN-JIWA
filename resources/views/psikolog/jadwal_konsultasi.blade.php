@@ -32,6 +32,12 @@
 </style>
 <div class="container py-4">
     <h2 class="schedule-header mb-4">Jadwal Konsultasi Masuk</h2>
+    @if(session('success'))
+        <div class="alert alert-success">{{ session('success') }}</div>
+    @endif
+    @if(session('error'))
+        <div class="alert alert-danger">{{ session('error') }}</div>
+    @endif
     <div class="row">
         @forelse($bookings as $booking)
             <div class="col-md-6 mb-4">
@@ -40,7 +46,15 @@
                         <h5 class="card-title">{{ $booking->user->nama ?? $booking->user->name }}</h5>
                         <p class="card-text mb-1"><strong>Tanggal:</strong> {{ Carbon::parse($booking->tanggal)->format('d M Y') }}</p>
                         <p class="card-text mb-1"><strong>Waktu:</strong> {{ $booking->jam }}</p>
-                        <p class="card-text mb-1"><strong>Status:</strong> {{ ucfirst($booking->status) }}</p>
+                        <p class="card-text mb-1">
+                            <strong>Status:</strong> 
+                            <span class="badge {{ $booking->status === 'paid' ? 'bg-success' : 'bg-warning' }}">
+                                {{ $booking->status === 'paid' ? 'Terkonfirmasi' : ucfirst($booking->status) }}
+                            </span>
+                            @if($booking->completed_at)
+                                <span class="badge bg-info">Selesai</span>
+                            @endif
+                        </p>
                         @if($booking->catatan)
                             <p class="card-text"><strong>Catatan:</strong> {{ $booking->catatan }}</p>
                         @endif
@@ -53,6 +67,15 @@
                             </div>
                             <button type="submit" class="btn btn-primary btn-sm">Simpan Link</button>
                         </form>
+
+                        @if($booking->status === 'paid' && !$booking->completed_at && $booking->gmeet_link)
+                            <form action="{{ route('psikolog.konsultasi.complete', $booking->id) }}" method="POST" class="mt-3">
+                                @csrf
+                                <button type="submit" class="btn btn-success w-100">
+                                    <i class="fas fa-check-circle me-2"></i>Selesai Konsultasi
+                                </button>
+                            </form>
+                        @endif
                     </div>
                 </div>
             </div>
