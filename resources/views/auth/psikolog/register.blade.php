@@ -73,8 +73,18 @@
         </ul>
       </div>
     @endif
-    <form method="POST" action="{{ route('psikolog.register.submit') }}">
-      @csrf
+    <form method="POST" action="{{ route('psikolog.register.submit') }}" enctype="multipart/form-data">
+    @csrf
+      <div class="form-group mb-3">
+  <label for="foto" class="form-label">Foto Profil</label>
+  <input id="foto" type="file" class="form-control-file @error('foto') is-invalid @enderror" name="foto" accept="image/*">
+  @error('foto')
+    <span class="invalid-feedback d-block" role="alert">
+      <strong>{{ $message }}</strong>
+    </span>
+  @enderror
+</div>
+
       <div class="form-group mb-3">
         <label for="nama" class="form-label">Nama Lengkap</label>
         <input id="nama" type="text" class="form-control @error('nama') is-invalid @enderror" name="nama" value="{{ old('nama') }}" required autocomplete="nama" autofocus placeholder="Masukkan nama lengkap Anda">

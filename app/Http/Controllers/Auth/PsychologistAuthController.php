@@ -25,6 +25,7 @@ class PsychologistAuthController extends Controller
     public function register(Request $request)
     {
         $validator = Validator::make($request->all(), [
+            'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             'nama' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:psychologists',
             'password' => 'required|string|min:8|confirmed',
@@ -35,6 +36,13 @@ class PsychologistAuthController extends Controller
             'deskripsi' => 'nullable|string',
         ]);
 
+        if ($request->hasFile('foto')) {
+            $path = $request->file('foto')->store('psikolog', 'public'); // simpan di storage/app/public/psikolog
+            $foto_profil = $path; // cukup simpan 'psikolog/nama-file.jpg' saja
+        } else {
+            $foto_profil = null;
+        }
+        
         if ($validator->fails()) {
             return redirect()->back()
                 ->withErrors($validator)
@@ -50,6 +58,7 @@ class PsychologistAuthController extends Controller
             'pengalaman' => $request->pengalaman,
             'biaya_konsultasi' => $request->biaya_konsultasi,
             'deskripsi' => $request->deskripsi,
+            'foto_profil' => $foto_profil,
         ]);
 
         Auth::guard('psychologist')->login($psikolog);
