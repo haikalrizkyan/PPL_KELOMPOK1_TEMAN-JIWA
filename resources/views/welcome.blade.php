@@ -108,15 +108,39 @@
 <body>
     <div class="welcome-container animate__animated animate__fadeIn">
         <img src="{{ asset('WhatsApp Image 2025-03-28 at 21.17.58_adbf7a26.jpg') }}" alt="Teman Jiwa Logo" class="logo animate__animated animate__fadeInDown">
-        <div class="welcome-title animate__animated animate__fadeInUp">Selamat Datang</div>
-        <div class="welcome-subtitle animate__animated animate__fadeInUp animate__delay-1s">Mulailah dengan masuk atau membuat akun baru</div>
-        <a href="{{ route('login') }}" class="btn btn-outline-temanjiwa btn-block animate__animated animate__fadeInUp animate__delay-1s">Masuk sebagai Pengguna</a>
-        <a href="{{ route('psikolog.login') }}" class="btn btn-outline-temanjiwa btn-block animate__animated animate__fadeInUp animate__delay-1s">Masuk sebagai Psikolog</a>
-        <a href="{{ route('register') }}" class="btn btn-outline-temanjiwa btn-block animate__animated animate__fadeInUp animate__delay-1s">Daftar sebagai Pengguna</a>
-        <a href="{{ route('psikolog.register') }}" class="btn btn-outline-temanjiwa btn-block animate__animated animate__fadeInUp animate__delay-1s">Daftar sebagai Psikolog</a>
+        <div class="text-center">
+    <div class="welcome-title animate__animated animate__fadeInUp">Selamat Datang</div>
+    <div class="welcome-subtitle animate__animated animate__fadeInUp animate__delay-1s">
+        Mulailah dengan masuk atau membuat akun baru
+    </div>
+</div>
+
+        <!-- Dropdown MASUK -->
+        <div class="dropdown mb-3">
+  <button class="btn btn-outline-temanjiwa btn-block dropdown-toggle" type="button" id="dropdownMasuk" data-bs-toggle="dropdown" aria-expanded="false">
+    MASUK
+  </button>
+  <div class="dropdown-menu w-100 p-0 border-0 shadow" aria-labelledby="dropdownMasuk">
+    <a href="{{ route('login') }}" class="btn btn-outline-temanjiwa btn-block rounded-0" style="border-top: none;">Masuk sebagai Pengguna</a>
+    <a href="{{ route('psikolog.login') }}" class="btn btn-outline-temanjiwa btn-block rounded-0">Masuk sebagai Psikolog</a>
+  </div>
+</div>
+
+<!-- Dropdown DAFTAR -->
+<div class="dropdown mb-3">
+  <button class="btn btn-outline-temanjiwa btn-block dropdown-toggle" type="button" id="dropdownDaftar" data-bs-toggle="dropdown" aria-expanded="false">
+    DAFTAR
+  </button>
+  <div class="dropdown-menu w-100 p-0 border-0 shadow" aria-labelledby="dropdownDaftar">
+    <a href="{{ route('register') }}" class="btn btn-outline-temanjiwa btn-block rounded-0" style="border-top: none;">Daftar sebagai Pengguna</a>
+    <a href="{{ route('psikolog.register') }}" class="btn btn-outline-temanjiwa btn-block rounded-0">Daftar sebagai Psikolog</a>
+  </div>
+</div>
+
         <div class="policy-text animate__animated animate__fadeIn animate__delay-2s">
             Dengan melanjutkan, Anda menyetujui ketentuan kami <a href="#">Terms</a> and <a href="#">Kebijakan Privasi</a>.
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
