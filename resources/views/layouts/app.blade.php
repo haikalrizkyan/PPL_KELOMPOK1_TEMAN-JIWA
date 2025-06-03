@@ -75,6 +75,11 @@
         </a>
     </li>
     <li class="nav-item">
+        <a class="nav-link {{ request()->is('assessment/history') ? 'text-info fw-bold border-bottom border-info' : '' }}" href="{{ route('assessment.history') }}">
+        Riwayat Assessment
+        </a>
+    </li>
+    <li class="nav-item">
         <a class="nav-link {{ request()->routeIs('konsultasi.index') ? 'text-info fw-bold border-bottom border-info' : '' }}"
            href="{{ route('konsultasi.index') }}">
             Konsultasi
@@ -92,7 +97,8 @@
             Artikel
         </a>
     </li>
-                            @elseif(Auth::guard('psychologist')->check())
+                            
+    @elseif(Auth::guard('psychologist')->check())
     <li class="nav-item">
         <a class="nav-link {{ request()->routeIs('psikolog.assessment.*') ? 'text-info fw-bold border-bottom border-info' : '' }}" 
            href="{{ route('psikolog.assessment.index') }}">
@@ -157,11 +163,11 @@
                                                 <i class="fas fa-user me-2"></i>Edit Profil
                                             </a>
                                         </li>
-                                        <li>
+                                        <!--<li>
                                             <a class="dropdown-item" href="{{ route('assessment.history') }}">
                                                 <i class="fas fa-history me-2"></i>Riwayat Assessment
                                             </a>
-                                        </li>
+                                        </li> -->
                                         <li><hr class="dropdown-divider"></li>
                                         <li>
                                             <a class="dropdown-item text-danger" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
