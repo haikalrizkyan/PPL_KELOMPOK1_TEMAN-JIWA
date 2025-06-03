@@ -150,13 +150,22 @@
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     @if(Auth::guard('psychologist')->check())
-                                        <!-- Hanya tampilkan menu untuk psikolog -->
+                                        <!-- Hanya tampilkan menu untuk psikolog 
                                         <li>
                                             <a class="dropdown-item" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
                                             <form id="logout-form" action="{{ route('psikolog.logout') }}" method="POST" style="display: none;">
                                                 @csrf
                                             </form>
+                                        </li>-->
+                                        <li>
+                                            <a class="dropdown-item text-danger" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                                <i class="fas fa-sign-out-alt me-2"></i>Logout
+                                            </a>
+                                            <form id="logout-form" action="{{ route('psikolog.logout') }}" method="POST" style="display: none;">
+                                                @csrf
+                                            </form>
                                         </li>
+                                    
                                     @else
                                         <li>
                                             <a class="dropdown-item" href="{{ route('profile.edit') }}">
