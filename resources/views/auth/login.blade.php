@@ -5,11 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login - Teman Jiwa</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Comfortaa:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
   <style>
     body {
-      font-family: 'Ubuntu', sans-serif;
+      font-family: 'Quicksand', sans-serif;
       background: linear-gradient(135deg, #F4FAF9 0%, #E8F5F4 100%);
       min-height: 100vh;
       display: flex;
@@ -51,6 +51,7 @@
       padding: 0.8rem 1.5rem;
       text-transform: uppercase;
       letter-spacing: 0.5px;
+      font-family: 'Comfortaa', cursive;
     }
     .btn-temanjiwa:hover {
       background: linear-gradient(135deg, #3D8C87 0%, #2D6C67 100%);
@@ -62,12 +63,14 @@
       color: #264653;
       font-weight: 500;
       margin-bottom: 0.5rem;
+      font-family: 'Comfortaa', cursive;
     }
     .form-control {
       border-radius: 1rem;
       padding: 0.8rem 1.2rem;
       border: 2px solid #E8F5F4;
       transition: all 0.3s ease;
+      font-family: 'Quicksand', sans-serif;
     }
     .form-control:focus {
       border-color: #4CA9A3;
@@ -80,6 +83,7 @@
       text-align: center;
       margin-bottom: 1.5rem;
       position: relative;
+      font-family: 'Comfortaa', cursive;
     }
     .login-title::after {
       content: '';
@@ -95,6 +99,7 @@
       text-decoration: none;
       font-weight: 500;
       transition: all 0.3s ease;
+      font-family: 'Comfortaa', cursive;
     }
     .login-link:hover {
       color: #3D8C87;
@@ -104,11 +109,15 @@
       background-color: #4CA9A3;
       border-color: #4CA9A3;
     }
+    .form-check-label {
+      font-family: 'Quicksand', sans-serif;
+    }
     .alert {
       border-radius: 1rem;
       border: none;
       background: rgba(220, 53, 69, 0.1);
       color: #dc3545;
+      font-family: 'Quicksand', sans-serif;
     }
     @media (max-width: 576px) {
       .login-container {
