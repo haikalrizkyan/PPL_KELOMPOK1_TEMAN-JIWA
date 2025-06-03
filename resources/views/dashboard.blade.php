@@ -7,7 +7,7 @@
 <style>
     body {
         background: #F4FAF9;
-        font-family: 'Ubuntu', sans-serif;
+        font-family: 'Poppins', sans-serif;
     }
     .dashboard-title {
         font-size: 2.2rem;
@@ -141,7 +141,7 @@
         border-radius:2rem;
         box-shadow:0 8px 32px 0 rgba(76,169,163,0.15);
         overflow:hidden;
-        font-family: 'Ubuntu', sans-serif;
+        font-family: 'Poppins', sans-serif;
     }
     .modal-header {
         background: linear-gradient(90deg, #4CA9A3 0%, #A8E6CF 100%);

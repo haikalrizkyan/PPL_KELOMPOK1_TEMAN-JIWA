@@ -16,10 +16,17 @@ class ArticleController extends Controller
         return view('article.index', compact('articles'));
     }
 
-    // Detail artikel untuk user
+    // Detail artikel untuk user dan psikolog
     public function show(Article $article)
     {
-        return view('article.show', compact('article'));
+        // Check if the authenticated user is a psychologist
+        if (Auth::guard('psychologist')->check()) {
+            // If it's a psychologist, render the psychologist's detail view
+            return view('psikolog.article.show', compact('article'));
+        } else {
+            // If it's a regular user, render the regular user's detail view
+            return view('article.show', compact('article'));
+        }
     }
 
     // List artikel milik psikolog yang login

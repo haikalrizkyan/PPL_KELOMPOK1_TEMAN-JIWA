@@ -2,68 +2,70 @@
 
 @section('content')
 <style>
-    body {
-        font-family: 'Ubuntu', sans-serif !important;
-        background-color: #F4FAF9 !important;
+    /* Add or modify styles specific to psychologist article view if needed */
+    /* Keep styles from public view for consistency */
+     body {
+        font-family: 'Poppins', sans-serif;
+        background-color: var(--light-bg);
+        color: var(--text-color);
     }
     .article-card {
-        border-radius: 1.5rem !important;
-        box-shadow: 0 8px 32px 0 rgba(76,169,163,0.10) !important;
-        background: #fff !important;
-        border: none !important;
+        border-radius: 1.5rem;
+        box-shadow: 0 8px 32px 0 rgba(76,169,163,0.10);
+        border: none;
     }
     .article-card-header {
-        background: linear-gradient(90deg, #4CA9A3 0%, #A8E6CF 100%);
-        color: #fff;
+        background: linear-gradient(90deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+        color: var(--white);
         font-size: 1.2rem;
         font-weight: 700;
         border-radius: 1.5rem 1.5rem 0 0;
-        padding: 1rem 1.5rem; /* Adjusted padding */
+        padding: 1rem 1.5rem;
     }
     .article-title {
-        font-size: 1.6rem; /* Adjusted font size */
+        font-size: 1.6rem;
         font-weight: 700;
-        color: #264653;
-        margin-bottom: 1.5rem; /* Adjusted margin */
+        color: var(--text-color);
+        margin-bottom: 1.5rem;
     }
     .section-title {
-        font-size: 1.2rem; /* Adjusted font size */
+        font-size: 1.2rem;
         font-weight: 600;
-        color: #264653;
-        margin-top: 1.5rem; /* Adjusted margin */
-        margin-bottom: 0.8rem; /* Adjusted margin */
+        color: var(--text-color);
+        margin-top: 1.5rem;
+        margin-bottom: 0.8rem;
     }
     .article-content p {
-        font-size: 1rem; /* Adjusted font size */
-        color: #4F4F4F; /* Slightly darker grey for readability */
-        line-height: 1.6; /* Improved line height */
-        margin-bottom: 1rem; /* Adjusted margin */
+        font-size: 1rem;
+        color: #4F4F4F;
+        line-height: 1.6;
+        margin-bottom: 1rem;
     }
     .btn-temanjiwa {
-        background: #4CA9A3;
-        color: #fff;
+        background: var(--primary-color);
+        color: var(--white);
         font-weight: 600;
         border-radius: 2rem;
         border: none;
         transition: background 0.2s;
-        padding: 0.75rem 1.5rem; /* Adjusted padding */
-        font-size: 1.1rem; /* Adjusted font size */
+        padding: 0.75rem 1.5rem;
+        font-size: 1.1rem;
     }
     .btn-temanjiwa:hover {
-        background: #3D8C87;
-        color: #fff;
+        background: var(--secondary-color);
+        color: var(--white);
     }
      .btn-secondary {
         border-radius: 2rem;
-        padding: 0.75rem 1.5rem; /* Adjusted padding */
-        font-size: 1.1rem; /* Adjusted font size */
+        padding: 0.75rem 1.5rem;
+        font-size: 1.1rem;
         font-weight: 600;
-        margin-top: 1.5rem; /* Added top margin */
+        margin-top: 1.5rem;
      }
      .article-image {
         max-width: 100%;
-        border-radius: 1rem; /* Rounded corners for image */
-        margin-bottom: 1.5rem; /* Adjusted margin */
+        border-radius: 1rem;
+        margin-bottom: 1.5rem;
      }
      .video-container {
         margin-bottom: 1.5rem;
@@ -78,6 +80,7 @@
         margin-bottom: 1rem; /* Adjusted margin */
     }
 </style>
+
 <div class="container py-4">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -110,9 +113,9 @@
                         <div class="mb-3">
                             @if(Str::startsWith($mimeType, 'image/'))
                                 <img src="{{ asset($attachmentPath) }}" alt="Lampiran Bagian Pertama" class="img-fluid rounded mb-3 attachment-image">
-                                 <a href="{{ asset($attachmentPath) }}" target="_blank" class="btn btn-temanjiwa btn-sm">
+                                <a href="{{ asset($attachmentPath) }}" target="_blank" class="btn btn-temanjiwa btn-sm">
                                      <i class="fas fa-download me-1"></i> Unduh Gambar
-                                 </a>
+                                </a>
                             @else
                                 <a href="{{ asset($attachmentPath) }}" target="_blank" class="btn btn-temanjiwa btn-sm">
                                     <i class="fas fa-file-download me-1"></i> Unduh Lampiran
@@ -146,10 +149,11 @@
                     @endif
                 </div>
             </div>
-            <a href="{{ route('article.index') }}" class="btn btn-secondary">
-                <i class="fas fa-arrow-left me-1"></i> Kembali ke Daftar Artikel
+            {{-- Link to go back to the psychologist's article list --}}
+            <a href="{{ route('psikolog.article.list') }}" class="btn btn-secondary">
+                <i class="fas fa-arrow-left me-1"></i> Kembali ke Daftar Artikel Saya
             </a>
         </div>
     </div>
 </div>
-@endsection
+@endsection 

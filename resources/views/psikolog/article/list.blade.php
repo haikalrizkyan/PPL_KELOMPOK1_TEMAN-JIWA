@@ -77,7 +77,7 @@
                         <td>{{ $article->created_at->format('Y-m-d H:i:s') }}</td>
                         <td>{{ Str::limit($article->first_section_description, 80) }}</td>
                         <td class="d-flex gap-2">
-                                    <a href="{{ route('article.show', $article->id) }}" class="btn btn-info btn-sm btn-detail">Detail</a>
+                                    <a href="{{ route('psikolog.article.show', $article->id) }}" class="btn btn-info btn-sm btn-detail">Detail</a>
                                     <a href="{{ route('psikolog.article.edit', $article->id) }}" class="btn btn-primary btn-sm btn-edit">Edit</a>
                                     <form method="POST" action="{{ route('psikolog.article.destroy', $article->id) }}" onsubmit="return confirm('Apakah Anda yakin ingin menghapus artikel ini?')">
                                 @csrf

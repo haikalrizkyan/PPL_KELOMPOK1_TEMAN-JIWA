@@ -10,7 +10,7 @@
     <title>{{ config('app.name', 'Teman Jiwa') }}</title>
 
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -22,9 +22,197 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
     <style>
+        :root {
+            --primary-color: #4CA9A3;
+            --secondary-color: #3D8C87;
+            --text-color: #264653;
+            --light-bg: #F4FAF9;
+            --white: #ffffff;
+        }
+
         body {
-            font-family: 'Ubuntu', sans-serif;
-            background-color: #F5FAFA; /* Ditambahkan untuk konsistensi */
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-color);
+            background-color: var(--light-bg);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+        }
+
+        .btn {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            border-radius: 2rem;
+            padding: 0.5rem 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, var(--secondary-color) 0%, #2D6C67 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(76,169,163,0.3);
+        }
+
+        .navbar {
+            font-family: 'Poppins', sans-serif;
+            background: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            color: var(--primary-color) !important;
+        }
+
+        .nav-link {
+            font-weight: 500;
+            color: var(--text-color) !important;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color) !important;
+        }
+
+        .card {
+            border-radius: 1rem;
+            border: none;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .card-title {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+        }
+
+        .form-control {
+            font-family: 'Poppins', sans-serif;
+            border-radius: 1rem;
+            border: 2px solid #E8F5F4;
+            padding: 0.8rem 1.2rem;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(76,169,163,0.15);
+        }
+
+        .form-label {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            color: var(--text-color);
+        }
+
+        .alert {
+            font-family: 'Poppins', sans-serif;
+            border-radius: 1rem;
+            border: none;
+        }
+
+        .dropdown-menu {
+            font-family: 'Poppins', sans-serif;
+            border-radius: 1rem;
+            border: none;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .dropdown-item {
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-item:hover {
+            background-color: var(--light-bg);
+            color: var(--primary-color);
+        }
+
+        .badge {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 1rem;
+        }
+
+        .table {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .table thead th {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            border-top: none;
+        }
+
+        .pagination {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .page-link {
+            border-radius: 1rem;
+            margin: 0 0.2rem;
+            border: none;
+            color: var(--text-color);
+        }
+
+        .page-item.active .page-link {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            border: none;
+        }
+
+        .modal-content {
+            border-radius: 1.5rem;
+            border: none;
+        }
+
+        .modal-header {
+            font-family: 'Poppins', sans-serif;
+            border-bottom: none;
+        }
+
+        .modal-footer {
+            border-top: none;
+        }
+
+        .toast {
+            font-family: 'Poppins', sans-serif;
+            border-radius: 1rem;
+            border: none;
+        }
+
+        .toast-header {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--light-bg);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-color);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--secondary-color);
         }
     </style>
 </head>

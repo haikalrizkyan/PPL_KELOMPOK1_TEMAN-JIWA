@@ -95,6 +95,7 @@ Route::get('/article/{article}', [App\Http\Controllers\ArticleController::class,
 Route::middleware(['auth:psychologist'])->prefix('psikolog')->name('psikolog.')->group(function () {
     Route::get('/article', [App\Http\Controllers\ArticleController::class, 'listMyArticles'])->name('article.list');
     Route::get('/article/create', [App\Http\Controllers\ArticleController::class, 'create'])->name('article.create');
+    Route::get('/article/{article}', [App\Http\Controllers\ArticleController::class, 'show'])->name('article.show');
     Route::post('/article', [App\Http\Controllers\ArticleController::class, 'store'])->name('article.store');
     Route::get('/article/{article}/edit', [App\Http\Controllers\ArticleController::class, 'edit'])->name('article.edit');
     Route::put('/article/{article}', [App\Http\Controllers\ArticleController::class, 'update'])->name('article.update');
